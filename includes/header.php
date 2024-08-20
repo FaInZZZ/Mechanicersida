@@ -70,11 +70,7 @@ $adminMenuLinks = array(
 			  <a class='nav-link' href='?logout=1'>Log out</a>
 			</li>";
 	  }
-	  else{
-		  echo "<li class='nav-item'>
-			  <a class='nav-link' href='register.php'>Register</a>
-			</li>";
-	  }
+	
 		?>
 		
 		
