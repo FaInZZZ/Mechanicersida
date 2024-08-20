@@ -31,14 +31,19 @@ if(isset($_POST['user-login'])){
 	
 	
 ?>
-<h1>Login form</h1>
-    <form action="" method="post">
-		<label for="uname">Username or email</label><br>
-        <input type="text" name="uname" id="uname"><br>
-		<label for="upass">Password</label><br>
-        <input type="password" name="upass" id="upass"><br>
-        <input type="submit" name="user-login" value="Next">
-    </form>
+    <div class="container mt-5">
+        <h1 class="mb-4">Login form</h1>
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="uname">Username or email</label>
+                <input type="text" name="uname" id="uname" class="form-control mb-3">
+            </div>
+            <div class="form-group">
+                <label for="upass">Password</label>
+                <input type="password" name="upass" id="upass" class="form-control mb-4">
+            </div>
+            <button type="submit" name="user-login" class="btn btn-warning btn-block">Next</button>
+        </form>
 </div>	
 <?php 
 include_once 'includes/footer.php';
