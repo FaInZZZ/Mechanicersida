@@ -115,21 +115,18 @@ if(isset($_POST['submitnykund'])){
 
             <script>
 $(document).ready(function(){
-    // AJAX request for customer creation
     $('form').submit(function(event){
-        event.preventDefault(); // Prevent form submission
+        event.preventDefault(); 
 
         $.ajax({
-            url: 'search.php',  // URL of the PHP file that handles the form submission
+            url: 'search.php',  
             type: 'POST',
-            data: $(this).serialize(),  // Serialize form data
+            data: $(this).serialize(), 
             success: function(response){
-                // Handle success - e.g., update UI with the response
                 alert("Customer added successfully!");
                 console.log(response);
             },
             error: function(xhr, status, error){
-                // Handle error
                 alert("There was an error. Please try again.");
                 console.log(xhr, status, error);
             }
