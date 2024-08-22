@@ -16,7 +16,9 @@ if(isset($_POST['submitnykund'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skapa</title>
-    <!-- Add Bootstrap CSS if not already included -->
+
+
+
 </head>
 <body>
 
@@ -101,7 +103,7 @@ if(isset($_POST['submitnykund'])){
 
 
 
-<!-- Modal Trigger Button -->
+<<!-- Modal Trigger Button -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#secondModal">Lägg till kund</button>
 
 <!-- Modal Form -->
@@ -109,16 +111,16 @@ if(isset($_POST['submitnykund'])){
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit user info</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Lägg till kund</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
-
-            
-
-
-
+                <form action="">
+                    <label for="fname">First name:</label>
+                    <input type="text" id="fname" name="fname" onkeyup="showClassmates(this.value)">
+                </form>
+                <!-- Display search results inside the modal -->
+                <p>Suggestions: <span id="class-list"></span></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -127,31 +129,40 @@ if(isset($_POST['submitnykund'])){
     </div>
 </div>
 
-
-
-
-
 <script>
-$(document).ready(function(){
-    $('form').submit(function(event){
-        event.preventDefault(); 
+function showClassmates(str) {
+    // Clear results if input is empty
+    if (str.length == 0) { 
+        document.getElementById("class-list").innerHTML = "";
+        return;
+    } else {
+        // Create a new XMLHttpRequest object
+        var xmlhttp = new XMLHttpRequest();
 
-        $.ajax({
-            url: 'search.php',  
-            type: 'POST',
-            data: $(this).serialize(), 
-            success: function(response){
-                alert("Customer added successfully!");
-                console.log(response);
-            },
-            error: function(xhr, status, error){
-                alert("There was an error. Please try again.");
-                console.log(xhr, status, error);
+        // Define the function to run when the state of the request changes
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                // Insert the response into the span with id 'class-list'
+                document.getElementById("class-list").innerHTML = this.responseText;
             }
-        });
-    });
-});
+        };
+
+        // Open the request to 'includes/search.php' with the query string
+        xmlhttp.open("GET", "includes/search.php?q=" + encodeURIComponent(str), true);
+        
+        // Send the request
+        xmlhttp.send();
+    }
+}
 </script>
+
+
+
+
+
+
+
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </body>
