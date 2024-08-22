@@ -103,7 +103,7 @@ if(isset($_POST['submitnykund'])){
 
 
 
-<<!-- Modal Trigger Button -->
+<!-- Modal Trigger Button -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#secondModal">Lägg till kund</button>
 
 <!-- Modal Form -->
@@ -120,7 +120,7 @@ if(isset($_POST['submitnykund'])){
                     <input type="text" id="fname" name="fname" onkeyup="showClassmates(this.value)">
                 </form>
                 <!-- Display search results inside the modal -->
-                <p>Suggestions: <span id="class-list"></span></p>
+                <p><strong>Suggestions:</strong><br><br> <span id="class-list"></span></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

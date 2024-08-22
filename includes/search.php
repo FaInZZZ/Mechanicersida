@@ -10,7 +10,7 @@ if (isset($_GET['q'])) {
     $stmt_searchClassmates->execute();
 
     foreach ($stmt_searchClassmates as $row) {
-        echo $row['cust_lname'] . " " . $row['cust_adress'] . "<br>";
+        echo "<strong> Efternamn: </strong> " . $row['cust_lname'] . "<br>" . "<strong> Adress: </strong>" . $row['cust_adress'] .  "<br><br>";
     }
 } else {
 }
