@@ -1,9 +1,11 @@
 <?php
 include_once 'includes/header.php';
 include_once 'includes/functions.php';
+include_once 'includes/class.user.php';
 if(isset($_POST['submitnykund'])){
 	$submitnykund = nykund($pdo);
 }
+
 
 ?>
 
@@ -34,7 +36,7 @@ if(isset($_POST['submitnykund'])){
     <h2 class="pt-5 pb-5">Kund</h2>
 
     <!-- Modal Trigger Button -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Lägg till</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Skapa kund</button>
 
     <!-- Modal Form -->
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -93,12 +95,66 @@ if(isset($_POST['submitnykund'])){
   </div>
 </div>
 </form>
-
 </div>
 
 
 
 
+<!-- Modal Trigger Button -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#secondModal">Lägg till kund</button>
+
+<!-- Modal Form -->
+<div class="modal fade" id="secondModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit user info</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+            <script>
+$(document).ready(function(){
+    // AJAX request for customer creation
+    $('form').submit(function(event){
+        event.preventDefault(); // Prevent form submission
+
+        $.ajax({
+            url: 'search.php',  // URL of the PHP file that handles the form submission
+            type: 'POST',
+            data: $(this).serialize(),  // Serialize form data
+            success: function(response){
+                // Handle success - e.g., update UI with the response
+                alert("Customer added successfully!");
+                console.log(response);
+            },
+            error: function(xhr, status, error){
+                // Handle error
+                alert("There was an error. Please try again.");
+                console.log(xhr, status, error);
+            }
+        });
+    });
+});
+</script>
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </body>
 </html>

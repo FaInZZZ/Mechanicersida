@@ -177,9 +177,9 @@ class User {
 	
 	public function searchUsers($input){
 		$inputJoker = "%{$input}%";
-		$stmt_checkUsername = $this->pdo->prepare('SELECT * FROM table_users WHERE u_name LIKE :uname OR u_email LIKE :email');
+		$stmt_checkUsername = $this->pdo->prepare('SELECT * FROM table_customer WHERE cust_fname LIKE :uname OR cust_adress LIKE :cust_adress');
 		$stmt_checkUsername->bindParam(":uname", $inputJoker, PDO::PARAM_STR);
-		$stmt_checkUsername->bindParam(":email", $inputJoker, PDO::PARAM_STR);
+		$stmt_checkUsername->bindParam(":cust_adress", $inputJoker, PDO::PARAM_STR);
 		$stmt_checkUsername->execute();
 		$userArray = $stmt_checkUsername->fetchAll();
 		return $userArray;
