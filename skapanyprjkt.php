@@ -25,16 +25,16 @@ if(isset($_POST['submitnykund'])){
 <div class="container text-center">
     <h2 class="pt-5 pb-5">Bil</h2>
     <div class="bilinputfalt">
-        <form class="d-flex justify-content-between" action="" method="post">
-            <label for="marke">Märke</label>
-            <input type="text" name="marke" id="marke">
-            <label for="model">Model</label>
-            <input type="text" name="model" id="model">
-            <label for="register">Reg</label>
-            <input type="text" name="register" id="register">
-            <!-- Ensure this form is properly closed -->
-        </form>
-    </div>
+    <form class="d-flex justify-content-between" action="" method="post">
+        <label for="marke">Märke</label>
+        <input type="text" name="marke" id="marke">
+        <label for="model">Model</label>
+        <input type="text" name="model" id="model">
+        <label for="register">Reg</label>
+        <input type="text" name="register" id="register">
+    </form>
+</div>
+
 
     <h2 class="pt-5 pb-5">Kund</h2>
 
