@@ -2,6 +2,7 @@
 include_once 'includes/header.php';
 include_once 'includes/functions.php';
 include_once 'includes/class.user.php';
+include_once 'includes/search.php';
 if(isset($_POST['submitnykund'])){
 	$submitnykund = nykund($pdo);
 }
@@ -113,7 +114,24 @@ if(isset($_POST['submitnykund'])){
             </div>
             <div class="modal-body">
 
-            <script>
+
+            
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
 $(document).ready(function(){
     $('form').submit(function(event){
         event.preventDefault(); 
@@ -134,23 +152,6 @@ $(document).ready(function(){
     });
 });
 </script>
-
-
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </body>

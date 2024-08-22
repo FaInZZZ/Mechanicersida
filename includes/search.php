@@ -1,14 +1,21 @@
 <?php
-include_once 'config.php';
-$input = "%".$_GET['q']."%";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    include_once 'config.php'; // Database configuration
+    include_once 'functions.php'; // Any helper functions
 
-$stmt_searchClassmates = $pdo->prepare("SELECT * FROM namn WHERE fname LIKE :fname OR lname LIKE :lname");
-$stmt_searchClassmates->bindParam(":fname", $input, PDO::PARAM_STR);
-$stmt_searchClassmates->bindParam(":lname", $input, PDO::PARAM_STR);
-$stmt_searchClassmates->execute();
+    // Sanitize and validate input data
+    $marke = filter_input(INPUT_POST, 'marke', FILTER_SANITIZE_STRING);
+    $model = filter_input(INPUT_POST, 'model', FILTER_SANITIZE_STRING);
+    $register = filter_input(INPUT_POST, 'register', FILTER_SANITIZE_STRING);
 
-foreach($stmt_searchClassmates as $row) {
-    echo $row['fname']." ".$row['lname']."<br>";
-   
+    // Database query example (adjust as necessary)
+    $query = $pdo->prepare("INSERT INTO customers (marke, model, register) VALUES (?, ?, ?)");
+    $query->execute([$marke, $model, $register]);
+
+    if ($query) {
+        echo json_encode(["status" => "success", "message" => "Customer added successfully"]);
+    } else {
+        echo json_encode(["status" => "error", "message" => "Failed to add customer"]);
+    }
 }
 ?>
