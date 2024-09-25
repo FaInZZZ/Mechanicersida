@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2024 at 09:34 AM
+-- Generation Time: Sep 25, 2024 at 10:03 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -59,7 +59,8 @@ INSERT INTO `table_customer` (`id_cust`, `cust_fname`, `cust_lname`, `cust_tel`,
 (3, 'dwada', 'dada', 'dada', 'dada@dawd', 'dadad', 'adad', 'adad'),
 (4, 'Kevin', 'Bränä', '0449574723', 'kevinsepost@gmail.com', 'hemma', '10640', 'sverige'),
 (5, 'Kevin', 'Bränä', '0449574723', 'kevinsepost@gmail.com', 'hemma', '10640', 'sverige'),
-(6, 'ok', 'hej', '3', '2@wdwada', '21', '21', '211');
+(6, 'ok', 'hej', '3', '2@wdwada', '21', '21', '211'),
+(7, 'dawd', 'dwad', 'wad', 'wad@awd.com', 'awd', 'dawd', 'adwd');
 
 -- --------------------------------------------------------
 
@@ -97,7 +98,10 @@ CREATE TABLE `table_projekt` (
   `pt_status_fk` int(11) NOT NULL,
   `cars_fk` int(11) NOT NULL,
   `customer_fk` int(11) NOT NULL,
-  `created_by_user_fk` int(11) NOT NULL
+  `created_by_user_fk` int(11) NOT NULL,
+  `car_brand` varchar(255) NOT NULL,
+  `car_model` varchar(255) NOT NULL,
+  `car_reg` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -199,7 +203,8 @@ ALTER TABLE `table_projekt`
   ADD KEY `pt_status_fk` (`pt_status_fk`,`cars_fk`,`customer_fk`,`created_by_user_fk`),
   ADD KEY `fk3` (`created_by_user_fk`),
   ADD KEY `fk5` (`customer_fk`),
-  ADD KEY `fk4` (`cars_fk`);
+  ADD KEY `fk4` (`cars_fk`),
+  ADD KEY `car_brand` (`car_brand`,`car_model`,`car_reg`);
 
 --
 -- Indexes for table `table_roles`
@@ -240,7 +245,7 @@ ALTER TABLE `table_cars`
 -- AUTO_INCREMENT for table `table_customer`
 --
 ALTER TABLE `table_customer`
-  MODIFY `id_cust` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_cust` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `table_parts`
