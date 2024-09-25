@@ -11,7 +11,9 @@ if (isset($_GET['q'])) {
     $stmt_searchClassmates->execute();
 
     foreach ($stmt_searchClassmates as $row) {
-        echo "<strong> Förnamn: </strong> " . $row['cust_fname'] . "<br>" . "<strong> Efternamn: </strong> " . $row['cust_lname'] . "<br>" . "<strong> Adress: </strong>" . $row['cust_adress'] .  "<br><br>";
+        echo "<div><strong> Förnamn: </strong> " . $row['cust_fname'] . "<br>" . "<strong> Efternamn: </strong> " . $row['cust_lname'] . "<br>" . "<strong> Adress: </strong>" . $row['cust_adress'] .  "<br><br>
+        <a href='newproject.php?customerId=" . $row['id_cust'] . "'>Välj</a>
+        </div>";
     }
 } else {
 }

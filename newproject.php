@@ -103,10 +103,8 @@ if (isset($_POST['submitnykund'])) {
 
 
 
-        <!-- Modal Trigger Button -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#secondModal">Lägg till kund</button>
 
-        <!-- Modal Form -->
         <div class="modal fade" id="secondModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -131,26 +129,20 @@ if (isset($_POST['submitnykund'])) {
 
         <script>
             function showClassmates(str) {
-                // Clear results if input is empty
                 if (str.length == 0) {
                     document.getElementById("class-list").innerHTML = "";
                     return;
                 } else {
-                    // Create a new XMLHttpRequest object
                     var xmlhttp = new XMLHttpRequest();
 
-                    // Define the function to run when the state of the request changes
                     xmlhttp.onreadystatechange = function() {
                         if (this.readyState == 4 && this.status == 200) {
-                            // Insert the response into the span with id 'class-list'
                             document.getElementById("class-list").innerHTML = this.responseText;
                         }
                     };
 
-                    // Open the request to 'includes/search.php' with the query string
                     xmlhttp.open("GET", "includes/search.php?q=" + encodeURIComponent(str), true);
 
-                    // Send the request
                     xmlhttp.send();
                 }
             }
