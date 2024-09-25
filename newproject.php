@@ -63,7 +63,80 @@ if (!empty($customerData)) {
 
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Skapa kund</button>
 
-        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        
+
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#secondModal">Lägg till kund</button>
+
+           
+        <?php
+        
+        foreach ($customerData as $row) {
+
+       echo " <br><input name='custname' class=' mt-5' type='text' value=' " . $row['cust_fname'] . "  ' disabled> </input>"; };
+
+        ?>
+
+     <h2 class="pt-5 pb-5">Projekt</h2>
+
+        <h3 class="mb-3 ">Fel beskrivning</h3>
+        <textarea name="fbe" class=" " id="fel"></textarea>
+
+        <h3 class="mt-5 mb-3">Arbetsbeskrivning</h3>
+        <textarea name="abe" id="Arbet"></textarea>
+
+        <div class="d-flex justify-content-end ">
+        <button type="submit" class="btn btn-primary" name="ltp">Lägg till project</button>
+        </div>
+       
+    </form>
+
+
+
+
+
+
+
+
+    <div class="modal fade" id="secondModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Lägg till kund</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="">
+                            <label for="fname">First name:</label>
+                            <input type="text" id="fname" name="fname" onkeyup="showClassmates(this.value)">
+                        </form>
+                        <p><strong>Suggestions:</strong><br><br> <span id="class-list"></span></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -120,55 +193,6 @@ if (!empty($customerData)) {
             </form>
         </div>
 
-
-
-
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#secondModal">Lägg till kund</button>
-
-        <div class="modal fade" id="secondModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Lägg till kund</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="">
-                            <label for="fname">First name:</label>
-                            <input type="text" id="fname" name="fname" onkeyup="showClassmates(this.value)">
-                        </form>
-                        <p><strong>Suggestions:</strong><br><br> <span id="class-list"></span></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-           
-        <?php
-        
-        foreach ($customerData as $row) {
-
-       echo " <br><input name='custname' class=' mt-5' type='text' value=' " . $row['cust_fname'] . "  ' disabled> </input>"; };
-
-        ?>
-
-     <h2 class="pt-5 pb-5">Projekt</h2>
-
-        <h3 class="mb-3 ">Fel beskrivning</h3>
-        <textarea name="fbe" class=" " id="fel"></textarea>
-
-        <h3 class="mt-5 mb-3">Arbetsbeskrivning</h3>
-        <textarea name="abe" id="Arbet"></textarea>
-
-        <div class="d-flex justify-content-end ">
-        <button type="button" class="btn btn-primary" name="ltp">Lägg till project</button>
-        </div>
-       
-    </form>
-
         <script>
             function showClassmates(str) {
                 if (str.length == 0) {
@@ -189,6 +213,7 @@ if (!empty($customerData)) {
                 }
             }
         </script>
+
 
 
 
