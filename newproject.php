@@ -7,6 +7,10 @@ if (isset($_POST['submitnykund'])) {
     $submitnykund = nykund($pdo);
 }
 
+if (isset($_POST['ltp'])) {
+    $submitpjk= nyprjkt($pdo);
+}
+
 $customerData = []; 
 
 if (isset($_GET['customerId'])) {
@@ -50,7 +54,7 @@ if (!empty($customerData)) {
                 <input type="text" name="model" id="model">
                 <label for="register">Reg</label>
                 <input type="text" name="register" id="register">
-            </form>
+            
         </div>
 
 
@@ -103,7 +107,6 @@ if (!empty($customerData)) {
                                     <input type="text" class="form-control" id="ort" name="ort" required>
                                 </div>
                             </div>
-                            <!-- Modal Footer with Submit Button -->
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
@@ -147,10 +150,22 @@ if (!empty($customerData)) {
         
         foreach ($customerData as $row) {
 
-       echo " <br><input class=' mt-5' type='text' value=' " . $row['cust_fname'] . " ' disabled> </input>"; };
+       echo " <br><input class=' mt-5' type='text' value=' " . $row['cust_fname'] . "  ' disabled> </input>"; };
 
         ?>
-     
+
+    <h2 class="pt-5 pb-5">Projekt</h2>
+
+        <h3 class="mb-3 ">Fel beskrivning</h3>
+        <textarea class=" " id="fel"></textarea>
+
+        <h3 class="mt-5 mb-3">Arbetsbeskrivning</h3>
+        <textarea id="Arbet"></textarea>
+
+        <div class="d-flex justify-content-end ">
+        <button type="button" class="btn btn-primary" name="ltp">Lägg till project</button>
+        </div>
+        </form>
 
         <script>
             function showClassmates(str) {
