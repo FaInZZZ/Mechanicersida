@@ -47,7 +47,8 @@ if (!empty($customerData)) {
     <div class="container text-center">
         <h2 class="pt-5 pb-5">Bil</h2>
         <div class="bilinputfalt">
-            <form class="d-flex justify-content-between" action="" method="post">
+            
+ <form class="d-flex justify-content-between" action="" method="post">
                 <label for="marke">Märke</label>
                 <input type="text" name="marke" id="marke">
                 <label for="model">Model</label>
@@ -150,22 +151,23 @@ if (!empty($customerData)) {
         
         foreach ($customerData as $row) {
 
-       echo " <br><input class=' mt-5' type='text' value=' " . $row['cust_fname'] . "  ' disabled> </input>"; };
+       echo " <br><input name='custname' class=' mt-5' type='text' value=' " . $row['cust_fname'] . "  ' disabled> </input>"; };
 
         ?>
 
-    <h2 class="pt-5 pb-5">Projekt</h2>
+     <h2 class="pt-5 pb-5">Projekt</h2>
 
         <h3 class="mb-3 ">Fel beskrivning</h3>
-        <textarea class=" " id="fel"></textarea>
+        <textarea name="fbe" class=" " id="fel"></textarea>
 
         <h3 class="mt-5 mb-3">Arbetsbeskrivning</h3>
-        <textarea id="Arbet"></textarea>
+        <textarea name="abe" id="Arbet"></textarea>
 
         <div class="d-flex justify-content-end ">
         <button type="button" class="btn btn-primary" name="ltp">Lägg till project</button>
         </div>
-        </form>
+       
+    </form>
 
         <script>
             function showClassmates(str) {
