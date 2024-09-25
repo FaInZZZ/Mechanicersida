@@ -7,6 +7,24 @@ if (isset($_POST['submitnykund'])) {
     $submitnykund = nykund($pdo);
 }
 
+$customerData = []; 
+
+if (isset($_GET['customerId'])) {
+    $customerId = htmlspecialchars($_GET['customerId']);
+
+    $stmt = $pdo->prepare("SELECT cust_fname FROM table_customer WHERE id_cust = :customerId");
+    $stmt->bindParam(":customerId", $customerId, PDO::PARAM_INT);
+    $stmt->execute();
+    
+    $customerData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+if (!empty($customerData)) {
+    foreach ($customerData as $row) {
+        echo "";
+    }
+} 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,10 +56,8 @@ if (isset($_POST['submitnykund'])) {
 
         <h2 class="pt-5 pb-5">Kund</h2>
 
-        <!-- Modal Trigger Button -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Skapa kund</button>
 
-        <!-- Modal Form -->
         <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -117,7 +133,6 @@ if (isset($_POST['submitnykund'])) {
                             <label for="fname">First name:</label>
                             <input type="text" id="fname" name="fname" onkeyup="showClassmates(this.value)">
                         </form>
-                        <!-- Display search results inside the modal -->
                         <p><strong>Suggestions:</strong><br><br> <span id="class-list"></span></p>
                     </div>
                     <div class="modal-footer">
@@ -126,6 +141,16 @@ if (isset($_POST['submitnykund'])) {
                 </div>
             </div>
         </div>
+
+           
+        <?php
+        
+        foreach ($customerData as $row) {
+
+       echo " <br><input class=' mt-5' type='text' value=' " . $row['cust_fname'] . " ' disabled> </input>"; };
+
+        ?>
+     
 
         <script>
             function showClassmates(str) {
