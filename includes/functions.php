@@ -40,11 +40,17 @@ function nykund($pdo) {
 }
 
 function nyprjkt($pdo) {
+    if (!empty($customerData)) {
+        throw new Exception("Ort field cannot be empty");
+    }
 
-    
+    if (!empty($_POST['produkter'])) {
+       return;
+    }
 
-    $stmt_inserpjk = $pdo->prepare('INSERT INTO table_projekt (customer_fk, pt_felbeskrivning, pt_arbetsbeskrivning, car_brand, car_model, car_reg ) 
-                                      VALUES (:customer_fk, :pt_felbeskrivning, :pt_arbetsbeskrivning, :car_brand, :car_model, :car_reg)');
+    $stmt_inserpjk = $pdo->prepare('INSERT INTO table_projekt 
+                                    (customer_fk, pt_felbeskrivning, pt_arbetsbeskrivning, car_brand, car_model, car_reg, pt_status_fk, fk_produkter) 
+                                    VALUES (:customer_fk, :pt_felbeskrivning, :pt_arbetsbeskrivning, :car_brand, :car_model, :car_reg, :pt_status_fk, :fk_produkter)');
 
     $stmt_inserpjk->bindParam(':customer_fk', $_GET['customerId'], PDO::PARAM_STR);
     $stmt_inserpjk->bindParam(':pt_felbeskrivning', $_POST['fbe'], PDO::PARAM_STR);
@@ -52,7 +58,13 @@ function nyprjkt($pdo) {
     $stmt_inserpjk->bindParam(':car_brand', $_POST['marke'], PDO::PARAM_STR);
     $stmt_inserpjk->bindParam(':car_model', $_POST['model'], PDO::PARAM_STR);
     $stmt_inserpjk->bindParam(':car_reg', $_POST['register'], PDO::PARAM_STR);
+    $stmt_inserpjk->bindParam(':fk_produkter', $_POST['produkter'], PDO::PARAM_INT);
+
+    $pt_status_fk = 1; 
+    $stmt_inserpjk->bindParam(':pt_status_fk', $pt_status_fk, PDO::PARAM_INT);
 
     $stmt_inserpjk->execute();
 }
+
+
 ?>

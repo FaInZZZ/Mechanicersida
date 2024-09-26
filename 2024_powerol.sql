@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2024 at 10:03 AM
+-- Generation Time: Sep 26, 2024 at 10:31 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,19 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `2024_powerol`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `table_cars`
---
-
-CREATE TABLE `table_cars` (
-  `id_cars` int(11) NOT NULL,
-  `car_brand` varchar(255) NOT NULL,
-  `car_model` varchar(255) NOT NULL,
-  `car_register` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -96,13 +83,20 @@ CREATE TABLE `table_projekt` (
   `pt_felbeskrivning` varchar(520) NOT NULL,
   `pt_arbetsbeskrivning` varchar(520) NOT NULL,
   `pt_status_fk` int(11) NOT NULL,
-  `cars_fk` int(11) NOT NULL,
   `customer_fk` int(11) NOT NULL,
   `created_by_user_fk` int(11) NOT NULL,
   `car_brand` varchar(255) NOT NULL,
   `car_model` varchar(255) NOT NULL,
-  `car_reg` varchar(255) NOT NULL
+  `car_reg` varchar(255) NOT NULL,
+  `fk_produkter` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `table_projekt`
+--
+
+INSERT INTO `table_projekt` (`id_projekt`, `pt_felbeskrivning`, `pt_arbetsbeskrivning`, `pt_status_fk`, `customer_fk`, `created_by_user_fk`, `car_brand`, `car_model`, `car_reg`, `fk_produkter`) VALUES
+(8, '', '', 1, 4, 0, '', '', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -136,6 +130,16 @@ CREATE TABLE `table_status` (
   `id_status` int(11) NOT NULL,
   `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `table_status`
+--
+
+INSERT INTO `table_status` (`id_status`, `status`) VALUES
+(1, 'active'),
+(2, 'inactive'),
+(3, 'faktuerbar'),
+(4, 'fakturead');
 
 -- --------------------------------------------------------
 
@@ -171,12 +175,6 @@ CREATE TABLE `table_users` (
 --
 
 --
--- Indexes for table `table_cars`
---
-ALTER TABLE `table_cars`
-  ADD PRIMARY KEY (`id_cars`);
-
---
 -- Indexes for table `table_customer`
 --
 ALTER TABLE `table_customer`
@@ -200,11 +198,11 @@ ALTER TABLE `table_produkter_i_projekt`
 --
 ALTER TABLE `table_projekt`
   ADD PRIMARY KEY (`id_projekt`),
-  ADD KEY `pt_status_fk` (`pt_status_fk`,`cars_fk`,`customer_fk`,`created_by_user_fk`),
+  ADD KEY `pt_status_fk` (`pt_status_fk`,`customer_fk`,`created_by_user_fk`),
   ADD KEY `fk3` (`created_by_user_fk`),
   ADD KEY `fk5` (`customer_fk`),
-  ADD KEY `fk4` (`cars_fk`),
-  ADD KEY `car_brand` (`car_brand`,`car_model`,`car_reg`);
+  ADD KEY `car_brand` (`car_brand`,`car_model`,`car_reg`),
+  ADD KEY `fk_produkter` (`fk_produkter`);
 
 --
 -- Indexes for table `table_roles`
@@ -236,12 +234,6 @@ ALTER TABLE `table_users`
 --
 
 --
--- AUTO_INCREMENT for table `table_cars`
---
-ALTER TABLE `table_cars`
-  MODIFY `id_cars` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `table_customer`
 --
 ALTER TABLE `table_customer`
@@ -263,7 +255,7 @@ ALTER TABLE `table_produkter_i_projekt`
 -- AUTO_INCREMENT for table `table_projekt`
 --
 ALTER TABLE `table_projekt`
-  MODIFY `id_projekt` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_projekt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `table_roles`
@@ -275,7 +267,7 @@ ALTER TABLE `table_roles`
 -- AUTO_INCREMENT for table `table_status`
 --
 ALTER TABLE `table_status`
-  MODIFY `id_status` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_status` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `table_timmar`
@@ -305,9 +297,7 @@ ALTER TABLE `table_produkter_i_projekt`
 --
 ALTER TABLE `table_projekt`
   ADD CONSTRAINT `fk1` FOREIGN KEY (`pt_status_fk`) REFERENCES `table_status` (`id_status`),
-  ADD CONSTRAINT `fk2` FOREIGN KEY (`id_projekt`) REFERENCES `table_produkter_i_projekt` (`projekt_id_fk`),
-  ADD CONSTRAINT `fk3` FOREIGN KEY (`created_by_user_fk`) REFERENCES `table_users` (`u_id`),
-  ADD CONSTRAINT `fk4` FOREIGN KEY (`cars_fk`) REFERENCES `table_cars` (`id_cars`),
+  ADD CONSTRAINT `fk2` FOREIGN KEY (`fk_produkter`) REFERENCES `table_produkter_i_projekt` (`projekt_id_fk`),
   ADD CONSTRAINT `fk5` FOREIGN KEY (`customer_fk`) REFERENCES `table_customer` (`id_cust`);
 
 --
