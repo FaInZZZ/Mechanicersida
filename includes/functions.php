@@ -1,7 +1,7 @@
 <?php
 include_once 'config.php';
 
-$customerData = []; 
+
 
 if (isset($_GET['customerId'])) {
     $customerId = htmlspecialchars($_GET['customerId']);
@@ -13,14 +13,9 @@ if (isset($_GET['customerId'])) {
     $customerData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-if (!empty($customerData)) {
-    foreach ($customerData as $row) {
-        echo "";
-    }
-} 
+$customerData = []; 
 
 function nykund($pdo) {
-    // Ensure that the 'ort' field is not empty
     if (empty($_POST['ort'])) {
         throw new Exception("Ort field cannot be empty");
     }
@@ -41,13 +36,15 @@ function nykund($pdo) {
 
 function nyprjkt($pdo) {
     if (!empty($customerData)) {
-        throw new Exception("Ort field cannot be empty");
+        echo "Yes";
     }
 
     if (!empty($_POST['produkter'])) {
        return;
     }
 
+
+    
     $stmt_inserpjk = $pdo->prepare('INSERT INTO table_projekt 
                                     (customer_fk, pt_felbeskrivning, pt_arbetsbeskrivning, car_brand, car_model, car_reg, pt_status_fk, fk_produkter) 
                                     VALUES (:customer_fk, :pt_felbeskrivning, :pt_arbetsbeskrivning, :car_brand, :car_model, :car_reg, :pt_status_fk, :fk_produkter)');

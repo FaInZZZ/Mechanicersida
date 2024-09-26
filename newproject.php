@@ -49,6 +49,16 @@ if (!empty($customerData)) {
         <div class="bilinputfalt">
             
  <form class="d-flex justify-content-between" action="" method="post">
+
+
+ <h2 class="pt-5 pb-5">Kund</h2>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Skapa kund</button>
+
+
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#secondModal">Lägg till kund</button>
+ 
                 <label for="marke">Märke</label>
                 <input type="text" name="marke" id="marke">
                 <label for="model">Model</label>
@@ -58,14 +68,9 @@ if (!empty($customerData)) {
             
         </div>
 
-
-        <h2 class="pt-5 pb-5">Kund</h2>
-
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Skapa kund</button>
-
         
 
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#secondModal">Lägg till kund</button>
+   
 
            
         <?php

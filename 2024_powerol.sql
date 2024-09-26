@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2024 at 10:31 AM
+-- Generation Time: Sep 26, 2024 at 11:54 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -90,13 +90,6 @@ CREATE TABLE `table_projekt` (
   `car_reg` varchar(255) NOT NULL,
   `fk_produkter` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `table_projekt`
---
-
-INSERT INTO `table_projekt` (`id_projekt`, `pt_felbeskrivning`, `pt_arbetsbeskrivning`, `pt_status_fk`, `customer_fk`, `created_by_user_fk`, `car_brand`, `car_model`, `car_reg`, `fk_produkter`) VALUES
-(8, '', '', 1, 4, 0, '', '', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -255,7 +248,7 @@ ALTER TABLE `table_produkter_i_projekt`
 -- AUTO_INCREMENT for table `table_projekt`
 --
 ALTER TABLE `table_projekt`
-  MODIFY `id_projekt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_projekt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `table_roles`
