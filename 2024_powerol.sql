@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2024 at 11:54 AM
+-- Generation Time: Sep 27, 2024 at 09:53 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -47,7 +47,8 @@ INSERT INTO `table_customer` (`id_cust`, `cust_fname`, `cust_lname`, `cust_tel`,
 (4, 'Kevin', 'Bränä', '0449574723', 'kevinsepost@gmail.com', 'hemma', '10640', 'sverige'),
 (5, 'Kevin', 'Bränä', '0449574723', 'kevinsepost@gmail.com', 'hemma', '10640', 'sverige'),
 (6, 'ok', 'hej', '3', '2@wdwada', '21', '21', '211'),
-(7, 'dawd', 'dwad', 'wad', 'wad@awd.com', 'awd', 'dawd', 'adwd');
+(7, 'dawd', 'dwad', 'wad', 'wad@awd.com', 'awd', 'dawd', 'adwd'),
+(8, 'dwdawd', 'dawdaw', 'dawdawd', 'dawdaw@fe.fiaw', 'dawd', 'dwadw', 'awddawd');
 
 -- --------------------------------------------------------
 
@@ -90,6 +91,17 @@ CREATE TABLE `table_projekt` (
   `car_reg` varchar(255) NOT NULL,
   `fk_produkter` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `table_projekt`
+--
+
+INSERT INTO `table_projekt` (`id_projekt`, `pt_felbeskrivning`, `pt_arbetsbeskrivning`, `pt_status_fk`, `customer_fk`, `created_by_user_fk`, `car_brand`, `car_model`, `car_reg`, `fk_produkter`) VALUES
+(22, 'dwdawd', 'dawdawd', 1, 3, 0, 'bil', 'skibidi', '234234324ergreg', NULL),
+(23, 'dwdawd', 'dawdawd', 1, 3, 0, 'bil', 'skibidi', '234234324ergreg', NULL),
+(24, 'dwdawd', 'dawdawd', 1, 3, 0, 'bil', 'skibidi', '234234324ergreg', NULL),
+(25, 'dwdawd', 'dawdawd', 1, 3, 0, 'bil', 'skibidi', '234234324ergreg', NULL),
+(26, 'fel i hovo', 'fisk', 1, 4, 0, 'homo', 'liini', 'lindström225', NULL);
 
 -- --------------------------------------------------------
 
@@ -164,6 +176,13 @@ CREATE TABLE `table_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `table_users`
+--
+
+INSERT INTO `table_users` (`u_id`, `u_name`, `u_password`, `u_email`, `u_role_fk`, `u_status`) VALUES
+(1, 'qarlsson', 'qarlsson', 'qarlsson@gmail.com', 4, 1);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -230,7 +249,7 @@ ALTER TABLE `table_users`
 -- AUTO_INCREMENT for table `table_customer`
 --
 ALTER TABLE `table_customer`
-  MODIFY `id_cust` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_cust` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `table_parts`
@@ -248,7 +267,7 @@ ALTER TABLE `table_produkter_i_projekt`
 -- AUTO_INCREMENT for table `table_projekt`
 --
 ALTER TABLE `table_projekt`
-  MODIFY `id_projekt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_projekt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `table_roles`
@@ -272,7 +291,7 @@ ALTER TABLE `table_timmar`
 -- AUTO_INCREMENT for table `table_users`
 --
 ALTER TABLE `table_users`
-  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables
@@ -292,12 +311,6 @@ ALTER TABLE `table_projekt`
   ADD CONSTRAINT `fk1` FOREIGN KEY (`pt_status_fk`) REFERENCES `table_status` (`id_status`),
   ADD CONSTRAINT `fk2` FOREIGN KEY (`fk_produkter`) REFERENCES `table_produkter_i_projekt` (`projekt_id_fk`),
   ADD CONSTRAINT `fk5` FOREIGN KEY (`customer_fk`) REFERENCES `table_customer` (`id_cust`);
-
---
--- Constraints for table `table_users`
---
-ALTER TABLE `table_users`
-  ADD CONSTRAINT `fk312132` FOREIGN KEY (`u_id`) REFERENCES `table_timmar` (`id_timmar`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
