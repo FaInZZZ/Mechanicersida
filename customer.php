@@ -40,9 +40,9 @@ if(isset($_POST['search-submit'])){
 		foreach($userArray as $userRow){
 			echo "
 			<div class='row'>
-				<div class='col'>{$userRow["u_name"]}</div>
+				<div class='col'>{$userRow["cust_fname"]}</div>
 				<div class='col'>
-					<a href='admin-account.php?uid={$userRow["u_id"]}'>Link</a>
+					<a href='admin-account.php?uid={$userRow["id_cust"]}'>Link</a>
 				</div> 
 			</div>
 			";
