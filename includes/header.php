@@ -26,7 +26,7 @@ $menuLinks = array(
   ),
 array(
   "title" => "Admin",
-  "url" => "admin-accountforkonton.php"
+  "url" => "admin.php"
 )
 );
 // Menylänkar synliga enbart för admins
