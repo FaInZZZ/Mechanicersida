@@ -23,6 +23,10 @@ $menuLinks = array(
   array(
     "title" => "Active",
     "url" => "active_projects.php"
+  ),
+array(
+  "title" => "Active",
+  "url" => "admin-accountforkonton.php"
 )
 );
 // Menylänkar synliga enbart för admins
