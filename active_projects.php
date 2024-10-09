@@ -61,13 +61,21 @@ try {
                     break;
             }
 
+            // Limit the length of felbeskrivning and arbetsbeskrivning (e.g., 100 characters)
+            $felbeskrivning = strlen($row['pt_felbeskrivning']) > 100 
+                ? substr($row['pt_felbeskrivning'], 0, 100) . '...' 
+                : $row['pt_felbeskrivning'];
+            $arbetsbeskrivning = strlen($row['pt_arbetsbeskrivning']) > 100 
+                ? substr($row['pt_arbetsbeskrivning'], 0, 100) . '...' 
+                : $row['pt_arbetsbeskrivning'];
+
             echo "<tr class='$color_class'>
                     <td>" . $row['customer_name'] . "</td>
                     <td>" . $row['car_brand'] . "</td>
                     <td>" . $row['car_model'] . "</td>
                     <td>" . $row['car_reg'] . "</td>
-                    <td>" . $row['pt_felbeskrivning'] . "</td>
-                    <td>" . $row['pt_arbetsbeskrivning'] . "</td>
+                    <td>" . $felbeskrivning . "</td>
+                    <td>" . $arbetsbeskrivning . "</td>
                     <td>" . $row['status_name'] . "</td> <!-- Show Status -->
                     <td>
                         <a href='single-project.php?id=" . $row['id_projekt'] . "' class='btn btn-primary'>View Project</a>
