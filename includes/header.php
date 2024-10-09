@@ -25,7 +25,7 @@ $menuLinks = array(
     "url" => "active_projects.php"
   ),
 array(
-  "title" => "Active",
+  "title" => "Admin",
   "url" => "admin-accountforkonton.php"
 )
 );
