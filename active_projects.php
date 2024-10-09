@@ -6,7 +6,7 @@ echo "<div class='container mt-5'>";
 echo "<h1 class='mb-4'>Active Projects</h1>";
 
 try {
-    // Query to fetch customer name and car details directly from table_projekt
+    // Query to fetch customer name, car details, and project status
     $stmt = $pdo->query("
         SELECT 
             p.id_projekt, 
@@ -15,10 +15,12 @@ try {
             p.pt_arbetsbeskrivning,
             p.car_brand, 
             p.car_model, 
-            p.car_reg
+            p.car_reg,
+            s.status_name, -- Fetching the status name from table_status
+            p.pt_status_fk
         FROM table_projekt p
         JOIN table_customer c ON p.customer_fk = c.id_cust
-        WHERE p.pt_status_fk = '1'
+        JOIN table_status s ON p.pt_status_fk = s.id_status
     ");
 
     if ($stmt->rowCount() > 0) {
@@ -31,19 +33,45 @@ try {
                         <th>Registration</th>
                         <th>Felbeskrivning</th>
                         <th>Arbetsbeskrivning</th>
+                        <th>Status</th> <!-- Added Status Column -->
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>";
 
         // Fetch each row and display it
         foreach ($stmt as $row) {
-            echo "<tr>
+            // Determine the color based on the status
+            $color_class = '';
+            switch ($row['pt_status_fk']) {
+                case 1: // Active
+                    $color_class = 'table-success'; // Green
+                    break;
+                case 2: // Inactive
+                    $color_class = 'table-danger'; // Red
+                    break;
+                case 3: // Fakturerbar
+                    $color_class = 'table-warning'; // Yellow
+                    break;
+                case 4: // Fakturerad
+                    $color_class = 'table-info'; // Blue
+                    break;
+                default:
+                    $color_class = ''; // Default (no color)
+                    break;
+            }
+
+            echo "<tr class='$color_class'>
                     <td>" . $row['customer_name'] . "</td>
                     <td>" . $row['car_brand'] . "</td>
                     <td>" . $row['car_model'] . "</td>
                     <td>" . $row['car_reg'] . "</td>
                     <td>" . $row['pt_felbeskrivning'] . "</td>
                     <td>" . $row['pt_arbetsbeskrivning'] . "</td>
+                    <td>" . $row['status_name'] . "</td> <!-- Show Status -->
+                    <td>
+                        <a href='single-project.php?id=" . $row['id_projekt'] . "' class='btn btn-primary'>View Project</a>
+                    </td>
                   </tr>";
         }
 

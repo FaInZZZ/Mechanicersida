@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2024 at 09:53 AM
+-- Generation Time: Oct 09, 2024 at 11:40 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -97,11 +97,12 @@ CREATE TABLE `table_projekt` (
 --
 
 INSERT INTO `table_projekt` (`id_projekt`, `pt_felbeskrivning`, `pt_arbetsbeskrivning`, `pt_status_fk`, `customer_fk`, `created_by_user_fk`, `car_brand`, `car_model`, `car_reg`, `fk_produkter`) VALUES
-(22, 'dwdawd', 'dawdawd', 1, 3, 0, 'bil', 'skibidi', '234234324ergreg', NULL),
-(23, 'dwdawd', 'dawdawd', 1, 3, 0, 'bil', 'skibidi', '234234324ergreg', NULL),
-(24, 'dwdawd', 'dawdawd', 1, 3, 0, 'bil', 'skibidi', '234234324ergreg', NULL),
+(22, 'dwdawd', 'dawdawd', 3, 3, 0, 'bil', 'skibidi', '234234324ergreg', NULL),
+(23, 'dwdawd', 'dawdawd', 2, 3, 0, 'bil', 'skibidi', '234234324ergreg', NULL),
+(24, 'dwdawd', 'dawdawd', 3, 3, 0, 'bil', 'skibidi', '234234324ergreg', NULL),
 (25, 'dwdawd', 'dawdawd', 1, 3, 0, 'bil', 'skibidi', '234234324ergreg', NULL),
-(26, 'fel i hovo', 'fisk', 1, 4, 0, 'homo', 'liini', 'lindström225', NULL);
+(26, 'fel i hovo', 'fisk', 1, 4, 0, 'homo', 'liini', 'lindström225', NULL),
+(27, 'aburdaburda', 'fix felen ', 1, 4, 0, 'volvo', 'v90', 'NFS-287', NULL);
 
 -- --------------------------------------------------------
 
@@ -133,18 +134,18 @@ INSERT INTO `table_roles` (`r_id`, `r_name`, `r_level`) VALUES
 
 CREATE TABLE `table_status` (
   `id_status` int(11) NOT NULL,
-  `status` varchar(255) NOT NULL
+  `status_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `table_status`
 --
 
-INSERT INTO `table_status` (`id_status`, `status`) VALUES
+INSERT INTO `table_status` (`id_status`, `status_name`) VALUES
 (1, 'active'),
 (2, 'inactive'),
-(3, 'faktuerbar'),
-(4, 'fakturead');
+(3, 'fakturerbar'),
+(4, 'fakturerad');
 
 -- --------------------------------------------------------
 
@@ -180,7 +181,8 @@ CREATE TABLE `table_users` (
 --
 
 INSERT INTO `table_users` (`u_id`, `u_name`, `u_password`, `u_email`, `u_role_fk`, `u_status`) VALUES
-(1, 'qarlsson', 'qarlsson', 'qarlsson@gmail.com', 4, 1);
+(22, 'nigga', '$2y$10$Sbhaj5s5.ryrmgiwI2a3VO8UV4oSCyCnISXOAuiR1qauwWN1yPQg6', 'nigga@gmail.com', 1, 1),
+(23, 'qarlsson', '$2y$10$Q9Lte2LOBuDPXhB71ZTKy.WcptqfPu89TqfPP2CBTh5eOq5XqkFzu', 'lompa@gmail.com', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -267,7 +269,7 @@ ALTER TABLE `table_produkter_i_projekt`
 -- AUTO_INCREMENT for table `table_projekt`
 --
 ALTER TABLE `table_projekt`
-  MODIFY `id_projekt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_projekt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `table_roles`
@@ -291,7 +293,7 @@ ALTER TABLE `table_timmar`
 -- AUTO_INCREMENT for table `table_users`
 --
 ALTER TABLE `table_users`
-  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables
