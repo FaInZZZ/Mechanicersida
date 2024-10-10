@@ -10,11 +10,21 @@ if (isset($_GET['id'])) {
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['status'])) {
         $status_id = $_POST['status'];
-        // Update the project status in the database
-        $update_stmt = $pdo->prepare("UPDATE table_projekt SET pt_status_fk = ? WHERE id_projekt = ?");
-        $update_stmt->execute([$status_id, $id_projekt]);
+        $car_brand = $_POST['car_brand'];
+        $car_model = $_POST['car_model'];
+        $car_reg = $_POST['car_reg'];
+        $felbeskrivning = $_POST['felbeskrivning'];
+        $arbetsbeskrivning = $_POST['arbetsbeskrivning'];
 
-        echo "<div class='alert alert-success'>Project status updated successfully.</div>";
+        // Update the project details in the database
+        $update_stmt = $pdo->prepare("
+            UPDATE table_projekt 
+            SET pt_status_fk = ?, car_brand = ?, car_model = ?, car_reg = ?, pt_felbeskrivning = ?, pt_arbetsbeskrivning = ? 
+            WHERE id_projekt = ?
+        ");
+        $update_stmt->execute([$status_id, $car_brand, $car_model, $car_reg, $felbeskrivning, $arbetsbeskrivning, $id_projekt]);
+
+        echo "<div class='alert alert-success'>Project details updated successfully.</div>";
     }
 
     try {
@@ -44,13 +54,27 @@ if (isset($_GET['id'])) {
             echo "<div class='card'>
                     <div class='card-body'>
                         <h3>Customer: " . $project['customer_name'] . "</h3>
-                        <p><strong>Brand:</strong> " . $project['car_brand'] . "</p>
-                        <p><strong>Model:</strong> " . $project['car_model'] . "</p>
-                        <p><strong>Registration:</strong> " . $project['car_reg'] . "</p>
-                        <p><strong>Felbeskrivning:</strong> " . $project['pt_felbeskrivning'] . "</p>
-                        <p><strong>Arbetsbeskrivning:</strong> " . $project['pt_arbetsbeskrivning'] . "</p>
-
                         <form method='POST'>
+                            <div class='form-group'>
+                                <label for='car_brand'>Brand</label>
+                                <input type='text' id='car_brand' name='car_brand' class='form-control' value='" . $project['car_brand'] . "'>
+                            </div>
+                            <div class='form-group'>
+                                <label for='car_model'>Model</label>
+                                <input type='text' id='car_model' name='car_model' class='form-control' value='" . $project['car_model'] . "'>
+                            </div>
+                            <div class='form-group'>
+                                <label for='car_reg'>Registration</label>
+                                <input type='text' id='car_reg' name='car_reg' class='form-control' value='" . $project['car_reg'] . "'>
+                            </div>
+                            <div class='form-group'>
+                                <label for='felbeskrivning'>Felbeskrivning</label>
+                                <textarea id='felbeskrivning' name='felbeskrivning' class='form-control'>" . $project['pt_felbeskrivning'] . "</textarea>
+                            </div>
+                            <div class='form-group'>
+                                <label for='arbetsbeskrivning'>Arbetsbeskrivning</label>
+                                <textarea id='arbetsbeskrivning' name='arbetsbeskrivning' class='form-control'>" . $project['pt_arbetsbeskrivning'] . "</textarea>
+                            </div>
                             <div class='form-group'>
                                 <label for='status'>Change Project Status</label>
                                 <select id='status' name='status' class='form-control'>";
@@ -63,7 +87,7 @@ if (isset($_GET['id'])) {
 
             echo "            </select>
                             </div>
-                            <button type='submit' class='btn btn-primary'>Update Status</button>
+                            <button type='submit' class='btn btn-primary'>Update Details</button>
                         </form>
                     </div>
                   </div>";
