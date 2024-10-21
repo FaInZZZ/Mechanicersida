@@ -174,6 +174,33 @@ class User {
 				$_SESSION['user_mail'] = $umail;
 			}
 	}
+
+	public function editCustInfo($umail, $opass, $upass, $uid, $role, $status){
+		//Hämta ut nuvarande användares lösenord
+		$stmt_getUserPassword = $this->pdo->prepare('SELECT u_password FROM table_users WHERE u_id = :uid');
+		$stmt_getUserPassword->bindParam(":uid", $uid, PDO::PARAM_INT);
+		$stmt_getUserPassword->execute();
+		$oldPassword = $stmt_getUserPassword->fetch();
+		
+		if(isset($_POST['update-submit'])){
+		//Kolla om lösenordet som matats in stämmer 
+			if(!password_verify($opass, $oldPassword['u_password'])){
+				return "The password is invalid";
+			}
+		}
+			$hashedPassword = password_hash($upass, PASSWORD_DEFAULT);
+		//Uppdatera i databasen
+			$stmt_updateUserInfo = $this->pdo->prepare('UPDATE table_users SET u_email=:umail, u_password=:upass, u_role_fk = :role, u_status = :status WHERE u_id = :uid');
+			$stmt_updateUserInfo->bindParam(":umail", $umail, PDO::PARAM_STR);
+			$stmt_updateUserInfo->bindParam(":upass", $hashedPassword, PDO::PARAM_STR);
+			$stmt_updateUserInfo->bindParam(":uid", $uid, PDO::PARAM_INT);
+			$stmt_updateUserInfo->bindParam(":role", $role, PDO::PARAM_INT);
+			$stmt_updateUserInfo->bindParam(":status", $status, PDO::PARAM_INT);
+			
+			if($stmt_updateUserInfo->execute() && $uid == $_SESSION['user_id']){
+				$_SESSION['user_mail'] = $umail;
+			}
+	}
 	
 	public function searchUsers($input){
 		$inputJoker = "%{$input}%";
@@ -184,9 +211,27 @@ class User {
 		$userArray = $stmt_checkUsername->fetchAll();
 		return $userArray;
 	}
+
+	public function searchCust($input){
+		$inputJoker = "%{$input}%";
+		$stmt_checkUsername = $this->pdo->prepare('SELECT * FROM table_customer WHERE cust_lname LIKE :cust_lname OR cust_epost LIKE :cust_epost');
+		$stmt_checkUsername->bindParam(":cust_lname", $inputJoker, PDO::PARAM_STR);
+		$stmt_checkUsername->bindParam(":cust_epost", $inputJoker, PDO::PARAM_STR);
+		$stmt_checkUsername->execute();
+		$userArray = $stmt_checkUsername->fetchAll();
+		return $userArray;
+	}
 	
 	public function getUserInfo($uid){
 		$stmt_selectUserData = $this->pdo->prepare('SELECT * FROM table_users WHERE u_id = :uid');
+		$stmt_selectUserData->bindParam(":uid", $uid, PDO::PARAM_INT);
+		$stmt_selectUserData->execute();
+		$userInfo = $stmt_selectUserData->fetch();
+		return $userInfo;
+	}
+
+	public function getCustInfo($uid){
+		$stmt_selectUserData = $this->pdo->prepare('SELECT * FROM table_customer WHERE id_cust = :uid');
 		$stmt_selectUserData->bindParam(":uid", $uid, PDO::PARAM_INT);
 		$stmt_selectUserData->execute();
 		$userInfo = $stmt_selectUserData->fetch();
