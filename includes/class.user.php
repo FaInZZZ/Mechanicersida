@@ -113,7 +113,7 @@ class User {
 		$_SESSION['user_name'] = $userData['u_name'];
 		$_SESSION['user_mail'] = $userData['u_email'];
 		$_SESSION['user_role'] = $userData['u_role_fk'];
-		header("Location: home.php");
+		header("Location: active_projects.php");
 	}
 	else{
 		array_push($this->errorMessages,"Password is incorrect! ");
