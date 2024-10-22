@@ -175,32 +175,29 @@ class User {
 			}
 	}
 
-	public function editCustInfo($umail, $opass, $upass, $uid, $role, $status){
-		//Hämta ut nuvarande användares lösenord
-		$stmt_getUserPassword = $this->pdo->prepare('SELECT u_password FROM table_users WHERE u_id = :uid');
-		$stmt_getUserPassword->bindParam(":uid", $uid, PDO::PARAM_INT);
-		$stmt_getUserPassword->execute();
-		$oldPassword = $stmt_getUserPassword->fetch();
+	public function editCustInfo($uid, $cust_fname, $cust_lname, $cust_tel, $cust_epost, $cust_adress, $cust_postnummer, $cust_ort) {
+		$stmt_updateCustInfo = $this->pdo->prepare('UPDATE table_customer SET cust_fname=:fname, cust_lname=:lname, cust_tel=:tel, cust_epost=:epost, cust_adress=:adress, cust_postnummer=:postnummer, cust_ort=:ort WHERE id_cust=:uid');
 		
-		if(isset($_POST['update-submit'])){
-		//Kolla om lösenordet som matats in stämmer 
-			if(!password_verify($opass, $oldPassword['u_password'])){
-				return "The password is invalid";
-			}
-		}
-			$hashedPassword = password_hash($upass, PASSWORD_DEFAULT);
-		//Uppdatera i databasen
-			$stmt_updateUserInfo = $this->pdo->prepare('UPDATE table_users SET u_email=:umail, u_password=:upass, u_role_fk = :role, u_status = :status WHERE u_id = :uid');
-			$stmt_updateUserInfo->bindParam(":umail", $umail, PDO::PARAM_STR);
-			$stmt_updateUserInfo->bindParam(":upass", $hashedPassword, PDO::PARAM_STR);
-			$stmt_updateUserInfo->bindParam(":uid", $uid, PDO::PARAM_INT);
-			$stmt_updateUserInfo->bindParam(":role", $role, PDO::PARAM_INT);
-			$stmt_updateUserInfo->bindParam(":status", $status, PDO::PARAM_INT);
+		$stmt_updateCustInfo->bindParam(":fname", $cust_fname, PDO::PARAM_STR);
+		$stmt_updateCustInfo->bindParam(":lname", $cust_lname, PDO::PARAM_STR);
+		$stmt_updateCustInfo->bindParam(":uid", $uid, PDO::PARAM_INT);
+		$stmt_updateCustInfo->bindParam(":tel", $cust_tel, PDO::PARAM_STR);
+		$stmt_updateCustInfo->bindParam(":epost", $cust_epost, PDO::PARAM_STR);
+		$stmt_updateCustInfo->bindParam(":adress", $cust_adress, PDO::PARAM_STR);
+		$stmt_updateCustInfo->bindParam(":postnummer", $cust_postnummer, PDO::PARAM_STR);
+		$stmt_updateCustInfo->bindParam(":ort", $cust_ort, PDO::PARAM_STR);
+		
+		if ($stmt_updateCustInfo->execute()) {
+			header("Location: admin.php?status=success");
+			exit();
+		} else {
 			
-			if($stmt_updateUserInfo->execute() && $uid == $_SESSION['user_id']){
-				$_SESSION['user_mail'] = $umail;
-			}
-	}
+			header("Location: admin.php?status=failed");
+			exit();
+	}}
+	
+	
+	
 	
 	public function searchUsers($input){
 		$inputJoker = "%{$input}%";
