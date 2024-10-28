@@ -26,8 +26,6 @@ if (isset($_GET['id'])) {
         header("Location: active_projects.php");
 
         exit();
-
-        echo "<div class='alert alert-success'>Project details updated successfully.</div>";
     }
 
     try {
@@ -53,53 +51,55 @@ if (isset($_GET['id'])) {
             // Fetch all possible statuses from table_status
             $status_stmt = $pdo->query("SELECT id_status, status_name FROM table_status");
             $statuses = $status_stmt->fetchAll();
+            ?>
 
-            echo "<div class='card'>
-                    <div class='card-body'>
-                        <h3>Customer: " . $project['customer_name'] . "</h3>
-                        <form method='POST'>
-                            <div class='form-group'>
-                                <label for='car_brand'>Brand</label>
-                                <input type='text' id='car_brand' name='car_brand' class='form-control' value='" . $project['car_brand'] . "'>
-                            </div>
-                            <div class='form-group'>
-                                <label for='car_model'>Model</label>
-                                <input type='text' id='car_model' name='car_model' class='form-control' value='" . $project['car_model'] . "'>
-                            </div>
-                            <div class='form-group'>
-                                <label for='car_reg'>Registration</label>
-                                <input type='text' id='car_reg' name='car_reg' class='form-control' value='" . $project['car_reg'] . "'>
-                            </div>
-                            <div class='form-group'>
-                                <label for='felbeskrivning'>Felbeskrivning</label>
-                                <textarea id='felbeskrivning' name='felbeskrivning' class='form-control'>" . $project['pt_felbeskrivning'] . "</textarea>
-                            </div>
-                            <div class='form-group'>
-                                <label for='arbetsbeskrivning'>Arbetsbeskrivning</label>
-                                <textarea id='arbetsbeskrivning' name='arbetsbeskrivning' class='form-control'>" . $project['pt_arbetsbeskrivning'] . "</textarea>
-                            </div>
-                            <div class='form-group'>
-                                <label for='status'>Change Project Status</label>
-                                <select id='status' name='status' class='form-control'>";
-            
-            // Populate dropdown with statuses
-            foreach ($statuses as $status) {
-                $selected = ($status['id_status'] == $project['pt_status_fk']) ? 'selected' : '';
-                echo "<option value='" . $status['id_status'] . "' $selected>" . $status['status_name'] . "</option>";
-            }
+            <div class="card">
+                <div class="card-body">
+                    <h3>Customer: <?= htmlspecialchars($project['customer_name']) ?></h3>
+                    <form method="POST">
+                        <div class="form-group">
+                            <label for="car_brand">Brand</label>
+                            <input type="text" id="car_brand" name="car_brand" class="form-control" value="<?= htmlspecialchars($project['car_brand']) ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="car_model">Model</label>
+                            <input type="text" id="car_model" name="car_model" class="form-control" value="<?= htmlspecialchars($project['car_model']) ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="car_reg">Registration</label>
+                            <input type="text" id="car_reg" name="car_reg" class="form-control" value="<?= htmlspecialchars($project['car_reg']) ?>">
+                        </div>
 
-            echo "            </select>
-                            </div>
-                            <button type='submit' class='btn btn-primary'>Update Details</button>
-                        </form>
-                    </div>
-                  </div>";
+
+                        <div class="form-group">
+                            <label for="felbeskrivning">Felbeskrivning</label>
+                            <textarea id="felbeskrivning" name="felbeskrivning" class="form-control"><?= htmlspecialchars($project['pt_felbeskrivning']) ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="arbetsbeskrivning">Arbetsbeskrivning</label>
+                            <textarea id="arbetsbeskrivning" name="arbetsbeskrivning" class="form-control"><?= htmlspecialchars($project['pt_arbetsbeskrivning']) ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Change Project Status</label>
+                            <select id="status" name="status" class="form-control">
+                                <?php foreach ($statuses as $status): 
+                                    $selected = ($status['id_status'] == $project['pt_status_fk']) ? 'selected' : ''; ?>
+                                    <option value="<?= $status['id_status'] ?>" <?= $selected ?>><?= htmlspecialchars($status['status_name']) ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Details</button>
+                    </form>
+                </div>
+            </div>
+
+            <?php
         } else {
             echo "<div class='alert alert-info' role='alert'>Project not found.</div>";
         }
 
     } catch (PDOException $e) {
-        echo "<div class='alert alert-danger' role='alert'>Error: " . $e->getMessage() . "</div>";
+        echo "<div class='alert alert-danger' role='alert'>Error: " . htmlspecialchars($e->getMessage()) . "</div>";
     }
 
     echo "</div>";
