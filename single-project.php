@@ -76,7 +76,36 @@ if (isset($_GET['id'])) {
                             <input type="text" id="car_reg" name="car_reg" class="form-control" value="<?= htmlspecialchars($project['car_reg']) ?>">
                         </div>
 
-                        <!-- New Button to open the modal (updated for Bootstrap 5) -->
+                        <div class="modal fade" id="additionalFieldsModal" tabindex="-1" aria-labelledby="additionalFieldsModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="additionalFieldsModalLabel">Additional Fields</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="additionalFieldsForm">
+                                <div class="form-group">
+                                    <label for="extra_field1">Hours</label>
+                                    <input type="text" id="extra_field1" name="extra_field1" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="extra_field2">Date</label>
+                                    <input type="date" id="extra_field2" name="extra_field2" class="form-control">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                    
+
+                        
                         <button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#additionalFieldsModal">
                             Add Additional Fields
                         </button>
@@ -103,34 +132,7 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
 
-            <!-- Modal Structure (updated for Bootstrap 5) -->
-            <div class="modal fade" id="additionalFieldsModal" tabindex="-1" aria-labelledby="additionalFieldsModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="additionalFieldsModalLabel">Additional Fields</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="additionalFieldsForm">
-                                <div class="form-group">
-                                    <label for="extra_field1">Extra Field 1</label>
-                                    <input type="text" id="extra_field1" name="extra_field1" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="extra_field2">Extra Field 2</label>
-                                    <input type="text" id="extra_field2" name="extra_field2" class="form-control">
-                                </div>
-                                <!-- Add more fields as needed -->
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
 
             <?php
         } else {
