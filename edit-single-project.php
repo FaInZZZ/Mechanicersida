@@ -2,7 +2,6 @@
 include_once 'includes/header.php';
 include_once 'includes/config.php'; // DB connection
 
-
 ?>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -13,12 +12,6 @@ if (isset($_GET['id'])) {
 
     echo "<div class='container mt-5'>";
     echo "<h1 class='mb-4'>Project Details</h1>";
-    
-
-    if (isset($_POST['inserthour'])) {
-        $lastHoursId = insertHours($pdo, $id_projekt);
-    }
-    
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['status'])) {
         $status_id = $_POST['status'];
@@ -41,6 +34,7 @@ if (isset($_GET['id'])) {
     }
 
     try {
+        // Fetch the specific project details
         $stmt = $pdo->prepare("
             SELECT 
                 CONCAT(c.cust_fname, ' ', c.cust_lname) AS customer_name, 
@@ -67,92 +61,41 @@ if (isset($_GET['id'])) {
             <div class="card">
                 <div class="card-body">
                     <h3>Customer: <?= htmlspecialchars($project['customer_name']) ?></h3>
-                    <form method="POST" action="projects/single-project.php">
+                    <form method="POST">
                         <div class="form-group">
                             <label for="car_brand">Brand</label>
-                            <input type="text" id="car_brand" name="car_brand" class="form-control" value="<?= htmlspecialchars($project['car_brand']) ?>"readonly>
+                            <input type="text" id="car_brand" name="car_brand" class="form-control" value="<?= htmlspecialchars($project['car_brand']) ?>">
                         </div>
                         <div class="form-group">
                             <label for="car_model">Model</label>
-                            <input type="text" id="car_model" name="car_model" class="form-control" value="<?= htmlspecialchars($project['car_model']) ?>"readonly>
+                            <input type="text" id="car_model" name="car_model" class="form-control" value="<?= htmlspecialchars($project['car_model']) ?>">
                         </div>
                         <div class="form-group">
                             <label for="car_reg">Registration</label>
-                            <input type="text" id="car_reg" name="car_reg" class="form-control" value="<?= htmlspecialchars($project['car_reg']) ?>"readonly>
+                            <input type="text" id="car_reg" name="car_reg" class="form-control" value="<?= htmlspecialchars($project['car_reg']) ?>">
                         </div>
+
 
                         <div class="form-group">
                             <label for="felbeskrivning">Felbeskrivning</label>
-                            <textarea readonly id="felbeskrivning" name="felbeskrivning" class="form-control"><?= htmlspecialchars($project['pt_felbeskrivning']) ?></textarea>
+                            <textarea id="felbeskrivning" name="felbeskrivning" class="form-control"><?= htmlspecialchars($project['pt_felbeskrivning']) ?></textarea>
                         </div>
                         <div class="form-group">
                             <label for="arbetsbeskrivning">Arbetsbeskrivning</label>
-                            <textarea readonly id="arbetsbeskrivning" name="arbetsbeskrivning" class="form-control"><?= htmlspecialchars($project['pt_arbetsbeskrivning']) ?></textarea>
+                            <textarea id="arbetsbeskrivning" name="arbetsbeskrivning" class="form-control"><?= htmlspecialchars($project['pt_arbetsbeskrivning']) ?></textarea>
                         </div>
                         <div class="form-group">
                             <label for="status">Change Project Status</label>
-                            <select id="status" name="status" class="form-control" disabled>
+                            <select id="status" name="status" class="form-control">
                                 <?php foreach ($statuses as $status): 
                                     $selected = ($status['id_status'] == $project['pt_status_fk']) ? 'selected' : ''; ?>
                                     <option value="<?= $status['id_status'] ?>" <?= $selected ?>><?= htmlspecialchars($status['status_name']) ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
-
-                        <button type="button" class="btn btn-primary" onclick="window.location.href='active_projects.php'">Back</button>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                            hours add
-                            </button>
+                        <button type="submit" class="btn btn-primary">Update Details</button>
                     </form>
                 </div>
-
-
-
-
-  
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Hours</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form method="POST" action="single-project.php?id=<?php echo $id_projekt ?>">
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="hours">Hours</label>
-            <input type="text" id="hours" name="hours" class="form-control" value="">
-          </div>
-          <div class="form-group">
-            <label for="date">Date</label>
-            <input type="date" id="date" name="date" class="form-control" value="">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" name="inserthour" class="btn btn-primary">Save Changes</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                
             </div>
 
             
@@ -173,7 +116,3 @@ if (isset($_GET['id'])) {
 
 include_once 'includes/footer.php';
 ?>
-
-
-
-

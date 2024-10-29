@@ -1,5 +1,6 @@
 <?php
 require_once 'includes/class.user.php';
+require_once 'includes/functions.php';
 require_once 'includes/config.php';
 $user = new User($pdo);
 

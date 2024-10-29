@@ -5,3 +5,7 @@
 	color: whitesmoke;
 	min-height: 500px;
 }
+
+#arbetsbeskrivning {
+    pointer-events: none;
+}

@@ -61,7 +61,6 @@ try {
                     break;
             }
 
-            // Limit the length of felbeskrivning and arbetsbeskrivning (e.g., 100 characters)
             $felbeskrivning = strlen($row['pt_felbeskrivning']) > 100 
                 ? substr($row['pt_felbeskrivning'], 0, 100) . '...' 
                 : $row['pt_felbeskrivning'];
@@ -79,6 +78,9 @@ try {
                     <td>" . $row['status_name'] . "</td> <!-- Show Status -->
                     <td>
                         <a href='single-project.php?id=" . $row['id_projekt'] . "' class='btn btn-primary'>View Project</a>
+                    </td>
+                    <td>
+                        <a href='edit-single-project.php?id=" . $row['id_projekt'] . "' class='btn btn-primary'>Edit Project</a>
                     </td>
                   </tr>";
         }
