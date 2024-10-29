@@ -21,7 +21,6 @@ if (isset($_GET['id'])) {
         $felbeskrivning = $_POST['felbeskrivning'];
         $arbetsbeskrivning = $_POST['arbetsbeskrivning'];
 
-        // Update the project details in the database
         $update_stmt = $pdo->prepare("
             UPDATE table_projekt 
             SET pt_status_fk = ?, car_brand = ?, car_model = ?, car_reg = ?, pt_felbeskrivning = ?, pt_arbetsbeskrivning = ? 
@@ -34,7 +33,6 @@ if (isset($_GET['id'])) {
     }
 
     try {
-        // Fetch the specific project details
         $stmt = $pdo->prepare("
             SELECT 
                 CONCAT(c.cust_fname, ' ', c.cust_lname) AS customer_name, 
@@ -53,7 +51,6 @@ if (isset($_GET['id'])) {
         if ($stmt->rowCount() > 0) {
             $project = $stmt->fetch();
 
-            // Fetch all possible statuses from table_status
             $status_stmt = $pdo->query("SELECT id_status, status_name FROM table_status");
             $statuses = $status_stmt->fetchAll();
             ?>
@@ -75,7 +72,6 @@ if (isset($_GET['id'])) {
                             <input type="text" id="car_reg" name="car_reg" class="form-control" value="<?= htmlspecialchars($project['car_reg']) ?>">
                         </div>
 
-
                         <div class="form-group">
                             <label for="felbeskrivning">Felbeskrivning</label>
                             <textarea id="felbeskrivning" name="felbeskrivning" class="form-control"><?= htmlspecialchars($project['pt_felbeskrivning']) ?></textarea>
@@ -94,11 +90,14 @@ if (isset($_GET['id'])) {
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Update Details</button>
-                    </form>
+                </form>
+                    <form method="POST" action="delete_project.php?id=<?= $id_projekt ?>" class="mt-3">
+                    <input type="hidden" name="id_projekt" value="<?= $id_projekt ?>">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this project?');">Delete Project</button>
+                </form>
+
                 </div>
             </div>
-
-            
 
             <?php
         } else {

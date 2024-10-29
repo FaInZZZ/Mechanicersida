@@ -1,6 +1,6 @@
 <?php
 include_once 'includes/header.php';
-include_once 'includes/config.php'; // DB connection
+include_once 'includes/config.php'; 
 
 
 ?>
@@ -8,6 +8,10 @@ include_once 'includes/config.php'; // DB connection
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <?php
+
+
+
+
 if (isset($_GET['id'])) {
     $id_projekt = $_GET['id'];
 
@@ -16,7 +20,10 @@ if (isset($_GET['id'])) {
     
 
     if (isset($_POST['inserthour'])) {
+        
         $lastHoursId = insertHours($pdo, $id_projekt);
+
+        header('location: active_projects.php?status=1');
     }
     
 

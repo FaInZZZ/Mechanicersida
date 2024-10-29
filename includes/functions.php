@@ -67,16 +67,26 @@ function nyprjkt($pdo) {
 
 
 function insertHours($pdo, $id_projekt) {
-    $stmt = $pdo->prepare("INSERT INTO table_timmar (hours, date, project_fk) VALUES (:hours, :date, :id_projekt)");
+    $stmt = $pdo->prepare("SELECT u_id FROM table_users WHERE u_name = :user_name");
+    $stmt->bindParam(':user_name', $_SESSION['user_name'], PDO::PARAM_STR);
+    $stmt->execute();
+    
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $user_fk = $user['u_id']; 
+
+    $stmt = $pdo->prepare("INSERT INTO table_timmar (hours, date, project_fk, user_fk) VALUES (:hours, :date, :id_projekt, :user_fk)");
     
     $stmt->bindParam(':hours', $_POST['hours'], PDO::PARAM_STR);
     $stmt->bindParam(':date', $_POST['date'], PDO::PARAM_STR);
     $stmt->bindParam(':id_projekt', $id_projekt, PDO::PARAM_INT);
+    $stmt->bindParam(':user_fk', $user_fk, PDO::PARAM_INT); // Use the retrieved user ID
     $stmt->execute();
+    
     $last_id = $pdo->lastInsertId();
     return $last_id;
-    
 }
+
 
 
 
