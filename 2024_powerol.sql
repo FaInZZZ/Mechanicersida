@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2024 at 02:06 PM
+-- Generation Time: Oct 29, 2024 at 11:34 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -156,9 +156,24 @@ INSERT INTO `table_status` (`id_status`, `status_name`) VALUES
 CREATE TABLE `table_timmar` (
   `id_timmar` int(11) NOT NULL,
   `date` date NOT NULL,
-  `amount` decimal(10,0) NOT NULL,
-  `user_fk` int(11) NOT NULL
+  `hours` decimal(10,0) NOT NULL,
+  `user_fk` int(11) DEFAULT NULL,
+  `project_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `table_timmar`
+--
+
+INSERT INTO `table_timmar` (`id_timmar`, `date`, `hours`, `user_fk`, `project_fk`) VALUES
+(2, '2024-10-09', 2, NULL, 0),
+(3, '2024-10-19', 23, NULL, 0),
+(4, '2024-10-05', 23232, NULL, 0),
+(5, '2024-10-12', 23, NULL, 0),
+(6, '2024-10-10', 22, NULL, 0),
+(7, '2024-10-29', 333, NULL, 0),
+(8, '2024-10-30', 22, NULL, 0),
+(9, '2024-10-29', 999, NULL, 27);
 
 -- --------------------------------------------------------
 
@@ -183,17 +198,6 @@ INSERT INTO `table_users` (`u_id`, `u_name`, `u_password`, `u_email`, `u_role_fk
 (22, 'nigga', '$2y$10$Sbhaj5s5.ryrmgiwI2a3VO8UV4oSCyCnISXOAuiR1qauwWN1yPQg6', 'nigga@gmail.com', 1, 1),
 (23, 'qarlsson', '$2y$10$Q9Lte2LOBuDPXhB71ZTKy.WcptqfPu89TqfPP2CBTh5eOq5XqkFzu', 'lompa@gmail.com', 1, 1),
 (24, 'kevin', '$2y$10$BPRZGEyuU45WJwCKcvOkHuAzgtpYf2xmjMO6wlVKjeOU7Ufl0./oK', 'kepep@gmail.com', 900, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `timmar_i_projekt`
---
-
-CREATE TABLE `timmar_i_projekt` (
-  `id_timmar_fk` int(11) NOT NULL,
-  `projekt_fk` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -256,13 +260,6 @@ ALTER TABLE `table_users`
   ADD KEY `u_role_fk` (`u_role_fk`);
 
 --
--- Indexes for table `timmar_i_projekt`
---
-ALTER TABLE `timmar_i_projekt`
-  ADD KEY `link1` (`projekt_fk`),
-  ADD KEY `lnik2` (`id_timmar_fk`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -306,7 +303,7 @@ ALTER TABLE `table_status`
 -- AUTO_INCREMENT for table `table_timmar`
 --
 ALTER TABLE `table_timmar`
-  MODIFY `id_timmar` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_timmar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `table_users`
@@ -338,13 +335,6 @@ ALTER TABLE `table_projekt`
 --
 ALTER TABLE `table_timmar`
   ADD CONSTRAINT `link23` FOREIGN KEY (`user_fk`) REFERENCES `table_users` (`u_id`);
-
---
--- Constraints for table `timmar_i_projekt`
---
-ALTER TABLE `timmar_i_projekt`
-  ADD CONSTRAINT `link1` FOREIGN KEY (`projekt_fk`) REFERENCES `table_projekt` (`id_projekt`),
-  ADD CONSTRAINT `lnik2` FOREIGN KEY (`id_timmar_fk`) REFERENCES `table_timmar` (`id_timmar`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
