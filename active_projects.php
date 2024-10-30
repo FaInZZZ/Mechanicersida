@@ -5,10 +5,8 @@ include_once 'includes/config.php'; // DB connection
 echo "<div class='container mt-5'>";
 echo "<h1 class='mb-4'>Active Projects</h1>";
 
-
-
 try {
-    // Query to fetch customer name, car details, and project status
+    // Query to fetch only active projects
     $stmt = $pdo->query("
         SELECT 
             p.id_projekt, 
@@ -23,6 +21,7 @@ try {
         FROM table_projekt p
         JOIN table_customer c ON p.customer_fk = c.id_cust
         JOIN table_status s ON p.pt_status_fk = s.id_status
+        WHERE p.pt_status_fk = 1 -- Only show projects with 'Active' status
     ");
 
     if ($stmt->rowCount() > 0) {
@@ -43,26 +42,8 @@ try {
 
         // Fetch each row and display it
         foreach ($stmt as $row) {
-            // Determine the color based on the status
-            $color_class = '';
-            switch ($row['pt_status_fk']) {
-                case 1: // Active
-                    $color_class = 'table-success'; // Green
-                    break;
-                case 2: // Inactive
-                    $color_class = 'table-danger'; // Red
-                    break;
-                case 3: // Fakturerbar
-                    $color_class = 'table-warning'; // Yellow
-                    break;
-                case 4: // Fakturerad
-                    $color_class = 'table-info'; // Blue
-                    break;
-                default:
-                    $color_class = ''; // Default (no color)
-                    break;
-            }
-
+            $color_class = 'table-success'; // All rows will have green color since only active projects are displayed
+            
             $felbeskrivning = strlen($row['pt_felbeskrivning']) > 100 
                 ? substr($row['pt_felbeskrivning'], 0, 100) . '...' 
                 : $row['pt_felbeskrivning'];

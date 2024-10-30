@@ -25,6 +25,10 @@ $menuLinks = array(
     "title" => "Active",
     "url" => "active_projects.php"
   ),
+  array(
+    "title" => "All",
+    "url" => "all_projects.php"
+  ),
 array(
   "title" => "Admin",
   "url" => "admin.php"
