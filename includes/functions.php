@@ -61,7 +61,7 @@ function nyprjkt($pdo) {
     $stmt_inserpjk->execute();
 
     $newProjectId = $pdo->lastInsertId();
-    header("Location: single-project.php?id=" . $newProjectId);
+    header("Location: edit-single-project.php?id=" . $newProjectId);
     exit();
 }
 
