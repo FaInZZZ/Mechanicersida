@@ -103,6 +103,8 @@ if (isset($_GET['id'])) {
                         <button type="submit" class="btn btn-primary">Update Details</button>
                     </form>
                     
+                   
+
                     <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         Add Hours
                     </button>
@@ -110,6 +112,9 @@ if (isset($_GET['id'])) {
                     <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#part">
                         Add Parts
                     </button>
+
+                    <button type="button" class="btn btn-primary mt-3" onclick="window.location.href='active_projects.php'">Back</button>
+                    
                     
                     <form method="POST" action="delete_project.php?id=<?= $id_projekt ?>" class="mt-3">
                         <input type="hidden" name="id_projekt" value="<?= $id_projekt ?>">
