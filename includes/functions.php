@@ -43,8 +43,6 @@ function nyprjkt($pdo) {
        return;
     }
 
-
-    
     $stmt_inserpjk = $pdo->prepare('INSERT INTO table_projekt 
                                     (customer_fk, pt_felbeskrivning, pt_arbetsbeskrivning, car_brand, car_model, car_reg, pt_status_fk, fk_produkter) 
                                     VALUES (:customer_fk, :pt_felbeskrivning, :pt_arbetsbeskrivning, :car_brand, :car_model, :car_reg, :pt_status_fk, :fk_produkter)');
@@ -57,11 +55,16 @@ function nyprjkt($pdo) {
     $stmt_inserpjk->bindParam(':car_reg', $_POST['register'], PDO::PARAM_STR);
     $stmt_inserpjk->bindParam(':fk_produkter', $_POST['produkter'], PDO::PARAM_INT);
 
-    $pt_status_fk = 1; 
+    $pt_status_fk = 1;
     $stmt_inserpjk->bindParam(':pt_status_fk', $pt_status_fk, PDO::PARAM_INT);
 
     $stmt_inserpjk->execute();
+
+    $newProjectId = $pdo->lastInsertId();
+    header("Location: single-project.php?id=" . $newProjectId);
+    exit();
 }
+
 
 
 
