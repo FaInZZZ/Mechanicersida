@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2024 at 11:34 AM
+-- Generation Time: Oct 31, 2024 at 01:46 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -59,8 +59,16 @@ INSERT INTO `table_customer` (`id_cust`, `cust_fname`, `cust_lname`, `cust_tel`,
 CREATE TABLE `table_parts` (
   `id_produkt` int(11) NOT NULL,
   `produkt_namn` varchar(255) NOT NULL,
-  `produkt_pris` decimal(7,2) NOT NULL
+  `produkt_pris` decimal(7,2) NOT NULL,
+  `project_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `table_parts`
+--
+
+INSERT INTO `table_parts` (`id_produkt`, `produkt_namn`, `produkt_pris`, `project_fk`) VALUES
+(1, 'was', 123.00, 28);
 
 -- --------------------------------------------------------
 
@@ -97,12 +105,10 @@ CREATE TABLE `table_projekt` (
 --
 
 INSERT INTO `table_projekt` (`id_projekt`, `pt_felbeskrivning`, `pt_arbetsbeskrivning`, `pt_status_fk`, `customer_fk`, `created_by_user_fk`, `car_brand`, `car_model`, `car_reg`, `fk_produkter`) VALUES
-(22, 'dwdawd', 'dawdawdwa', 2, 3, 0, 'bil', 'skibidi', '234234324ergreg', NULL),
-(23, 'dwdawd', 'dawdawd', 2, 3, 0, 'bil', 'skibidi', '234234324ergreg', NULL),
 (24, 'dwdawd', 'dawdawd', 3, 3, 0, 'bil', 'skibidi', '234234324ergreg', NULL),
 (25, 'felidi', 'abidi', 4, 3, 0, 'bilidi', 'skibidi', 'ragedi', NULL),
 (26, 'fel i hov', 'fis', 2, 4, 0, 'ho', 'liin', 'lindström22', NULL),
-(27, 'aburdaburda', 'fix felen ', 1, 4, 0, 'volvo', 'v90', 'NFS-287', NULL);
+(28, 'fel i huvu', 'ngger', 1, 3, 0, 'Mark', 'mdo', '14223q', NULL);
 
 -- --------------------------------------------------------
 
@@ -173,7 +179,16 @@ INSERT INTO `table_timmar` (`id_timmar`, `date`, `hours`, `user_fk`, `project_fk
 (6, '2024-10-10', 22, NULL, 0),
 (7, '2024-10-29', 333, NULL, 0),
 (8, '2024-10-30', 22, NULL, 0),
-(9, '2024-10-29', 999, NULL, 27);
+(9, '2024-10-29', 999, NULL, 27),
+(11, '2024-10-17', 2, NULL, 27),
+(12, '2024-10-25', 2, 24, 27),
+(13, '2024-10-04', 2, 24, 27),
+(14, '2024-10-11', 23, 24, 27),
+(15, '2024-10-03', 2, 24, 27),
+(16, '2024-10-03', 2, 24, 27),
+(17, '2024-10-19', 2, 24, 27),
+(18, '2024-10-11', 22, 24, 27),
+(19, '2024-10-11', 432, 24, 28);
 
 -- --------------------------------------------------------
 
@@ -273,7 +288,7 @@ ALTER TABLE `table_customer`
 -- AUTO_INCREMENT for table `table_parts`
 --
 ALTER TABLE `table_parts`
-  MODIFY `id_produkt` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_produkt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `table_produkter_i_projekt`
@@ -285,7 +300,7 @@ ALTER TABLE `table_produkter_i_projekt`
 -- AUTO_INCREMENT for table `table_projekt`
 --
 ALTER TABLE `table_projekt`
-  MODIFY `id_projekt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_projekt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `table_roles`
@@ -303,7 +318,7 @@ ALTER TABLE `table_status`
 -- AUTO_INCREMENT for table `table_timmar`
 --
 ALTER TABLE `table_timmar`
-  MODIFY `id_timmar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_timmar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `table_users`

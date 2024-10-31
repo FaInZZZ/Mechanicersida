@@ -87,6 +87,19 @@ function insertHours($pdo, $id_projekt) {
     return $last_id;
 }
 
+function insertParts($pdo, $id_projekt) {
+    $stmt = $pdo->prepare("INSERT INTO table_parts (produkt_namn, produkt_pris, project_fk) VALUES (:part, :pris, :id_projekt)");
+    
+    $stmt->bindParam(':part', $_POST['part'], PDO::PARAM_STR);
+    $stmt->bindParam(':pris', $_POST['pris'], PDO::PARAM_STR);
+    $stmt->bindParam(':id_projekt', $id_projekt, PDO::PARAM_INT);
+    $stmt->execute();
+    
+    $last_id = $pdo->lastInsertId();
+    return $last_id;
+}
+    
+
 
 
 

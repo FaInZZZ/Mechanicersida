@@ -16,7 +16,12 @@ if (isset($_GET['id'])) {
     // Process hours insertion if form submitted
     if (isset($_POST['inserthour'])) {
         $lastHoursId = insertHours($pdo, $id_projekt);
-        header('location: active_projects.php?status=1');
+        header('location: active_projects.php');
+    }
+
+    if (isset($_POST['insertpart'])) {
+        $lastHoursId = insertParts($pdo, $id_projekt);
+        header('location: active_projects.php');
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['status'])) {
@@ -101,6 +106,10 @@ if (isset($_GET['id'])) {
                     <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         Add Hours
                     </button>
+
+                    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#part">
+                        Add Parts
+                    </button>
                     
                     <form method="POST" action="delete_project.php?id=<?= $id_projekt ?>" class="mt-3">
                         <input type="hidden" name="id_projekt" value="<?= $id_projekt ?>">
@@ -136,6 +145,44 @@ if (isset($_GET['id'])) {
                     </div>
                 </div>
             </div>
+
+
+
+
+            <div class="modal fade" id="part" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add parts</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="POST" action="edit-single-project.php?id=<?= $id_projekt ?>">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="part">Parts</label>
+                                    <input type="text" id="part" name="part" class="form-control" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pris">Pris</label>
+                                    <input type="text" id="pris" name="pris" class="form-control" value="">
+                                </div>  
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" name="insertpart" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
 
             <?php
         } else {
