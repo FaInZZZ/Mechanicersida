@@ -103,6 +103,40 @@ function insertParts($pdo, $id_projekt) {
 }
     
 
+function getTimeOverview($pdo) {
+    $stmt = $pdo->prepare("
+        SELECT table_users.u_name, SUM(table_timmar.hours) as total_hours 
+        FROM table_timmar 
+        INNER JOIN table_users ON table_timmar.user_fk = table_users.u_id
+        WHERE table_timmar.date BETWEEN :start_date AND :end_date 
+        GROUP BY table_users.u_name
+    ");
+
+    $stmt->bindParam(':start_date', $_POST['start_date'], PDO::PARAM_STR);
+    $stmt->bindParam(':end_date', $_POST['end_date'], PDO::PARAM_STR);
+    $stmt->execute();
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if (count($results) > 0) {
+        echo "<table border='1'>";
+        echo "<tr><th>User Name</th><th>Total Hours</th></tr>";
+        foreach ($results as $row) {
+            echo "<tr>
+                    <td>" . htmlspecialchars($row['u_name']) . "</td>
+                    <td>" . htmlspecialchars($row['total_hours']) . "</td>
+                  </tr>";
+        }
+        echo "</table>";
+    } else {
+        echo "<p>No records found for the selected date range.</p>";
+    }
+}
+
+
+
+
+
+
 
 
 

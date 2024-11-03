@@ -1,16 +1,27 @@
+<?php
+
+include_once 'includes/functions.php';
+include_once 'includes/header.php';
+include_once 'includes/config.php';
+
+if (isset($_POST['Datesubmit'])) {
+    getTimeOverview($pdo);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Time Overview</title>
 </head>
 <body>
-
-
-
-
-
-    
+    <form method="POST" action="timeoverview.php">
+        <label for="start_date">Start Date:</label>
+        <input type="date" name="start_date" required>
+        <label for="end_date">End Date:</label>
+        <input type="date" name="end_date" required>
+        <button type="submit" name="Datesubmit">Submit</button>
+    </form>
 </body>
 </html>
