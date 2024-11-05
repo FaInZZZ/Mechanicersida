@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 05, 2024 at 12:54 PM
+-- Generation Time: Nov 05, 2024 at 01:55 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -43,10 +43,6 @@ CREATE TABLE `table_customer` (
 --
 
 INSERT INTO `table_customer` (`id_cust`, `cust_fname`, `cust_lname`, `cust_tel`, `cust_epost`, `cust_adress`, `cust_postnummer`, `cust_ort`) VALUES
-(3, 'dwada', 'dada', 'dada', 'dada@dawd', 'dadad', 'adad', 'adad'),
-(4, 'harald', 'Aladin', 'fel siffror i banken', 'Bortstaintetander@gmail.com', 'grotta', 'vet it', 'leksvall gangg'),
-(5, 'bra', 'Bränä', '0449574723', 'kevinsepost@gmail.com', 'hemma', '10640', 'sverige'),
-(6, 'owad', 'hej', '3', '2@wdwada', '21', '21', '211'),
 (7, 'dawd', 'dwad', 'wad', 'wad@awd.com', 'awd', 'dawd', 'adwd'),
 (8, 'dwdawd', 'dawdaw', 'dawdawd', 'dawdaw@fe.fiaw', 'dawd', 'dwadw', 'awddawd');
 
@@ -92,7 +88,7 @@ CREATE TABLE `table_projekt` (
   `pt_felbeskrivning` varchar(520) NOT NULL,
   `pt_arbetsbeskrivning` varchar(520) NOT NULL,
   `pt_status_fk` int(11) NOT NULL,
-  `customer_fk` int(11) NOT NULL,
+  `customer_fk` int(11) DEFAULT NULL,
   `created_by_user_fk` int(11) NOT NULL,
   `car_brand` varchar(255) NOT NULL,
   `car_model` varchar(255) NOT NULL,
@@ -105,15 +101,11 @@ CREATE TABLE `table_projekt` (
 --
 
 INSERT INTO `table_projekt` (`id_projekt`, `pt_felbeskrivning`, `pt_arbetsbeskrivning`, `pt_status_fk`, `customer_fk`, `created_by_user_fk`, `car_brand`, `car_model`, `car_reg`, `fk_produkter`) VALUES
-(24, 'dwdawd', 'dawdawd', 3, 3, 0, 'bil', 'skibidi', '234234324ergreg', NULL),
-(25, 'felidi', 'abidi', 4, 3, 0, 'bilidi', 'skibidi', 'ragedi', NULL),
-(26, 'fel i hov', 'fis', 2, 4, 0, 'ho', 'liin', 'lindström22', NULL),
-(28, 'fel i huvu', 'ngger', 1, 3, 0, 'Mark', 'mdo', '14223q', NULL),
-(29, 'fel', 'fel', 1, 3, 0, 'marke', 'model', 'reg', NULL),
-(30, 'fel', 'wa', 1, 3, 0, 'wa', 'wa', 'wa', NULL),
-(31, 'fel', 'arb', 1, 3, 0, 'mar', 'model', 'reg', NULL),
-(32, 'fel', 'arb', 1, 3, 0, 'mark', 'model', 'reg', NULL),
-(33, 'awa', 'wa', 1, 3, 0, 'wa', 'aw', 'aw', NULL);
+(24, 'dwdawd', 'dawdawd', 3, NULL, 0, 'bil', 'skibidi', '234234324ergreg', NULL),
+(25, 'felidi', 'abidi', 4, 8, 0, 'bilidi', 'skibidi', 'ragedi', NULL),
+(28, 'fel i huvu', 'ngger', 1, 7, 0, 'Mark', 'mdo', '14223q', NULL),
+(29, 'fel', 'fel', 1, 8, 0, 'marke', 'model', 'reg', NULL),
+(30, 'fel', 'wa', 1, 7, 0, 'wa', 'wa', 'wa', NULL);
 
 -- --------------------------------------------------------
 
@@ -350,7 +342,7 @@ ALTER TABLE `table_produkter_i_projekt`
 ALTER TABLE `table_projekt`
   ADD CONSTRAINT `fk1` FOREIGN KEY (`pt_status_fk`) REFERENCES `table_status` (`id_status`),
   ADD CONSTRAINT `fk2` FOREIGN KEY (`fk_produkter`) REFERENCES `table_produkter_i_projekt` (`projekt_id_fk`),
-  ADD CONSTRAINT `fk5` FOREIGN KEY (`customer_fk`) REFERENCES `table_customer` (`id_cust`);
+  ADD CONSTRAINT `fk3` FOREIGN KEY (`customer_fk`) REFERENCES `table_customer` (`id_cust`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `table_timmar`
