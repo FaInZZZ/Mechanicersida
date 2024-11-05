@@ -20,6 +20,10 @@ $menuLinks = array(
   array(
     "title" => "Active",
     "url" => "active_projects.php"
+  ),
+  array(
+    "title" => "Fakturering",
+    "url" => "fakturering.php"
   )
 
 );
@@ -36,6 +40,10 @@ $adminMenuLinks = array(
       array(
         "title" => "Redigera Kund",
         "url" => "redigera_kund_search.php"
+      ),
+      array(
+        "title" => "Admin",
+        "url" => "admin.php"
       )
 );
 
