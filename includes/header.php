@@ -31,7 +31,7 @@ $adminMenuLinks = array(
     ),
     array(
         "title" => "Account",
-        "url" => "account.php"
+        "url" => "edit-account.php"
       ),
       array(
         "title" => "Redigera Kund",
