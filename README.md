@@ -1,1 +1,1 @@
-![image](https://cdn.openart.ai/uploads/image_R8RBGqfn_1713794397681_raw.jpg)
+![mechanciersida](https://github.com/user-attachments/assets/11bebf6d-e7e9-424e-9f77-4ea63c1b9386)
