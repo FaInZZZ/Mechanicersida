@@ -227,13 +227,7 @@ class User {
 		return $userInfo;
 	}
 
-	public function getCustInfo($uid){
-		$stmt_selectUserData = $this->pdo->prepare('SELECT * FROM table_customer WHERE id_cust = :uid');
-		$stmt_selectUserData->bindParam(":uid", $uid, PDO::PARAM_INT);
-		$stmt_selectUserData->execute();
-		$userInfo = $stmt_selectUserData->fetch();
-		return $userInfo;
-	}
+	
 	
 	public function logout(){
 		session_unset();
@@ -247,6 +241,27 @@ class User {
 		$stmt_deleteUser->bindParam(":uid", $uid, PDO::PARAM_INT);
 		if($stmt_deleteUser->execute()){
 			return "User deleted successfully";
+		}
+		else{
+			return "Something unexpected has happened. Try again later or contact support";
+		}
+	}
+
+	public function getCustInfo($uid){
+		$stmt_custData = $this->pdo->prepare('SELECT * FROM table_customer WHERE id_cust = :uid');
+		$stmt_custData->bindParam(":uid", $uid, PDO::PARAM_INT);
+		$stmt_custData->execute();
+		$CustInfo = $stmt_custData->fetch();
+		return $CustInfo;
+	}
+
+	
+
+	public function deleteCust($uid){
+		$stmt_deleteCust = $this->pdo->prepare('DELETE FROM table_customer WHERE id_cust = :uid');
+		$stmt_deleteCust->bindParam(":uid", $uid, PDO::PARAM_INT);
+		if($stmt_deleteCust->execute()){
+			return "Customer deleted successfully";
 		}
 		else{
 			return "Something unexpected has happened. Try again later or contact support";

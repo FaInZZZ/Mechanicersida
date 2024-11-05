@@ -20,26 +20,23 @@ $menuLinks = array(
   array(
     "title" => "Active",
     "url" => "active_projects.php"
-  ),
-  array(
-    "title" => "All",
-    "url" => "all_projects.php"
-  ),
-array(
-  "title" => "Admin",
-  "url" => "admin.php"
-),
-array(
-  "title" => "Account",
-  "url" => "account.php"
-)
+  )
+
 );
 // Menylänkar synliga enbart för admins
 $adminMenuLinks = array(
     array(
-        "title" => "Adminpage",
+        "title" => "Redigera konton",
+        "url" => "admin-account.php"
+    ),
+    array(
+        "title" => "Account",
+        "url" => "account.php"
+      ),
+      array(
+        "title" => "Redigera Kund",
         "url" => "admin.php"
-    )
+      )
 );
 
 
@@ -107,7 +104,7 @@ $adminMenuLinks = array(
                         }
                     }
                     if(isset($_SESSION['user_id'])){
-                        if($user->checkUserRole(500)){
+                        if($user->checkUserRole(300)){
                             foreach($adminMenuLinks as $menuItem){
                                 echo "<li class='nav-item'>
                                     <a class='nav-link' href='{$menuItem['url']}'>{$menuItem['title']}</a>
