@@ -12,13 +12,11 @@ if(isset($_POST['user-login'])){
 
 <div class="container">
 <?php 
-	//Om du nyligen registrerat dig -> visa
 	if(isset($_GET['newuser'])){
 		echo "	<div class='alert alert-success text-center mt-2' role='alert'>
 					You have successfully registered. Please log in using the form below.
 				</div>";
 	}
-	//Om det finns ett errormessage -> visa
 	if(isset($errorMessage)){
 		echo "<div class='alert alert-danger text-center mt-2' role='alert'>";
 					
@@ -42,7 +40,7 @@ if(isset($_POST['user-login'])){
                 <label for="upass">Password</label>
                 <input type="password" name="upass" id="upass" class="form-control mb-4">
             </div>
-            <button type="submit" name="user-login" class="btn btn-warning btn-block">Next</button>
+            <button type="submit" name="user-login" class="btn btn-warning btn-block">Login</button>
         </form>
 </div>	
 <?php 

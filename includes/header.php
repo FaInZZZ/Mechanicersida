@@ -10,10 +10,6 @@ if(isset($_GET['logout'])){
 //Menylänkar synliga för inloggade oberoende av roll
 $menuLinks = array(
     array(
-        "title" => "Home",
-        "url" => "home.php"
-    ),
-    array(
       "title" => "New",
       "url" => "newproject.php"
     ),
