@@ -55,7 +55,8 @@ function nyprjkt($pdo) {
     $stmt_inserpjk->bindParam(':car_reg', $_POST['register'], PDO::PARAM_STR);
     $stmt_inserpjk->bindParam(':fk_produkter', $_POST['produkter'], PDO::PARAM_INT);
 
-    $pt_status_fk = 1;
+    // Set pt_status_fk to the ID for 'inactive' status (replace 0 with the correct ID)
+    $pt_status_fk = 2; // Assuming 0 is the ID for 'inactive'
     $stmt_inserpjk->bindParam(':pt_status_fk', $pt_status_fk, PDO::PARAM_INT);
 
     $stmt_inserpjk->execute();
