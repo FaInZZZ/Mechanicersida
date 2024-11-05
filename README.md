@@ -1,1 +1,1 @@
-![mechanciersida](https://github.com/user-attachments/assets/11bebf6d-e7e9-424e-9f77-4ea63c1b9386)
+![mechanciersida](https://github.com/user-attachments/assets/2ada953e-cfea-47cd-af27-0661524c10c2)
