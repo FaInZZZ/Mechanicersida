@@ -188,11 +188,11 @@ class User {
 		$stmt_updateCustInfo->bindParam(":ort", $cust_ort, PDO::PARAM_STR);
 		
 		if ($stmt_updateCustInfo->execute()) {
-			header("Location: admin.php?status=success");
+			header("Location: active_projects.php?status=success");
 			exit();
 		} else {
 			
-			header("Location: admin.php?status=failed");
+			header("Location: active_projects.php?status=failed");
 			exit();
 	}}
 	
