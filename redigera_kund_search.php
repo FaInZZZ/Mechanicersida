@@ -9,7 +9,6 @@ if($user->checkLoginStatus()){
 
 if(isset($_POST['search-submit'])){
 	$userArray = $user->searchCust($_POST['cust_fname']);
-	print_r($userArray);
 
 }
 ?>

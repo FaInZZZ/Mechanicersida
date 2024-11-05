@@ -1,17 +1,16 @@
 <?php
 class User {
-  private $username;
-  private $role;
-  private $pdo;
-  private $errorMessages = [];
-  private $errorState = 0;
+    private $username;
+    private $role;
+    private $pdo;
+    private $errorMessages = [];
+    private $errorState = 0;
 
-
-  function __construct($pdo) {
-	$this->role = 4;
-	$this->username = "RandomGuest123";
-	$this->pdo = $pdo;
-  }
+    function __construct($pdo) {
+        $this->role = 4;
+        $this->username = "RandomGuest123";
+        $this->pdo = $pdo;
+    }
   
   private function cleanInput($data){
 		$data = trim($data);
@@ -268,4 +267,11 @@ class User {
 		}
 	}
 
+	public function getAllCustomers() {
+		$stmt = $this->pdo->prepare("SELECT id_cust, cust_fname, cust_lname FROM table_customer"); // Adjust table name as necessary
+		$stmt->execute();
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
+	
+	
 }
