@@ -9,35 +9,50 @@ if ($user->checkLoginStatus()) {
 
 if (isset($_POST['search-submit'])) {
     $userArray = $user->searchUsers($_POST['u_name']);
-  
 }
 ?>
 
-<div class="container">
-    <h1>Edit User Info</h1>
-    <form method="post">
-        <label for="u_name">Name or Address</label><br>
-        <input type="text" name="u_name" id="u_name" placeholder="Enter name or address"><br>
-        <input type="submit" name="search-submit" value="Search">
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Edit User Info</h1>
+
+    <form method="post" class="mb-4">
+        <div class="form-group">
+            <label for="u_name">Name or Address</label>
+            <input type="text" name="u_name" id="u_name" class="form-control" placeholder="Enter name or address">
+        </div>
+        <button type="submit" name="search-submit" class="btn btn-primary btn-block">Search</button>
     </form>
-    
-    <div class="row">
-        <?php
-        if (isset($userArray)) {
-            foreach ($userArray as $userRow) {
-                echo "
-                <div class='row'>
-                    <div class='col'>{$userRow["u_name"]}</div>
-                    <div class='col'>{$userRow["u_email"]}</div>
-                    <div class='col'>
-                        <a href='edit_user.php?uid={$userRow["u_id"]}'>Edit</a>
-                    </div> 
-                </div>
-                ";
-            }
-        }
-        ?>
+
+    <?php if (isset($userArray) && count($userArray) > 0): ?>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($userArray as $userRow) {
+                    echo "
+                    <tr>
+                        <td>{$userRow['u_name']}</td>
+                        <td>{$userRow['u_email']}</td>
+                        <td>
+                            <a href='edit_user.php?uid={$userRow["u_id"]}' class='btn btn-warning btn-sm'>Edit</a>
+                        </td>
+                    </tr>
+                    ";
+                }
+                ?>
+            </tbody>
+        </table>
     </div>
+    <?php else: ?>
+        <p class="alert alert-info">No user found. Please try another search.</p>
+    <?php endif; ?>
 </div>
 
 <?php 

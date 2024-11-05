@@ -1,46 +1,59 @@
 <?php
 include_once 'includes/header.php';
 
-if($user->checkLoginStatus()){
-	if(!$user->checkUserRole(300)){
-		header("Location: home.php");
-	}
+if ($user->checkLoginStatus()) {
+    if (!$user->checkUserRole(300)) {
+        header("Location: home.php");
+    }
 }
 
-if(isset($_POST['search-submit'])){
-	$userArray = $user->searchCust($_POST['cust_fname']);
-
+if (isset($_POST['search-submit'])) {
+    $userArray = $user->searchCust($_POST['cust_fname']);
 }
 ?>
 
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Edit Customer Info</h1>
 
-<div class="container">
-<h1>Edit Customer info</h1>
-    <form method="post">
-		<label for="unamemail">Förnamn eller Efternamn</label><br>
-        <input type="text" name="cust_fname" id="cust_fname" value="" placeholder="Input"><br>
-        <input type="submit" name="search-submit" value="Search">
+    <form method="post" class="mb-4">
+        <div class="form-group">
+            <label for="cust_fname">Förnamn eller Efternamn</label>
+            <input type="text" name="cust_fname" id="cust_fname" class="form-control" placeholder="Input">
+        </div>
+        <button type="submit" name="search-submit" class="btn btn-primary btn-block">Search</button>
     </form>
-	
-	<div class="row">
-	<?php
-	if(isset($userArray)){
-		foreach($userArray as $userRow){
-			echo "
-			<div class='row'>
-			<div class='col'>{$userRow["cust_fname"]}</div>
-				<div class='col'>{$userRow["cust_lname"]}</div>
-				<div class='col'>
-					<a href='edit_cust.php?uid={$userRow["id_cust"]}'>Link</a>
-				</div> 
-			</div>
-			";
-		}
-	}
-	?>
-</div>
-</div>
 
+    <?php if (isset($userArray) && count($userArray) > 0): ?>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Förnamn</th>
+                    <th>Efternamn</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($userArray as $userRow) {
+                    echo "
+                    <tr>
+                        <td>{$userRow['cust_fname']}</td>
+                        <td>{$userRow['cust_lname']}</td>
+                        <td>
+                            <a href='edit_cust.php?uid={$userRow["id_cust"]}' class='btn btn-warning btn-sm'>Edit</a>
+                        </td>
+                    </tr>
+                    ";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+    <?php else: ?>
+        <p class="alert alert-info">No customer found. Please try another search.</p>
+    <?php endif; ?>
+</div>
 
 <?php 
 include_once 'includes/footer.php';
