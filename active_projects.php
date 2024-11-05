@@ -30,13 +30,13 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
     <?php endif; ?>
 
     <div class="container mt-4">
-    <?php if ($status === 'successeditcust'): ?>
+    <?php if ($status === 'successeditproject'): ?>
         <div class="alert alert-success" role="alert">
-            Successfully edited customer!
+            Successfully edited Project!
         </div>
-    <?php elseif ($status === 'faileditcus'): ?>
+    <?php elseif ($status === 'faileditproject'): ?>
         <div class="alert alert-danger" role="alert">
-            Failed to edit customer.
+            Failed to edit Project.
         </div>
     <?php endif; ?>
 

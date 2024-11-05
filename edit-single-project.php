@@ -45,9 +45,11 @@ if (isset($_GET['id'])) {
             SET pt_status_fk = ?, car_brand = ?, car_model = ?, car_reg = ?, pt_felbeskrivning = ?, pt_arbetsbeskrivning = ? 
             WHERE id_projekt = ?
         ");
-        $update_stmt->execute([$status_id, $car_brand, $car_model, $car_reg, $felbeskrivning, $arbetsbeskrivning, $id_projekt]);
-        header("Location: active_projects.php?status=successeditproject");
-
+        if ($update_stmt->execute([$status_id, $car_brand, $car_model, $car_reg, $felbeskrivning, $arbetsbeskrivning, $id_projekt])) {
+            header("Location: active_projects.php?status=successeditproject");
+        } else {
+            header("Location: active_projects.php?status=faileditproject");
+        }
         exit();
     }
 
