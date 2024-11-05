@@ -1,5 +1,11 @@
 <?php
 
+if($user->checkLoginStatus()){
+	if(!$user->checkUserRole(300)){
+		header("Location: home.php");
+	}
+}
+
 include_once 'includes/header.php';
 $user->checkLoginStatus();
 if(isset($_POST['update-submit'])){
