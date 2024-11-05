@@ -30,16 +30,8 @@ $menuLinks = array(
 // Menylänkar synliga enbart för admins
 $adminMenuLinks = array(
     array(
-        "title" => "Redigera konton",
-        "url" => "redigera_user_search.php"
-    ),
-    array(
         "title" => "Account",
         "url" => "edit-account.php"
-      ),
-      array(
-        "title" => "Redigera Kund",
-        "url" => "redigera_kund_search.php"
       ),
       array(
         "title" => "Admin",
