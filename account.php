@@ -1,4 +1,5 @@
 <?php
+include_once 'includes/header.php';
 
 if($user->checkLoginStatus()){
 	if(!$user->checkUserRole(300)){
@@ -6,7 +7,7 @@ if($user->checkLoginStatus()){
 	}
 }
 
-include_once 'includes/header.php';
+
 $user->checkLoginStatus();
 if(isset($_POST['update-submit'])){
 	$feedback = $user->checkUserRegisterInput($_SESSION['user_name'], $_POST['umail'], $_POST['npass'], $_POST['npassrepeat']);

@@ -2,7 +2,15 @@
 
 include_once 'includes/functions.php';
 include_once 'includes/header.php';
-include_once 'includes/config.php';
+
+
+if($user->checkLoginStatus()){
+	if(!$user->checkUserRole(300)){
+		header("Location: home.php");
+	}
+}
+
+
 
 if (isset($_POST['Datesubmit'])) {
     getTimeOverview($pdo);

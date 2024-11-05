@@ -1,6 +1,12 @@
 <?php
 include_once 'includes/header.php';
-$user->checkLoginStatus();
+
+if($user->checkLoginStatus()){
+	if(!$user->checkUserRole(300)){
+		header("Location: home.php");
+	}
+}
+
 if(isset($_POST['search-submit'])){
 	$userArray = $user->searchCust($_POST['cust_fname']);
 	print_r($userArray);

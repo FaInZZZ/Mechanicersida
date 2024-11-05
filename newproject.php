@@ -4,6 +4,12 @@ include_once 'includes/functions.php';
 include_once 'includes/class.user.php';
 include_once 'includes/search.php';
 
+if($user->checkLoginStatus()){
+	if(!$user->checkUserRole(10)){
+		header("Location: home.php");
+	}
+}
+
 if (isset($_POST['submitnykund'])) {
     $submitnykund = nykund($pdo);
 }

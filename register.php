@@ -2,6 +2,12 @@
 
 include_once 'includes/header.php';
 
+if($user->checkLoginStatus()){
+	if(!$user->checkUserRole(300)){
+		header("Location: home.php");
+	}
+}
+
 if(isset($_POST['register-submit'])){
 	$feedback = $user->checkUserRegisterInput($_POST['uname'], $_POST['umail'], $_POST['upass'], $_POST['upassrepeat']);
 	

@@ -1,6 +1,12 @@
 <?php
 include_once 'includes/header.php';
-include_once 'includes/config.php'; 
+
+
+if($user->checkLoginStatus()){
+	if(!$user->checkUserRole(10)){
+		header("Location: home.php");
+	}
+}
 
 
 ?>

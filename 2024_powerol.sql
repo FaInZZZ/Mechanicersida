@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2024 at 01:46 PM
+-- Generation Time: Nov 05, 2024 at 12:54 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -108,7 +108,12 @@ INSERT INTO `table_projekt` (`id_projekt`, `pt_felbeskrivning`, `pt_arbetsbeskri
 (24, 'dwdawd', 'dawdawd', 3, 3, 0, 'bil', 'skibidi', '234234324ergreg', NULL),
 (25, 'felidi', 'abidi', 4, 3, 0, 'bilidi', 'skibidi', 'ragedi', NULL),
 (26, 'fel i hov', 'fis', 2, 4, 0, 'ho', 'liin', 'lindström22', NULL),
-(28, 'fel i huvu', 'ngger', 1, 3, 0, 'Mark', 'mdo', '14223q', NULL);
+(28, 'fel i huvu', 'ngger', 1, 3, 0, 'Mark', 'mdo', '14223q', NULL),
+(29, 'fel', 'fel', 1, 3, 0, 'marke', 'model', 'reg', NULL),
+(30, 'fel', 'wa', 1, 3, 0, 'wa', 'wa', 'wa', NULL),
+(31, 'fel', 'arb', 1, 3, 0, 'mar', 'model', 'reg', NULL),
+(32, 'fel', 'arb', 1, 3, 0, 'mark', 'model', 'reg', NULL),
+(33, 'awa', 'wa', 1, 3, 0, 'wa', 'aw', 'aw', NULL);
 
 -- --------------------------------------------------------
 
@@ -210,9 +215,11 @@ CREATE TABLE `table_users` (
 --
 
 INSERT INTO `table_users` (`u_id`, `u_name`, `u_password`, `u_email`, `u_role_fk`, `u_status`) VALUES
-(22, 'nigga', '$2y$10$Sbhaj5s5.ryrmgiwI2a3VO8UV4oSCyCnISXOAuiR1qauwWN1yPQg6', 'nigga@gmail.com', 1, 1),
 (23, 'qarlsson', '$2y$10$Q9Lte2LOBuDPXhB71ZTKy.WcptqfPu89TqfPP2CBTh5eOq5XqkFzu', 'lompa@gmail.com', 1, 1),
-(24, 'kevin', '$2y$10$BPRZGEyuU45WJwCKcvOkHuAzgtpYf2xmjMO6wlVKjeOU7Ufl0./oK', 'kepep@gmail.com', 900, 1);
+(24, 'kevin', '$2y$10$BPRZGEyuU45WJwCKcvOkHuAzgtpYf2xmjMO6wlVKjeOU7Ufl0./oK', 'kepep@gmail.com', 3, 1),
+(25, 'Mechanicer', '$2y$10$pb59Hn5./9CLTdG2d2T7P.gv6Oy109VKJF004/MNRwT3HyyJbbkeS', 'Mechanicer@gmail.com', 1, 1),
+(26, 'Fakturerare', '$2y$10$9Ujcasd8wRgut4nPbgqhRewdYUunauVr0rpIx.QC0KaQxJMkrFHBq', 'Fakturerare@gmail.com', 2, 1),
+(27, 'Chefen', '$2y$10$N6zVPhEGOOa7XHy3DmZRAuUOV18R7Ov9RTSN/ZOV0XinOBiwBsy9m', 'Chefen@gmail.cok', 4, 1);
 
 --
 -- Indexes for dumped tables
@@ -300,7 +307,7 @@ ALTER TABLE `table_produkter_i_projekt`
 -- AUTO_INCREMENT for table `table_projekt`
 --
 ALTER TABLE `table_projekt`
-  MODIFY `id_projekt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_projekt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `table_roles`
@@ -324,7 +331,7 @@ ALTER TABLE `table_timmar`
 -- AUTO_INCREMENT for table `table_users`
 --
 ALTER TABLE `table_users`
-  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constraints for dumped tables

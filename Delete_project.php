@@ -1,5 +1,11 @@
 <?php
-include_once 'includes/config.php'; 
+include_once 'includes/header.php';
+
+if($user->checkLoginStatus()){
+	if(!$user->checkUserRole(10)){
+		header("Location: home.php");
+	}
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_projekt'])) {
     $id_projekt = $_POST['id_projekt'];

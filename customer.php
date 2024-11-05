@@ -4,11 +4,19 @@ include_once 'includes/functions.php';
 include_once 'includes/class.user.php';
 include_once 'includes/search.php';
 
+if($user->checkLoginStatus()){
+	if(!$user->checkUserRole(10)){
+		header("Location: home.php");
+	}
+}
+
 if(isset($_POST['search-submit'])){
 	$userArray = $user->searchUsers($_POST['unamemail']);
 	print_r($userArray);
 
 }
+
+
 
 ?>
 

@@ -1,6 +1,11 @@
 <?php
 include_once 'includes/header.php';
-include_once 'includes/config.php'; // DB connection
+
+if($user->checkLoginStatus()){
+	if(!$user->checkUserRole(10)){
+		header("Location: home.php");
+	}
+}
 
 echo "<div class='container mt-5'>";
 echo "<h1 class='mb-4'>Active Projects</h1>";
