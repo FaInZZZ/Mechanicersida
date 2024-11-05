@@ -27,7 +27,7 @@ $menuLinks = array(
 $adminMenuLinks = array(
     array(
         "title" => "Redigera konton",
-        "url" => "admin-account.php"
+        "url" => "redigera_user_search.php"
     ),
     array(
         "title" => "Account",
@@ -35,7 +35,7 @@ $adminMenuLinks = array(
       ),
       array(
         "title" => "Redigera Kund",
-        "url" => "admin.php"
+        "url" => "redigera_kund_search.php"
       )
 );
 
@@ -88,7 +88,7 @@ $adminMenuLinks = array(
 <header class="container-fluid bg-dark">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Powerol</a>
+            <a class="navbar-brand" href="active_projects.php">Powerol</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

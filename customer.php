@@ -37,7 +37,7 @@ if(isset($_POST['search-submit'])){
     <h1>Customer List</h1>
     
     <form method="post">
-		<label for="unamemail">Username or mail</label><br>
+		<label for="unamemail">Firstname </label><br>
         <input type="text" name="unamemail" id="unamemail" value="" placeholder="Input user name or mail"><br>
         <input type="submit" name="search-submit" value="Search">
     </form>
