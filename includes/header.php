@@ -1,4 +1,5 @@
-<?php
+ 
+ <?php
 require_once 'includes/class.user.php';
 require_once 'includes/functions.php';
 require_once 'includes/config.php';
@@ -9,17 +10,13 @@ if(isset($_GET['logout'])){
 }
 
 $menuLinks = array(
-    array(
-      "title" => "New",
-      "url" => "newproject.php"
-    ),
-    array(
-      "title" => "Projects",
-      "url" => "all_projects.php"
-    ),
   array(
-    "title" => "Active",
-    "url" => "active_projects.php"
+    "title" => "Projects",
+    "url" => "project.php"
+  ),
+  array(
+    "title" => "Edit Kund",
+    "url" => "redigera_kund_search.php"
   ),
   array(
     "title" => "Fakturering",
@@ -29,12 +26,8 @@ $menuLinks = array(
 );
 // Menylänkar synliga enbart för admins
 $adminMenuLinks = array(
-    array(
-        "title" => "Account",
-        "url" => "edit-account.php"
-      ),
       array(
-        "title" => "Admin",
+        "title" => "Admin Page",
         "url" => "admin.php"
       )
 );

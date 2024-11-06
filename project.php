@@ -13,25 +13,25 @@
 
     <main class="container mt-4">
         <div class="row justify-content-center">
-        <h1>Admin page</h1>
+        <h1>Project page</h1>
             <div class="col-lg-4 col-md-6">
-                <a href="edit-account.php" class="card text-center">
+                <a href="newproject.php" class="card text-center">
                     <div class="card-body">
-                        <h5 class="card-title">Edit Current Account</h5>
+                        <h5 class="card-title">New Project</h5>
                     </div>
                 </a>
             </div>
             <div class="col-lg-4 col-md-6">
-                <a href="redigera_user_search.php" class="card text-center">
+                <a href="active_projects.php" class="card text-center">
                     <div class="card-body">
-                        <h5 class="card-title">Edit Account</h5>
+                        <h5 class="card-title">Active Projects</h5>
                     </div>
                 </a>
             </div>
             <div class="col-lg-4 col-md-6">
-                <a href="customer.php" class="card text-center">
+                <a href="all_projects" class="card text-center">
                     <div class="card-body">
-                        <h5 class="card-title">View All Customers</h5>
+                        <h5 class="card-title">View All Projects</h5>
                     </div>
                 </a>
             </div>
