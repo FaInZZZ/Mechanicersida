@@ -5,9 +5,9 @@ include_once 'includes/class.user.php';
 include_once 'includes/search.php';
 
 if($user->checkLoginStatus()){
-	if(!$user->checkUserRole(10)){
-		header("Location: home.php");
-	}
+    if(!$user->checkUserRole(10)){
+        header("Location: home.php");
+    }
 }
 
 if (isset($_POST['submitnykund'])) {
@@ -29,7 +29,6 @@ if (isset($_GET['customerId'])) {
     
     $customerData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +38,6 @@ if (isset($_GET['customerId'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skapa</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -47,10 +45,8 @@ if (isset($_GET['customerId'])) {
 
     <div class="container my-5">
 
-        <!-- Customer Section -->
         <h2 class="text-center mb-5">Kund Information</h2>
         <form action="" method="post">
-            <!-- Buttons to add or create customer -->
             <div class="d-flex justify-content-between mb-5">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCustomerModal">Skapa kund</button>
                 <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addCustomerModal">Lägg till kund</button>
@@ -60,7 +56,6 @@ if (isset($_GET['customerId'])) {
                 <input type="text" class="form-control mb-3" name="custname" value="<?= $row['cust_fname'] ?>" disabled>
             <?php endforeach; ?>
 
-            <!-- Car Information Section -->
             <h2 class="text-center mb-5">Bil Information</h2>
             <div class="row g-3 mb-3">
                 <div class="col-md-4">
@@ -77,7 +72,6 @@ if (isset($_GET['customerId'])) {
                 </div>
             </div>
 
-            <!-- Project Information Section -->
             <h2 class="text-center mt-5 mb-4">Projekt Information</h2>
 
             <h3 class="mb-3">Felbeskrivning</h3>
@@ -86,14 +80,12 @@ if (isset($_GET['customerId'])) {
             <h3 class="mb-3">Arbetsbeskrivning</h3>
             <textarea name="abe" class="form-control mb-4" rows="3" id="Arbet" placeholder="Ange arbetsbeskrivning"></textarea>
 
-            <!-- Submit Button -->
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-success" name="ltp">Lägg till projekt</button>
             </div>
         </form>
     </div>
 
-    <!-- Modal: Create Customer -->
     <div class="modal fade" id="createCustomerModal" tabindex="-1" aria-labelledby="createCustomerModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -143,7 +135,6 @@ if (isset($_GET['customerId'])) {
         </div>
     </div>
 
-    <!-- Modal: Add Customer -->
     <div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="addCustomerModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -167,7 +158,6 @@ if (isset($_GET['customerId'])) {
         </div>
     </div>
 
-    <!-- Bootstrap JS and Dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function showClassmates(str) {

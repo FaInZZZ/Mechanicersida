@@ -1,8 +1,8 @@
 <?php
 
 include_once 'includes/header.php';
-if($user->checkLoginStatus()){
-    if(!$user->checkUserRole(10)){
+if ($user->checkLoginStatus()) {
+    if (!$user->checkUserRole(10)) {
         header("Location: home.php");
     }
 }
@@ -11,7 +11,6 @@ echo "<div class='container mt-5'>";
 echo "<h1 class='mb-4'>Fakturerbar och Fakturerad Projects</h1>";
 
 try {
-    // Update the query to fetch only fakturerbar and fakturerad projects
     $stmt = $pdo->query("
         SELECT 
             p.id_projekt, 
@@ -21,12 +20,12 @@ try {
             p.car_brand, 
             p.car_model, 
             p.car_reg,
-            s.status_name, -- Fetching the status name from table_status
+            s.status_name, 
             p.pt_status_fk
         FROM table_projekt p
         JOIN table_customer c ON p.customer_fk = c.id_cust
         JOIN table_status s ON p.pt_status_fk = s.id_status
-        WHERE p.pt_status_fk IN (2, 3) -- Replace 2 and 3 with the actual status IDs for 'fakturerbar' and 'fakturerad'
+        WHERE p.pt_status_fk IN (2, 3)
     ");
 
     if ($stmt->rowCount() > 0) {
@@ -45,9 +44,8 @@ try {
                 </thead>
                 <tbody>";
 
-        // Fetch each row and display it
         foreach ($stmt as $row) {
-            $color_class = ($row['pt_status_fk'] == 2) ? 'table-warning' : 'table-info'; // Example color coding
+            $color_class = ($row['pt_status_fk'] == 2) ? 'table-warning' : 'table-info';
 
             $felbeskrivning = strlen($row['pt_felbeskrivning']) > 100 
                 ? substr($row['pt_felbeskrivning'], 0, 100) . '...' 

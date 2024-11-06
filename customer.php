@@ -11,11 +11,7 @@ if($user->checkLoginStatus()){
     }
 }
 
-$userArray = $user->getAllCustomers();
-$customers = $user->getAllCustomers();
-
-
-
+$customers = $user->getAllCustomers();  // Fetch all customers
 ?>
 
 <!DOCTYPE html>
@@ -29,31 +25,32 @@ $customers = $user->getAllCustomers();
 </head>
 <body>
 
-<div class="mt-3 container text-center">
+<div class="container mt-3 text-center">
     <h1>Customer List</h1>
 
-<div class="container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($customers as $customer): ?>
+    <div class="container">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td><?php echo htmlspecialchars($customer['cust_fname']); ?></td>
-                    <td><?php echo htmlspecialchars($customer['cust_lname']); ?></td>
-                    <td>
-                        <a href="edit_cust.php?uid=<?php echo $customer['id_cust']; ?>" class="btn btn-warning">Edit</a>
-                        <a href="confirm-delete-kund.php?uid=<?php echo $customer['id_cust']; ?>" class="btn btn-danger">Delete</a>
-                    </td>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Actions</th>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php foreach ($customers as $customer): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($customer['cust_fname']); ?></td>
+                        <td><?php echo htmlspecialchars($customer['cust_lname']); ?></td>
+                        <td>
+                            <a href="edit_cust.php?uid=<?php echo $customer['id_cust']; ?>" class="btn btn-warning">Edit</a>
+                            <a href="confirm-delete-kund.php?uid=<?php echo $customer['id_cust']; ?>" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 </body>

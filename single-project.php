@@ -1,37 +1,27 @@
 <?php
 include_once 'includes/header.php';
 
-
-if($user->checkLoginStatus()){
-	if(!$user->checkUserRole(10)){
-		header("Location: home.php");
-	}
+if ($user->checkLoginStatus()) {
+    if (!$user->checkUserRole(10)) {
+        header("Location: home.php");
+    }
 }
-
-
 ?>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <?php
 
-
-
-
 if (isset($_GET['id'])) {
     $id_projekt = $_GET['id'];
 
     echo "<div class='container mt-5'>";
     echo "<h1 class='mb-4'>Project Details</h1>";
-    
 
     if (isset($_POST['inserthour'])) {
-        
         $lastHoursId = insertHours($pdo, $id_projekt);
-
         header('location: active_projects.php?status=1');
     }
-    
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['status'])) {
         $status_id = $_POST['status'];
@@ -41,7 +31,6 @@ if (isset($_GET['id'])) {
         $felbeskrivning = $_POST['felbeskrivning'];
         $arbetsbeskrivning = $_POST['arbetsbeskrivning'];
 
-        // Update the project details in the database
         $update_stmt = $pdo->prepare("
             UPDATE table_projekt 
             SET pt_status_fk = ?, car_brand = ?, car_model = ?, car_reg = ?, pt_felbeskrivning = ?, pt_arbetsbeskrivning = ? 
@@ -49,7 +38,6 @@ if (isset($_GET['id'])) {
         ");
         $update_stmt->execute([$status_id, $car_brand, $car_model, $car_reg, $felbeskrivning, $arbetsbeskrivning, $id_projekt]);
         header("Location: active_projects.php");
-
         exit();
     }
 
@@ -72,73 +60,49 @@ if (isset($_GET['id'])) {
         if ($stmt->rowCount() > 0) {
             $project = $stmt->fetch();
 
-            // Fetch all possible statuses from table_status
             $status_stmt = $pdo->query("SELECT id_status, status_name FROM table_status");
             $statuses = $status_stmt->fetchAll();
             ?>
 
-            <div class="card">
-                <div class="card-body">
-                    <h3>Customer: <?= htmlspecialchars($project['customer_name']) ?></h3>
-                    <form method="POST" action="projects/single-project.php">
-                        <div class="form-group">
-                            <label for="car_brand">Brand</label>
-                            <input type="text" id="car_brand" name="car_brand" class="form-control" value="<?= htmlspecialchars($project['car_brand']) ?>"readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="car_model">Model</label>
-                            <input type="text" id="car_model" name="car_model" class="form-control" value="<?= htmlspecialchars($project['car_model']) ?>"readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="car_reg">Registration</label>
-                            <input type="text" id="car_reg" name="car_reg" class="form-control" value="<?= htmlspecialchars($project['car_reg']) ?>"readonly>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="felbeskrivning">Felbeskrivning</label>
-                            <textarea readonly id="felbeskrivning" name="felbeskrivning" class="form-control"><?= htmlspecialchars($project['pt_felbeskrivning']) ?></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="arbetsbeskrivning">Arbetsbeskrivning</label>
-                            <textarea readonly id="arbetsbeskrivning" name="arbetsbeskrivning" class="form-control"><?= htmlspecialchars($project['pt_arbetsbeskrivning']) ?></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="status">Change Project Status</label>
-                            <select id="status" name="status" class="form-control" disabled>
-                                <?php foreach ($statuses as $status): 
-                                    $selected = ($status['id_status'] == $project['pt_status_fk']) ? 'selected' : ''; ?>
-                                    <option value="<?= $status['id_status'] ?>" <?= $selected ?>><?= htmlspecialchars($status['status_name']) ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-
-                        <button type="button" class="btn btn-primary" onclick="window.location.href='active_projects.php'">Back</button>
-
+<div class="card">
+    <div class="card-body">
+        <h3>Customer: <?= htmlspecialchars($project['customer_name']) ?></h3>
+        <form method="POST" action="projects/single-project.php">
+            <div class="form-group mb-3">
+                <label for="car_brand">Brand</label>
+                <input type="text" id="car_brand" name="car_brand" class="form-control" value="<?= htmlspecialchars($project['car_brand']) ?>" readonly>
+            </div>
+            <div class="form-group mb-3">
+                <label for="car_model">Model</label>
+                <input type="text" id="car_model" name="car_model" class="form-control" value="<?= htmlspecialchars($project['car_model']) ?>" readonly>
+            </div>
+            <div class="form-group mb-3">
+                <label for="car_reg">Registration</label>
+                <input type="text" id="car_reg" name="car_reg" class="form-control" value="<?= htmlspecialchars($project['car_reg']) ?>" readonly>
+            </div>
+            <div class="form-group mb-3">
+                <label for="felbeskrivning">Felbeskrivning</label>
+                <textarea readonly id="felbeskrivning" name="felbeskrivning" class="form-control"><?= htmlspecialchars($project['pt_felbeskrivning']) ?></textarea>
+            </div>
+            <div class="form-group mb-3">
+                <label for="arbetsbeskrivning">Arbetsbeskrivning</label>
+                <textarea readonly id="arbetsbeskrivning" name="arbetsbeskrivning" class="form-control"><?= htmlspecialchars($project['pt_arbetsbeskrivning']) ?></textarea>
+            </div>
+            <div class="form-group mb-3">
+                <label for="status">Change Project Status</label>
+                <select id="status" name="status" class="form-control" disabled>
+                    <?php foreach ($statuses as $status): 
+                        $selected = ($status['id_status'] == $project['pt_status_fk']) ? 'selected' : ''; ?>
+                        <option value="<?= $status['id_status'] ?>" <?= $selected ?>><?= htmlspecialchars($status['status_name']) ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="window.location.href='active_projects.php'">Back</button>
+        </form>
     </div>
-  </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                
-            </div>
-
-            
-
-            <?php
+<?php
         } else {
             echo "<div class='alert alert-info' role='alert'>Project not found.</div>";
         }
@@ -154,7 +118,3 @@ if (isset($_GET['id'])) {
 
 include_once 'includes/footer.php';
 ?>
-
-
-
-

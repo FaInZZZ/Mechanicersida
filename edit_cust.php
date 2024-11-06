@@ -3,9 +3,9 @@ include_once 'includes/class.user.php';
 include_once 'includes/header.php';
 
 if($user->checkLoginStatus()){
-	if(!$user->checkUserRole(300)){
-		header("Location: home.php");
-	}
+    if(!$user->checkUserRole(300)){
+        header("Location: home.php");
+    }
 }
 
 if ($user->checkLoginStatus()) {
@@ -15,7 +15,6 @@ if ($user->checkLoginStatus()) {
         );
     }
 }
-
 
 $uid = $_GET['uid']; 
 $CustInfo = $user->getCustInfo($uid);

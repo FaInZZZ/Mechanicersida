@@ -6,9 +6,7 @@ include_once 'includes/header.php';
 if(isset($_POST['user-login'])){
 	$errorMessage = $user->login($_POST['uname'], $_POST['upass']);
 }
-
 ?>
-
 
 <div class="container">
 <?php 
@@ -19,15 +17,12 @@ if(isset($_POST['user-login'])){
 	}
 	if(isset($errorMessage)){
 		echo "<div class='alert alert-danger text-center mt-2' role='alert'>";
-					
+
 		foreach($errorMessage as $item){
 		echo $item;
 	}
 	echo "</div>";
 	}
-	
-	
-	
 ?>
     <div class="container mt-5">
         <h1 class="mb-4">Login form</h1>
@@ -42,7 +37,7 @@ if(isset($_POST['user-login'])){
             </div>
             <button type="submit" name="user-login" class="btn btn-warning btn-block">Login</button>
         </form>
-</div>	
+    </div>	
 <?php 
 include_once 'includes/footer.php';
 ?>

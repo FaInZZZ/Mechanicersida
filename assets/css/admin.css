@@ -1,16 +1,16 @@
 .card {
-    margin: 15px; /* Adds space between cards */
-    text-decoration: none; /* Removes underline from link */
-    color: inherit; /* Makes text color inherit from parent */
-    border-radius: 0.5rem; /* Gives the card rounded corners */
-    transition: transform 0.3s, box-shadow 0.3s; /* Adds a smooth transition */
+    margin: 15px; 
+    text-decoration: none;
+    color: inherit; 
+    border-radius: 0.5rem; 
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .card:hover {
-    transform: translateY(-5px); /* Moves card up on hover */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Adds shadow effect on hover */
+    transform: translateY(-5px); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
 }
 
 .card-body {
-    padding: 20px; /* Adds padding for better spacing */
+    padding: 20px; 
 }

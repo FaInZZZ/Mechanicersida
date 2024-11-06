@@ -9,12 +9,12 @@ if ($user->checkLoginStatus()) {
     }
 }
 
-// Check if uid is provided and valid before calling getUserInfo
 $CustInfo = false;
 if (isset($_GET['uid'])) {
     $CustInfo = $user->getCustInfo($_GET['uid']);
 }
 
+$deleteFeedback = null;
 if (isset($_POST['confirm-delete'])) {
     $deleteFeedback = $user->deleteCust($_GET['uid']);
 }
@@ -22,9 +22,9 @@ if (isset($_POST['confirm-delete'])) {
 
 <div class="container p-5">
 <?php 
-if (!isset($deleteFeedback)) {
-    if ($CustInfo && isset($CustInfo['cust_fname'])) { // Check if $userInfoArray is valid
-        echo "<h2 class='text-center my-5'>Are you sure that you want to delete the user {$CustInfo['cust_fname']}</h2>";
+if ($deleteFeedback === null) {
+    if ($CustInfo && isset($CustInfo['cust_fname'])) {
+        echo "<h2 class='text-center my-5'>Are you sure that you want to delete the user {$CustInfo['cust_fname']}?</h2>";
         
         echo "<div class='row justify-content-center'>
             <a href='admin-account.php?uid={$_GET['uid']}' class='btn btn-warning' 
@@ -40,7 +40,8 @@ if (!isset($deleteFeedback)) {
     echo "<h2 class='text-center my-5'>{$deleteFeedback}</h2>";
 }
 ?>
-</div>	
+</div>  
+
 <?php 
 include_once 'includes/footer.php';
 ?>

@@ -2,18 +2,15 @@
 include_once 'includes/header.php';
 
 if($user->checkLoginStatus()){
-	if(!$user->checkUserRole(10)){
-		header("Location: home.php");
-	}
+    if(!$user->checkUserRole(10)){
+        header("Location: home.php");
+    }
 }
 
 echo "<div class='container mt-5'>";
 echo "<h1 class='mb-4'>Active Projects</h1>";
 
-
-
 try {
-    // Query to fetch customer name, car details, and project status
     $stmt = $pdo->query("
         SELECT 
             p.id_projekt, 
@@ -23,7 +20,7 @@ try {
             p.car_brand, 
             p.car_model, 
             p.car_reg,
-            s.status_name, -- Fetching the status name from table_status
+            s.status_name, 
             p.pt_status_fk
         FROM table_projekt p
         JOIN table_customer c ON p.customer_fk = c.id_cust
@@ -40,31 +37,29 @@ try {
                         <th>Registration</th>
                         <th>Felbeskrivning</th>
                         <th>Arbetsbeskrivning</th>
-                        <th>Status</th> <!-- Added Status Column -->
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>";
 
-        // Fetch each row and display it
         foreach ($stmt as $row) {
-            // Determine the color based on the status
             $color_class = '';
             switch ($row['pt_status_fk']) {
-                case 1: // Active
-                    $color_class = 'table-success'; // Green
+                case 1:
+                    $color_class = 'table-success';
                     break;
-                case 2: // Inactive
-                    $color_class = 'table-danger'; // Red
+                case 2:
+                    $color_class = 'table-danger';
                     break;
-                case 3: // Fakturerbar
-                    $color_class = 'table-warning'; // Yellow
+                case 3:
+                    $color_class = 'table-warning';
                     break;
-                case 4: // Fakturerad
-                    $color_class = 'table-info'; // Blue
+                case 4:
+                    $color_class = 'table-info';
                     break;
                 default:
-                    $color_class = ''; // Default (no color)
+                    $color_class = '';
                     break;
             }
 
@@ -82,7 +77,7 @@ try {
                     <td>" . $row['car_reg'] . "</td>
                     <td>" . $felbeskrivning . "</td>
                     <td>" . $arbetsbeskrivning . "</td>
-                    <td>" . $row['status_name'] . "</td> <!-- Show Status -->
+                    <td>" . $row['status_name'] . "</td>
                     <td>
                         <a href='single-project.php?id=" . $row['id_projekt'] . "' class='btn btn-primary'>View Project</a>
                     </td>

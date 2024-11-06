@@ -1,9 +1,9 @@
 <?php
 include_once 'includes/header.php';
 if($user->checkLoginStatus()){
-	if(!$user->checkUserRole(10)){
-		header("Location: home.php");
-	}
+    if(!$user->checkUserRole(10)){
+        header("Location: home.php");
+    }
 }
 
 $status = isset($_GET['status']) ? $_GET['status'] : '';
@@ -44,7 +44,6 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 echo "<div class='container mt-5'>";
 echo "<h1 class='mb-4'>Active Projects</h1>";
 
-// Query to fetch only active projects
 $stmt = $pdo->query("
     SELECT 
         p.id_projekt, 
@@ -54,12 +53,12 @@ $stmt = $pdo->query("
         p.car_brand, 
         p.car_model, 
         p.car_reg,
-        s.status_name, -- Fetching the status name from table_status
+        s.status_name,
         p.pt_status_fk
     FROM table_projekt p
     JOIN table_customer c ON p.customer_fk = c.id_cust
     JOIN table_status s ON p.pt_status_fk = s.id_status
-    WHERE p.pt_status_fk = 1 -- Only show projects with 'Active' status
+    WHERE p.pt_status_fk = 1
 ");
 
 if ($stmt->rowCount() > 0) {
@@ -72,16 +71,15 @@ if ($stmt->rowCount() > 0) {
                     <th>Registration</th>
                     <th>Felbeskrivning</th>
                     <th>Arbetsbeskrivning</th>
-                    <th>Status</th> <!-- Added Status Column -->
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>";
 
-    // Fetch each row and display it
     foreach ($stmt as $row) {
-        $color_class = 'table-success'; // All rows will have green color since only active projects are displayed
-        
+        $color_class = 'table-success';
+
         $felbeskrivning = strlen($row['pt_felbeskrivning']) > 100 
             ? substr($row['pt_felbeskrivning'], 0, 100) . '...' 
             : $row['pt_felbeskrivning'];
@@ -96,7 +94,7 @@ if ($stmt->rowCount() > 0) {
                 <td>" . $row['car_reg'] . "</td>
                 <td>" . $felbeskrivning . "</td>
                 <td>" . $arbetsbeskrivning . "</td>
-                <td>" . $row['status_name'] . "</td> <!-- Show Status -->
+                <td>" . $row['status_name'] . "</td>
                 <td>
                     <a href='single-project.php?id=" . $row['id_projekt'] . "' class='btn btn-primary'>View Project</a>
                 </td>
@@ -115,6 +113,6 @@ echo "</div>";
 
 include_once 'includes/footer.php';
 ?>
-    
+
 </body>
 </html>

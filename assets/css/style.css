@@ -1,8 +1,30 @@
-.hero-section {
-	background-image: url('../images/pizza_header_4k.webp');
-	background-size: cover;
-	background-repeat: no-repeat;
-	color: whitesmoke;
-	min-height: 500px;
+.navbar-brand {
+	font-weight: bold;
+	font-size: 1.5rem;
+	color: #fff !important;
 }
-
+.navbar-nav .nav-item .nav-link {
+	margin-right: 10px;
+	color: #ddd;
+	font-size: 1rem;
+	transition: color 0.3s, background-color 0.3s;
+}
+.navbar-nav .nav-item .nav-link:hover {
+	color: #fff;
+	background-color: #495057;
+	border-radius: 5px;
+}
+.navbar-nav .nav-item .nav-link.active {
+	color: #fff;
+	background-color: #343a40;
+	border-radius: 5px;
+}
+.navbar-toggler {
+	border-color: #fff;
+}
+.navbar-toggler-icon {
+	background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><path stroke="rgba(255, 255, 255, 0.7)" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/></svg>');
+}
+.navbar {
+	padding: 0.8rem 1rem;
+}

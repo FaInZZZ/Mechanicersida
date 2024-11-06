@@ -2,16 +2,15 @@
 include_once 'includes/header.php';
 
 if($user->checkLoginStatus()){
-	if(!$user->checkUserRole(10)){
-		header("Location: home.php");
-	}
+    if(!$user->checkUserRole(10)){
+        header("Location: home.php");
+    }
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_projekt'])) {
     $id_projekt = $_POST['id_projekt'];
 
     try {
-
         $delete_stmt = $pdo->prepare("DELETE FROM table_projekt WHERE id_projekt = ?");
         $delete_stmt->execute([$id_projekt]);
         header('location: active_projects.php');

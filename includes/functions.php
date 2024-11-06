@@ -1,8 +1,6 @@
 <?php
 include_once 'config.php';
 
-
-
 if (isset($_GET['customerId'])) {
     $customerId = htmlspecialchars($_GET['customerId']);
 
@@ -66,10 +64,6 @@ function nyprjkt($pdo) {
     exit();
 }
 
-
-
-
-
 function insertHours($pdo, $id_projekt) {
     $stmt = $pdo->prepare("SELECT u_id FROM table_users WHERE u_name = :user_name");
     $stmt->bindParam(':user_name', $_SESSION['user_name'], PDO::PARAM_STR);
@@ -103,7 +97,6 @@ function insertParts($pdo, $id_projekt) {
     return $last_id;
 }
     
-
 function getTimeOverview($pdo) {
     $stmt = $pdo->prepare("
         SELECT table_users.u_name, SUM(table_timmar.hours) as total_hours 

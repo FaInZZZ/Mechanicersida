@@ -7,7 +7,7 @@ $user = new User($pdo);
 if(isset($_GET['logout'])){
 	$user->logout();
 }
-//Menylänkar synliga för inloggade oberoende av roll
+
 $menuLinks = array(
     array(
       "title" => "New",
@@ -39,9 +39,7 @@ $adminMenuLinks = array(
       )
 );
 
-
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,38 +49,7 @@ $adminMenuLinks = array(
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link rel="stylesheet" href="assets/css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<style>
-    .navbar-brand {
-        font-weight: bold;
-        font-size: 1.5rem;
-        color: #fff !important;
-    }
-    .navbar-nav .nav-item .nav-link {
-        margin-right: 10px;
-        color: #ddd;
-        font-size: 1rem;
-        transition: color 0.3s, background-color 0.3s;
-    }
-    .navbar-nav .nav-item .nav-link:hover {
-        color: #fff;
-        background-color: #495057;
-        border-radius: 5px;
-    }
-    .navbar-nav .nav-item .nav-link.active {
-        color: #fff;
-        background-color: #343a40;
-        border-radius: 5px;
-    }
-    .navbar-toggler {
-        border-color: #fff;
-    }
-    .navbar-toggler-icon {
-        background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><path stroke="rgba(255, 255, 255, 0.7)" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/></svg>');
-    }
-    .navbar {
-        padding: 0.8rem 1rem;
-    }
-</style>
+
 </head>
 <body>
 <header class="container-fluid bg-dark">
