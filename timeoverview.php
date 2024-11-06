@@ -18,15 +18,30 @@ if (isset($_POST['Datesubmit'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Time Overview</title>
+    <!-- Bootstrap CSS (using the CDN for simplicity) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <form method="POST" action="timeoverview.php">
-        <label for="start_date">Start Date:</label>
-        <input type="date" name="start_date" required>
-        <label for="end_date">End Date:</label>
-        <input type="date" name="end_date" required>
-        <button type="submit" name="Datesubmit">Submit</button>
-    </form>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Time Overview</h2>
+        <form method="POST" action="timeoverview.php">
+            <div class="mb-3">
+                <label for="start_date" class="form-label">Start Date:</label>
+                <input type="date" name="start_date" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="end_date" class="form-label">End Date:</label>
+                <input type="date" name="end_date" class="form-control" required>
+            </div>
+            <div class="text-center">
+                <button type="submit" name="Datesubmit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS (optional, for additional functionality like modals or tooltips) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
