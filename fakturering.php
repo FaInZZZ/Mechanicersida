@@ -8,9 +8,10 @@ if ($user->checkLoginStatus()) {
 }
 
 echo "<div class='container mt-5'>";
-echo "<h1 class='mb-4'>Fakturerbar och Fakturerad Projects</h1>";
+echo "<h1 class='mb-4'>Fakturerbar, Fakturerad, Obetald, and Betald Projects</h1>";
 
 try {
+    // Update SQL query to include the new status IDs 5 (obetald) and 6 (betald)
     $stmt = $pdo->query("
         SELECT 
             p.id_projekt, 
@@ -25,7 +26,7 @@ try {
         FROM table_projekt p
         JOIN table_customer c ON p.customer_fk = c.id_cust
         JOIN table_status s ON p.pt_status_fk = s.id_status
-        WHERE p.pt_status_fk IN (2, 3)
+        WHERE p.pt_status_fk IN (3, 4, 5, 6)  -- Include new statuses (obetald, betald)
     ");
 
     if ($stmt->rowCount() > 0) {
@@ -45,7 +46,22 @@ try {
                 <tbody>";
 
         foreach ($stmt as $row) {
-            $color_class = ($row['pt_status_fk'] == 2) ? 'table-warning' : 'table-info';
+            // Assign different colors based on the status
+            $color_class = '';
+            switch ($row['pt_status_fk']) {
+                case 3:
+                    $color_class = 'table-warning'; // Fakturerbar
+                    break;
+                case 4:
+                    $color_class = 'table-info'; // Fakturerad
+                    break;
+                case 5:
+                    $color_class = 'table-secondary'; // Obetald
+                    break;
+                case 6:
+                    $color_class = 'table-success'; // Betald
+                    break;
+            }
 
             $felbeskrivning = strlen($row['pt_felbeskrivning']) > 100 
                 ? substr($row['pt_felbeskrivning'], 0, 100) . '...' 
@@ -73,7 +89,7 @@ try {
 
         echo "</tbody></table>";
     } else {
-        echo "<div class='alert alert-info' role='alert'>No fakturerbar or fakturerad projects found.</div>";
+        echo "<div class='alert alert-info' role='alert'>No projects found with the selected statuses.</div>";
     }
 
 } catch (PDOException $e) {
