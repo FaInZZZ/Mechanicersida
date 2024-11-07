@@ -19,7 +19,7 @@ $menuLinks = array(
 
 $faktMenuLinks = array(
     array(
-        "title" => "Fakturering",
+        "title" => "Billables",
         "url" => "fakturering.php"
       )
 );
