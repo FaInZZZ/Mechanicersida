@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2024 at 10:26 AM
+-- Generation Time: Nov 07, 2024 at 11:14 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -55,7 +55,7 @@ CREATE TABLE `table_parts` (
   `id_produkt` int(11) NOT NULL,
   `produkt_namn` varchar(255) NOT NULL,
   `produkt_pris` decimal(7,2) NOT NULL,
-  `project_fk` int(11) NOT NULL
+  `project_fk` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -88,7 +88,11 @@ CREATE TABLE `table_projekt` (
 --
 
 INSERT INTO `table_projekt` (`id_projekt`, `pt_felbeskrivning`, `pt_arbetsbeskrivning`, `pt_status_fk`, `customer_fk`, `created_by_user_fk`, `car_brand`, `car_model`, `car_reg`) VALUES
-(38, 'fel', 'arb', 3, 10, 25, 'marke', 'model', 'reg');
+(39, 'fele', 'arbat', 2, 10, 24, 'mare', 'mode', 'regn'),
+(40, 'feleer', 'arbaww', 2, 10, 24, 'mark', 'model', 'reg'),
+(41, 'dwad', 'adawd', 2, 10, 24, 'wadw', 'adadad', 'ada'),
+(42, 'dad', 'adwad', 2, 10, 24, 'wada', 'dadadd', 'awda'),
+(43, 'jyfjgkn,', 'm,m,.', 2, 10, 24, 'rgsg', 'rdgdg', 'fy');
 
 -- --------------------------------------------------------
 
@@ -272,7 +276,7 @@ ALTER TABLE `table_parts`
 -- AUTO_INCREMENT for table `table_projekt`
 --
 ALTER TABLE `table_projekt`
-  MODIFY `id_projekt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_projekt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `table_roles`
@@ -301,12 +305,6 @@ ALTER TABLE `table_users`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `table_parts`
---
-ALTER TABLE `table_parts`
-  ADD CONSTRAINT `fk32` FOREIGN KEY (`project_fk`) REFERENCES `table_projekt` (`id_projekt`);
 
 --
 -- Constraints for table `table_projekt`
