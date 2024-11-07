@@ -81,6 +81,7 @@ $stmt = $pdo->query("
     JOIN table_customer c ON p.customer_fk = c.id_cust
     JOIN table_status s ON p.pt_status_fk = s.id_status
     WHERE p.pt_status_fk = 1 OR p.pt_status_fk = 2
+    ORDER BY p.pt_status_fk ASC
 ");
 
 if ($stmt->rowCount() > 0) {
