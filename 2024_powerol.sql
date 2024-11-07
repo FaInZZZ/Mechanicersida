@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2024 at 08:49 AM
+-- Generation Time: Nov 07, 2024 at 09:58 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -43,8 +43,7 @@ CREATE TABLE `table_customer` (
 --
 
 INSERT INTO `table_customer` (`id_cust`, `cust_fname`, `cust_lname`, `cust_tel`, `cust_epost`, `cust_adress`, `cust_postnummer`, `cust_ort`) VALUES
-(7, 'dawd', 'dwad', 'wad', 'wad@awd.com', 'awd', 'dawd', 'adwd'),
-(8, 'dwdawd', 'dawdaw', 'dawdawd', 'dawdaw@fe.fiaw', 'dawd', 'dwadw', 'awddawd');
+(10, 'kevin', 'brandt', 'telefon', 'e-post@gmail.com', 'adress', 'postnummer', 'ort');
 
 -- --------------------------------------------------------
 
@@ -64,18 +63,7 @@ CREATE TABLE `table_parts` (
 --
 
 INSERT INTO `table_parts` (`id_produkt`, `produkt_namn`, `produkt_pris`, `project_fk`) VALUES
-(1, 'was', 123.00, 28);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `table_produkter_i_projekt`
---
-
-CREATE TABLE `table_produkter_i_projekt` (
-  `projekt_id_fk` int(11) NOT NULL,
-  `produkt_id_fk` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(5, 'www', 212.00, 38);
 
 -- --------------------------------------------------------
 
@@ -92,21 +80,15 @@ CREATE TABLE `table_projekt` (
   `created_by_user_fk` int(11) NOT NULL,
   `car_brand` varchar(255) NOT NULL,
   `car_model` varchar(255) NOT NULL,
-  `car_reg` varchar(255) NOT NULL,
-  `fk_produkter` int(11) DEFAULT NULL
+  `car_reg` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `table_projekt`
 --
 
-INSERT INTO `table_projekt` (`id_projekt`, `pt_felbeskrivning`, `pt_arbetsbeskrivning`, `pt_status_fk`, `customer_fk`, `created_by_user_fk`, `car_brand`, `car_model`, `car_reg`, `fk_produkter`) VALUES
-(24, 'dwdawd', 'dawdawd', 3, NULL, 0, 'bil', 'skibidi', '234234324ergreg', NULL),
-(25, 'felidi', 'abidi', 4, 8, 0, 'bilidi', 'skibidi', 'ragedi', NULL),
-(28, 'fel i huvu', 'ngger', 3, 7, 0, 'Mark', 'mdo', '14223q', NULL),
-(29, 'fel', 'fel', 5, 8, 0, 'marke', 'model', 'reg', NULL),
-(30, 'fel', 'wa', 4, 7, 0, 'wa', 'wa', 'wa', NULL),
-(34, 'dawwdwda', 'dawwdawddw', 5, 7, 0, 'awdawd', 'dawdawd', 'dwwaddwdwa', NULL);
+INSERT INTO `table_projekt` (`id_projekt`, `pt_felbeskrivning`, `pt_arbetsbeskrivning`, `pt_status_fk`, `customer_fk`, `created_by_user_fk`, `car_brand`, `car_model`, `car_reg`) VALUES
+(38, 'fel', 'arb', 3, 10, 25, 'marke', 'model', 'reg');
 
 -- --------------------------------------------------------
 
@@ -149,9 +131,7 @@ INSERT INTO `table_status` (`id_status`, `status_name`) VALUES
 (1, 'active'),
 (2, 'inactive'),
 (3, 'fakturerbar'),
-(4, 'fakturerad'),
-(5, 'obetald'),
-(6, 'betald');
+(4, 'fakturerad');
 
 -- --------------------------------------------------------
 
@@ -188,7 +168,9 @@ INSERT INTO `table_timmar` (`id_timmar`, `date`, `hours`, `user_fk`, `project_fk
 (16, '2024-10-03', 2, 24, 27),
 (17, '2024-10-19', 2, 24, 27),
 (18, '2024-10-11', 22, 24, 27),
-(19, '2024-10-11', 432, 24, 28);
+(19, '2024-10-11', 432, 24, 28),
+(20, '2024-11-20', 0, 24, 28),
+(21, '2024-11-07', 5, 25, 38);
 
 -- --------------------------------------------------------
 
@@ -230,14 +212,8 @@ ALTER TABLE `table_customer`
 -- Indexes for table `table_parts`
 --
 ALTER TABLE `table_parts`
-  ADD PRIMARY KEY (`id_produkt`);
-
---
--- Indexes for table `table_produkter_i_projekt`
---
-ALTER TABLE `table_produkter_i_projekt`
-  ADD PRIMARY KEY (`projekt_id_fk`),
-  ADD KEY `produkt_id_fk` (`produkt_id_fk`);
+  ADD PRIMARY KEY (`id_produkt`),
+  ADD KEY `fk32` (`project_fk`);
 
 --
 -- Indexes for table `table_projekt`
@@ -247,8 +223,7 @@ ALTER TABLE `table_projekt`
   ADD KEY `pt_status_fk` (`pt_status_fk`,`customer_fk`,`created_by_user_fk`),
   ADD KEY `fk3` (`created_by_user_fk`),
   ADD KEY `fk5` (`customer_fk`),
-  ADD KEY `car_brand` (`car_brand`,`car_model`,`car_reg`),
-  ADD KEY `fk_produkter` (`fk_produkter`);
+  ADD KEY `car_brand` (`car_brand`,`car_model`,`car_reg`);
 
 --
 -- Indexes for table `table_roles`
@@ -284,25 +259,19 @@ ALTER TABLE `table_users`
 -- AUTO_INCREMENT for table `table_customer`
 --
 ALTER TABLE `table_customer`
-  MODIFY `id_cust` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_cust` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `table_parts`
 --
 ALTER TABLE `table_parts`
-  MODIFY `id_produkt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `table_produkter_i_projekt`
---
-ALTER TABLE `table_produkter_i_projekt`
-  MODIFY `projekt_id_fk` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_produkt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `table_projekt`
 --
 ALTER TABLE `table_projekt`
-  MODIFY `id_projekt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_projekt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `table_roles`
@@ -320,7 +289,7 @@ ALTER TABLE `table_status`
 -- AUTO_INCREMENT for table `table_timmar`
 --
 ALTER TABLE `table_timmar`
-  MODIFY `id_timmar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_timmar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `table_users`
@@ -333,19 +302,17 @@ ALTER TABLE `table_users`
 --
 
 --
--- Constraints for table `table_produkter_i_projekt`
+-- Constraints for table `table_parts`
 --
-ALTER TABLE `table_produkter_i_projekt`
-  ADD CONSTRAINT `fk133` FOREIGN KEY (`projekt_id_fk`) REFERENCES `table_parts` (`id_produkt`),
-  ADD CONSTRAINT `fk4849453` FOREIGN KEY (`projekt_id_fk`) REFERENCES `table_timmar` (`id_timmar`);
+ALTER TABLE `table_parts`
+  ADD CONSTRAINT `fk32` FOREIGN KEY (`project_fk`) REFERENCES `table_projekt` (`id_projekt`);
 
 --
 -- Constraints for table `table_projekt`
 --
 ALTER TABLE `table_projekt`
   ADD CONSTRAINT `fk1` FOREIGN KEY (`pt_status_fk`) REFERENCES `table_status` (`id_status`),
-  ADD CONSTRAINT `fk2` FOREIGN KEY (`fk_produkter`) REFERENCES `table_produkter_i_projekt` (`projekt_id_fk`),
-  ADD CONSTRAINT `fk3` FOREIGN KEY (`customer_fk`) REFERENCES `table_customer` (`id_cust`) ON DELETE SET NULL;
+  ADD CONSTRAINT `fk3` FOREIGN KEY (`customer_fk`) REFERENCES `table_customer` (`id_cust`);
 
 --
 -- Constraints for table `table_timmar`
