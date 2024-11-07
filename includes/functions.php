@@ -33,6 +33,11 @@ function nykund($pdo) {
 }
 
 function nyprjkt($pdo) {
+    if (empty($_GET['customerId'])) {
+        header("Location: newproject.php?status=nokund");
+        exit();
+    }
+
     if (!empty($customerData)) {
         echo "Yes";
     }
@@ -42,8 +47,8 @@ function nyprjkt($pdo) {
     }
 
     $stmt_inserpjk = $pdo->prepare('INSERT INTO table_projekt 
-                                    (customer_fk, pt_felbeskrivning, pt_arbetsbeskrivning, car_brand, car_model, car_reg, pt_status_fk, fk_produkter) 
-                                    VALUES (:customer_fk, :pt_felbeskrivning, :pt_arbetsbeskrivning, :car_brand, :car_model, :car_reg, :pt_status_fk, :fk_produkter)');
+                                    (customer_fk, pt_felbeskrivning, pt_arbetsbeskrivning, car_brand, car_model, car_reg, pt_status_fk, fk_produkter, created_by_user_fk) 
+                                    VALUES (:customer_fk, :pt_felbeskrivning, :pt_arbetsbeskrivning, :car_brand, :car_model, :car_reg, :pt_status_fk, :fk_produkter, :created_by_user_fk)');
 
     $stmt_inserpjk->bindParam(':customer_fk', $_GET['customerId'], PDO::PARAM_STR);
     $stmt_inserpjk->bindParam(':pt_felbeskrivning', $_POST['fbe'], PDO::PARAM_STR);
@@ -52,9 +57,9 @@ function nyprjkt($pdo) {
     $stmt_inserpjk->bindParam(':car_model', $_POST['model'], PDO::PARAM_STR);
     $stmt_inserpjk->bindParam(':car_reg', $_POST['register'], PDO::PARAM_STR);
     $stmt_inserpjk->bindParam(':fk_produkter', $_POST['produkter'], PDO::PARAM_INT);
+    $stmt_inserpjk->bindParam(':created_by_user_fk', $_SESSION['user_id'], PDO::PARAM_INT);
 
-    // Set pt_status_fk to the ID for 'inactive' status (replace 0 with the correct ID)
-    $pt_status_fk = 2; // Assuming 0 is the ID for 'inactive'
+    $pt_status_fk = 2; 
     $stmt_inserpjk->bindParam(':pt_status_fk', $pt_status_fk, PDO::PARAM_INT);
 
     $stmt_inserpjk->execute();
@@ -63,6 +68,7 @@ function nyprjkt($pdo) {
     header("Location: edit-single-project.php?id=" . $newProjectId);
     exit();
 }
+
 
 function insertHours($pdo, $id_projekt) {
     $stmt = $pdo->prepare("SELECT u_id FROM table_users WHERE u_name = :user_name");
@@ -78,8 +84,16 @@ function insertHours($pdo, $id_projekt) {
     $stmt->bindParam(':hours', $_POST['hours'], PDO::PARAM_STR);
     $stmt->bindParam(':date', $_POST['date'], PDO::PARAM_STR);
     $stmt->bindParam(':id_projekt', $id_projekt, PDO::PARAM_INT);
-    $stmt->bindParam(':user_fk', $user_fk, PDO::PARAM_INT); // Use the retrieved user ID
-    $stmt->execute();
+    $stmt->bindParam(':user_fk', $user_fk, PDO::PARAM_INT); 
+
+    if ($stmt->execute()) {
+        header("Location: active_projects.php?status=successedithours");
+        exit();
+    } else {
+        header("Location: active_projects.php?status=failedithours");
+        exit();
+    }
+    
     
     $last_id = $pdo->lastInsertId();
     return $last_id;
@@ -91,8 +105,15 @@ function insertParts($pdo, $id_projekt) {
     $stmt->bindParam(':part', $_POST['part'], PDO::PARAM_STR);
     $stmt->bindParam(':pris', $_POST['pris'], PDO::PARAM_STR);
     $stmt->bindParam(':id_projekt', $id_projekt, PDO::PARAM_INT);
-    $stmt->execute();
     
+    if ($stmt->execute()) {
+        header("Location: active_projects.php?status=successeditpart");
+        exit();
+    } else {
+        header("Location: active_projects.php?status=faileditpart");
+        exit();
+    }
+
     $last_id = $pdo->lastInsertId();
     return $last_id;
 }

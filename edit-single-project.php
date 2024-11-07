@@ -51,18 +51,20 @@ if (isset($_GET['id'])) {
 
     try {
         $stmt = $pdo->prepare("
-            SELECT 
-                CONCAT(c.cust_fname, ' ', c.cust_lname) AS customer_name, 
-                p.pt_felbeskrivning, 
-                p.pt_arbetsbeskrivning,
-                p.car_brand, 
-                p.car_model, 
-                p.car_reg,
-                p.pt_status_fk
-            FROM table_projekt p
-            JOIN table_customer c ON p.customer_fk = c.id_cust
-            WHERE p.id_projekt = ?
-        ");
+        SELECT 
+            CONCAT(c.cust_fname, ' ', c.cust_lname) AS customer_name, 
+            p.pt_felbeskrivning, 
+            p.pt_arbetsbeskrivning,
+            p.car_brand, 
+            p.car_model, 
+            p.car_reg,
+            p.pt_status_fk,
+            u.u_name AS user_name  
+        FROM table_projekt p
+        JOIN table_customer c ON p.customer_fk = c.id_cust
+        JOIN table_users u ON p.created_by_user_fk = u.u_id
+        WHERE p.id_projekt = ?
+    ");
         $stmt->execute([$id_projekt]);
 
         if ($stmt->rowCount() > 0) {
@@ -75,6 +77,7 @@ if (isset($_GET['id'])) {
 <div class="card">
     <div class="card-body">
         <h3>Customer: <?= htmlspecialchars($project['customer_name']) ?></h3>
+        <h3>Created: <?= htmlspecialchars($project['user_name']) ?></h3>
         <form method="POST">
             <div class="form-group mb-3">
                 <label for="car_brand">Brand</label>

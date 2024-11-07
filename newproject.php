@@ -4,6 +4,8 @@ include_once 'includes/functions.php';
 include_once 'includes/class.user.php';
 include_once 'includes/search.php';
 
+$status = isset($_GET['status']) ? $_GET['status'] : '';
+
 if($user->checkLoginStatus()){
     if(!$user->checkUserRole(10)){
         header("Location: home.php");
@@ -29,6 +31,8 @@ if (isset($_GET['customerId'])) {
     
     $customerData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -45,8 +49,18 @@ if (isset($_GET['customerId'])) {
 
     <div class="container my-5">
 
+    <div class="container mt-4">
+    <?php if ($status === 'nokund'): ?>
+        <div class="alert alert-danger" role="alert">
+           Choose a customer
+        </div>
+    <?php endif; ?>
+</div>
+
+
         <h2 class="text-center mb-5">Kund Information</h2>
         <form action="" method="post">
+        <input type="hidden" name="user_name" value="<?php echo htmlspecialchars($_SESSION['user_id']); ?>">
             <div class="d-flex justify-content-between mb-5">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCustomerModal">Skapa kund</button>
                 <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addCustomerModal">Lägg till kund</button>

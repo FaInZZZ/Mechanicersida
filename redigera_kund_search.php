@@ -2,7 +2,7 @@
 include_once 'includes/header.php';
 
 if ($user->checkLoginStatus()) {
-    if (!$user->checkUserRole(300)) {
+    if (!$user->checkUserRole(10)) {
         header("Location: home.php");
     }
 }

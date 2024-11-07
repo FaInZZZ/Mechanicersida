@@ -13,18 +13,16 @@ $menuLinks = array(
   array(
     "title" => "Projects",
     "url" => "project.php"
-  ),
-  array(
-    "title" => "Edit Kund",
-    "url" => "redigera_kund_search.php"
-  ),
-  array(
-    "title" => "Fakturering",
-    "url" => "fakturering.php"
   )
 
 );
-// Menylänkar synliga enbart för admins
+
+$faktMenuLinks = array(
+    array(
+        "title" => "Fakturering",
+        "url" => "fakturering.php"
+      )
+);
 $adminMenuLinks = array(
       array(
         "title" => "Admin Page",
@@ -63,6 +61,16 @@ $adminMenuLinks = array(
                             </li>";
                         }
                     }
+                    if(isset($_SESSION['user_id'])){
+                        if($user->checkUserRole(50)){
+                            foreach($faktMenuLinks as $menuItem){
+                                echo "<li class='nav-item'>
+                                    <a class='nav-link' href='{$menuItem['url']}'>{$menuItem['title']}</a>
+                                </li>";
+                            }
+                        }
+                    }
+
                     if(isset($_SESSION['user_id'])){
                         if($user->checkUserRole(300)){
                             foreach($adminMenuLinks as $menuItem){

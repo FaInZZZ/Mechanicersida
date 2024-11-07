@@ -19,6 +19,28 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 <body>
 
 <div class="container mt-4">
+    <?php if ($status === 'successeditpart'): ?>
+        <div class="alert alert-success" role="alert">
+            Successfully Added Parts!
+        </div>
+    <?php elseif ($status === 'faileditpart'): ?>
+        <div class="alert alert-danger" role="alert">
+            Failed to Add Parts.
+        </div>
+    <?php endif; ?>
+
+    <div class="container mt-4">
+    <?php if ($status === 'successedithours'): ?>
+        <div class="alert alert-success" role="alert">
+            Successfully Added Hours!
+        </div>
+    <?php elseif ($status === 'failedithours'): ?>
+        <div class="alert alert-danger" role="alert">
+            Failed to Add hours.
+        </div>
+    <?php endif; ?>
+
+<div class="container mt-4">
     <?php if ($status === 'successeditcust'): ?>
         <div class="alert alert-success" role="alert">
             Successfully edited customer!
@@ -58,7 +80,7 @@ $stmt = $pdo->query("
     FROM table_projekt p
     JOIN table_customer c ON p.customer_fk = c.id_cust
     JOIN table_status s ON p.pt_status_fk = s.id_status
-    WHERE p.pt_status_fk = 1
+    WHERE p.pt_status_fk = 1 OR p.pt_status_fk = 2
 ");
 
 if ($stmt->rowCount() > 0) {

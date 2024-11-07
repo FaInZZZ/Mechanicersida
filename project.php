@@ -29,9 +29,16 @@
                 </a>
             </div>
             <div class="col-lg-4 col-md-6">
-                <a href="all_projects" class="card text-center">
+                <a href="all_projects.php" class="card text-center">
                     <div class="card-body">
                         <h5 class="card-title">View All Projects</h5>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <a href="redigera_kund_search.php" class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Edit Customer</h5>
                     </div>
                 </a>
             </div>
