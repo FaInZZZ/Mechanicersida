@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2024 at 09:58 AM
+-- Generation Time: Nov 07, 2024 at 10:26 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -110,7 +110,8 @@ INSERT INTO `table_roles` (`r_id`, `r_name`, `r_level`) VALUES
 (1, 'Mechanicer', 10),
 (2, 'Fakturerare', 50),
 (3, 'Administrator', 500),
-(4, 'Chefen', 300);
+(4, 'Chefen', 300),
+(402, 'Disable', 1);
 
 -- --------------------------------------------------------
 
@@ -193,7 +194,7 @@ CREATE TABLE `table_users` (
 
 INSERT INTO `table_users` (`u_id`, `u_name`, `u_password`, `u_email`, `u_role_fk`, `u_status`) VALUES
 (23, 'qarlsson', '$2y$10$Q9Lte2LOBuDPXhB71ZTKy.WcptqfPu89TqfPP2CBTh5eOq5XqkFzu', 'lompa@gmail.com', 3, 1),
-(24, 'kevin', '$2y$10$BPRZGEyuU45WJwCKcvOkHuAzgtpYf2xmjMO6wlVKjeOU7Ufl0./oK', 'kepep@gmail.com', 3, 1),
+(24, 'kevin', '$2y$10$6RMiMbVRUdYd02EjhAG2deTqfBtpvgnsDi3tvgQG9Z2Zbh7l3mate', 'uihfhuiehifehife@gmail.com', 3, 1),
 (25, 'Mechanicer', '$2y$10$pb59Hn5./9CLTdG2d2T7P.gv6Oy109VKJF004/MNRwT3HyyJbbkeS', 'Mechanicer@gmail.com', 1, 1),
 (26, 'Fakturerare', '$2y$10$9Ujcasd8wRgut4nPbgqhRewdYUunauVr0rpIx.QC0KaQxJMkrFHBq', 'Fakturerare@gmail.com', 2, 1),
 (27, 'Chefen', '$2y$10$N6zVPhEGOOa7XHy3DmZRAuUOV18R7Ov9RTSN/ZOV0XinOBiwBsy9m', 'Chefen@gmail.cok', 4, 1);
@@ -277,7 +278,7 @@ ALTER TABLE `table_projekt`
 -- AUTO_INCREMENT for table `table_roles`
 --
 ALTER TABLE `table_roles`
-  MODIFY `r_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=402;
+  MODIFY `r_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=403;
 
 --
 -- AUTO_INCREMENT for table `table_status`
