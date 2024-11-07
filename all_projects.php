@@ -1,8 +1,8 @@
 <?php
 include_once 'includes/header.php';
 
-if($user->checkLoginStatus()){
-    if(!$user->checkUserRole(10)){
+if ($user->checkLoginStatus()) {
+    if (!$user->checkUserRole(10)) {
         header("Location: home.php");
     }
 }
@@ -44,22 +44,23 @@ try {
                 <tbody>";
 
         foreach ($stmt as $row) {
-            $color_class = '';
+            // Set the color class for the Status column only
+            $status_color_class = '';
             switch ($row['pt_status_fk']) {
                 case 1:
-                    $color_class = 'table-success';
+                    $status_color_class = 'table-success';
                     break;
                 case 2:
-                    $color_class = 'table-danger';
+                    $status_color_class = 'table-danger';
                     break;
                 case 3:
-                    $color_class = 'table-warning';
+                    $status_color_class = 'table-warning';
                     break;
                 case 4:
-                    $color_class = 'table-info';
+                    $status_color_class = 'table-info';
                     break;
                 default:
-                    $color_class = '';
+                    $status_color_class = '';
                     break;
             }
 
@@ -70,14 +71,14 @@ try {
                 ? substr($row['pt_arbetsbeskrivning'], 0, 100) . '...' 
                 : $row['pt_arbetsbeskrivning'];
 
-            echo "<tr class='$color_class'>
+            echo "<tr>
                     <td>" . $row['customer_name'] . "</td>
                     <td>" . $row['car_brand'] . "</td>
                     <td>" . $row['car_model'] . "</td>
                     <td>" . $row['car_reg'] . "</td>
                     <td>" . $felbeskrivning . "</td>
                     <td>" . $arbetsbeskrivning . "</td>
-                    <td>" . $row['status_name'] . "</td>
+                    <td class='$status_color_class'>" . $row['status_name'] . "</td>
                     <td>
                         <a href='single-project.php?id=" . $row['id_projekt'] . "' class='btn btn-primary'>View Project</a>
                     </td>

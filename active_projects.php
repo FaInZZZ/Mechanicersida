@@ -100,7 +100,8 @@ if ($stmt->rowCount() > 0) {
             <tbody>";
 
     foreach ($stmt as $row) {
-        $color_class = 'table-success';
+        // Apply color class based on the project status for Status column only
+        $status_color_class = ($row['pt_status_fk'] == 1) ? 'table-success' : 'table-danger';
 
         $felbeskrivning = strlen($row['pt_felbeskrivning']) > 100 
             ? substr($row['pt_felbeskrivning'], 0, 100) . '...' 
@@ -109,14 +110,14 @@ if ($stmt->rowCount() > 0) {
             ? substr($row['pt_arbetsbeskrivning'], 0, 100) . '...' 
             : $row['pt_arbetsbeskrivning'];
 
-        echo "<tr class='$color_class'>
+        echo "<tr>
                 <td>" . $row['customer_name'] . "</td>
                 <td>" . $row['car_brand'] . "</td>
                 <td>" . $row['car_model'] . "</td>
                 <td>" . $row['car_reg'] . "</td>
                 <td>" . $felbeskrivning . "</td>
                 <td>" . $arbetsbeskrivning . "</td>
-                <td>" . $row['status_name'] . "</td>
+                <td class='$status_color_class'>" . $row['status_name'] . "</td>
                 <td>
                     <a href='single-project.php?id=" . $row['id_projekt'] . "' class='btn btn-primary'>View Project</a>
                 </td>

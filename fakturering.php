@@ -2,7 +2,7 @@
 
 include_once 'includes/header.php';
 if ($user->checkLoginStatus()) {
-    if (!$user->checkUserRole(10)) {
+    if (!$user->checkUserRole(50)) {
         header("Location: home.php");
     }
 }
@@ -46,20 +46,14 @@ try {
                 <tbody>";
 
         foreach ($stmt as $row) {
-            // Assign different colors based on the status
-            $color_class = '';
+            // Assign different colors based on the status, only for the Status column
+            $status_color_class = '';
             switch ($row['pt_status_fk']) {
                 case 3:
-                    $color_class = 'table-warning'; // Fakturerbar
+                    $status_color_class = 'table-warning'; // Fakturerbar
                     break;
                 case 4:
-                    $color_class = 'table-info'; // Fakturerad
-                    break;
-                case 5:
-                    $color_class = 'table-secondary'; // Obetald
-                    break;
-                case 6:
-                    $color_class = 'table-success'; // Betald
+                    $status_color_class = 'table-info'; // Fakturerad
                     break;
             }
 
@@ -70,14 +64,14 @@ try {
                 ? substr($row['pt_arbetsbeskrivning'], 0, 100) . '...' 
                 : $row['pt_arbetsbeskrivning'];
 
-            echo "<tr class='$color_class'>
+            echo "<tr>
                     <td>" . $row['customer_name'] . "</td>
                     <td>" . $row['car_brand'] . "</td>
                     <td>" . $row['car_model'] . "</td>
                     <td>" . $row['car_reg'] . "</td>
                     <td>" . $felbeskrivning . "</td>
                     <td>" . $arbetsbeskrivning . "</td>
-                    <td>" . $row['status_name'] . "</td>
+                    <td class='$status_color_class'>" . $row['status_name'] . "</td>
                     <td>
                         <a href='single-project.php?id=" . $row['id_projekt'] . "' class='btn btn-primary'>View Project</a>
                     </td>
