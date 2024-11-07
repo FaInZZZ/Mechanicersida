@@ -39,8 +39,8 @@
                             <th>Brand</th>
                             <th>Model</th>
                             <th>Registration</th>
-                            <th>Felbeskrivning</th>
-                            <th>Arbetsbeskrivning</th>
+                            <th>Error description</th>
+                            <th>Work description</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
