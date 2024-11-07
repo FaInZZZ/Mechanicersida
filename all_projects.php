@@ -1,6 +1,6 @@
 <?php
 
-//ok
+////ok
 include_once 'includes/header.php';
 
 if ($user->checkLoginStatus()) {
