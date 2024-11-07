@@ -149,7 +149,17 @@ function getTimeOverview($pdo) {
 
 
 
+function GetPrjParts($pdo, $id_projekt) {
+    $stmt = $pdo->prepare('
+    SELECT * FROM table_parts 
+    WHERE project_fk = :id');
+    $stmt->bindParam(':id', $id_projekt, PDO::PARAM_INT);
+    $stmt->execute();
 
+    return $stmt->fetchAll();
+
+
+}
 
 
 
