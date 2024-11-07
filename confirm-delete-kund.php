@@ -27,8 +27,8 @@ if ($deleteFeedback === null) {
         echo "<h2 class='text-center my-5'>Are you sure that you want to delete the user {$CustInfo['cust_fname']}?</h2>";
         
         echo "<div class='row justify-content-center'>
-            <a href='admin-account.php?uid={$_GET['uid']}' class='btn btn-warning' 
-            style='display: block; max-width: 300px;'>No, get me out of here!!!</a>
+            <a href='edit_user.php?uid={$_GET['uid']}' class='btn btn-warning' 
+            style='display: block; max-width: 300px;'>Back</a>
             <form method='post' action='' style='display: block; max-width: 300px;'>
                 <input type='submit' name='confirm-delete' class='btn btn-danger' value='Delete this user'>
             </form>
