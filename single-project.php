@@ -88,11 +88,11 @@ if (isset($_GET['id'])) {
                 <input type="text" id="car_reg" name="car_reg" class="form-control" value="<?= htmlspecialchars($project['car_reg']) ?>" readonly>
             </div>
             <div class="form-group mb-3">
-                <label for="felbeskrivning">Felbeskrivning</label>
+                <label for="felbeskrivning">Error description</label>
                 <textarea readonly id="felbeskrivning" name="felbeskrivning" class="form-control"><?= htmlspecialchars($project['pt_felbeskrivning']) ?></textarea>
             </div>
             <div class="form-group mb-3">
-                <label for="arbetsbeskrivning">Arbetsbeskrivning</label>
+                <label for="arbetsbeskrivning">Work description</label>
                 <textarea readonly id="arbetsbeskrivning" name="arbetsbeskrivning" class="form-control"><?= htmlspecialchars($project['pt_arbetsbeskrivning']) ?></textarea>
             </div>
             <div class="form-group mb-3">
