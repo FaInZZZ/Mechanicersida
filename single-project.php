@@ -97,8 +97,8 @@ if (isset($_GET['id'])) {
             </div>
             <div class="form-group mb-3">
                 <label for="parts">Parts</label>
-                <textarea readonly id="parts" name="parts" class="form-control">Produkt: <?php foreach ($partsinproject as $row) { echo $row['produkt_namn'];}?></textarea>
-                <textarea readonly id="parts" name="parts" class="form-control">Pris: <?php foreach ($partsinproject as $row) { echo $row['produkt_pris'];}?></textarea>
+                <textarea readonly id="parts" name="parts" class="form-control">Product: <?php foreach ($partsinproject as $row) { echo $row['produkt_namn'];}?></textarea>
+                <textarea readonly id="parts" name="parts" class="form-control">Price: <?php foreach ($partsinproject as $row) { echo $row['produkt_pris'];}?></textarea>
             </div>
             <div class="form-group mb-3">
                 <label for="status">Change Project Status</label>

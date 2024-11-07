@@ -163,7 +163,7 @@ if (isset($_GET['id'])) {
                         <input type="text" id="part" name="part" class="form-control">
                     </div>
                     <div class="form-group mb-3">
-                        <label for="pris">Pris</label>
+                        <label for="pris">Price</label>
                         <input type="text" id="pris" name="pris" class="form-control">
                     </div>  
                 </div>

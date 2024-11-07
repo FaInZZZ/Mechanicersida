@@ -58,44 +58,44 @@ if (isset($_GET['customerId'])) {
 </div>
 
 
-        <h2 class="text-center mb-5">Kund Information</h2>
+        <h2 class="text-center mb-5">Customer</h2>
         <form action="" method="post">
         <input type="hidden" name="user_name" value="<?php echo htmlspecialchars($_SESSION['user_id']); ?>">
             <div class="d-flex justify-content-between mb-5">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCustomerModal">Skapa kund</button>
-                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addCustomerModal">Lägg till kund</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCustomerModal">Create customer</button>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addCustomerModal">Add customer</button>
             </div>
 
             <?php foreach ($customerData as $row): ?>
                 <input type="text" class="form-control mb-3" name="custname" value="<?= $row['cust_fname'] ?>" disabled>
             <?php endforeach; ?>
 
-            <h2 class="text-center mb-5">Bil Information</h2>
+            <h2 class="text-center mb-5">Car</h2>
             <div class="row g-3 mb-3">
                 <div class="col-md-4">
-                    <label for="marke" class="form-label">Märke</label>
-                    <input type="text" class="form-control" name="marke" id="marke" placeholder="Ange märke" required>
+                    <label for="marke" class="form-label">Brand</label>
+                    <input type="text" class="form-control" name="marke" id="marke" placeholder="brand" required>
                 </div>
                 <div class="col-md-4">
                     <label for="model" class="form-label">Model</label>
-                    <input type="text" class="form-control" name="model" id="model" placeholder="Ange model" required>
+                    <input type="text" class="form-control" name="model" id="model" placeholder="model" required>
                 </div>
                 <div class="col-md-4">
-                    <label for="register" class="form-label">Registreringsnummer</label>
-                    <input type="text" class="form-control" name="register" id="register" placeholder="Ange reg.nr" required>
+                    <label for="register" class="form-label">Registrer</label>
+                    <input type="text" class="form-control" name="register" id="register" placeholder="register" required>
                 </div>
             </div>
 
-            <h2 class="text-center mt-5 mb-4">Projekt Information</h2>
+            <h2 class="text-center mt-5 mb-4">Project</h2>
 
-            <h3 class="mb-3">Felbeskrivning</h3>
-            <textarea name="fbe" class="form-control mb-4" rows="3" id="fel" placeholder="Ange felbeskrivning"></textarea>
+            <h3 class="mb-3">Error description</h3>
+            <textarea name="fbe" class="form-control mb-4" rows="3" id="fel" placeholder="Error description"></textarea>
 
-            <h3 class="mb-3">Arbetsbeskrivning</h3>
-            <textarea name="abe" class="form-control mb-4" rows="3" id="Arbet" placeholder="Ange arbetsbeskrivning"></textarea>
+            <h3 class="mb-3">Work description</h3>
+            <textarea name="abe" class="form-control mb-4" rows="3" id="Arbet" placeholder="Work description"></textarea>
 
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-success" name="ltp">Lägg till projekt</button>
+                <button type="submit" class="btn btn-success" name="ltp">Add project</button>
             </div>
         </form>
     </div>
@@ -105,44 +105,44 @@ if (isset($_GET['customerId'])) {
             <div class="modal-content">
                 <form method="post" action="">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="createCustomerModalLabel">Skapa kund</h5>
+                        <h5 class="modal-title" id="createCustomerModalLabel">Create</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label for="namn" class="form-label">Förnamn</label>
+                                <label for="namn" class="form-label">First name</label>
                                 <input type="text" class="form-control" id="namn" name="namn" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="enamn" class="form-label">Efternamn</label>
+                                <label for="enamn" class="form-label">Last name</label>
                                 <input type="text" class="form-control" id="enamn" name="enamn" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="telefon" class="form-label">Telefon</label>
+                                <label for="telefon" class="form-label">Phone</label>
                                 <input type="text" class="form-control" id="telefon" name="telefon" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="epost" class="form-label">E-post</label>
+                                <label for="epost" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="epost" name="epost" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="adress" class="form-label">Adress</label>
+                                <label for="adress" class="form-label">Address</label>
                                 <input type="text" class="form-control" id="adress" name="adress" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="postnummer" class="form-label">Postnummer</label>
+                                <label for="postnummer" class="form-label">Postnumber</label>
                                 <input type="text" class="form-control" id="postnummer" name="postnummer" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="ort" class="form-label">Ort</label>
+                                <label for="ort" class="form-label">Region</label>
                                 <input type="text" class="form-control" id="ort" name="ort" required>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Stäng</button>
-                        <button type="submit" name="submitnykund" class="btn btn-primary">Lägg till kund</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" name="submitnykund" class="btn btn-primary">Add customer</button>
                     </div>
                 </form>
             </div>
@@ -153,20 +153,20 @@ if (isset($_GET['customerId'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addCustomerModalLabel">Lägg till kund</h5>
+                    <h5 class="modal-title" id="addCustomerModalLabel">Add customer</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="">
                         <div class="mb-3">
-                            <label for="fname" class="form-label">Förnamn</label>
+                            <label for="fname" class="form-label">Firstname</label>
                             <input type="text" class="form-control" id="fname" name="fname" onkeyup="showClassmates(this.value)">
                         </div>
                     </form>
-                    <p><strong>Förslag:</strong><br><br> <span id="class-list"></span></p>
+                    <p><strong>Suggestions:</strong><br><br> <span id="class-list"></span></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Stäng</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
