@@ -81,13 +81,15 @@ $CustInfo = $user->getCustInfo($uid);
             <label for="cust_ort">City</label>
             <input type="text" name="cust_ort" id="cust_ort" class="form-control" value="<?php echo htmlspecialchars($CustInfo['cust_ort']); ?>">
         </div>
-
-        <button type="submit" name="admin-update-submit" class="btn btn-success">Update</button>
+        
+        <div class="mt-3">
+            <button type="submit" name="admin-update-submit" class="btn btn-success">Update</button>
+            <a href="confirm-delete-kund.php?uid=<?php echo $uid; ?>" class="btn btn-danger ml-2">Delete This User</a>
+        </div>
     </form>
-
-    <a href="confirm-delete-kund.php?uid=<?php echo $uid; ?>" class="btn btn-danger">Delete This User</a>
 </div>
 
 <?php 
 include_once 'includes/footer.php';
 ?>
+

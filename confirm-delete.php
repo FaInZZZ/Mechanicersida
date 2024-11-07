@@ -27,12 +27,14 @@ if ($deleteFeedback === null) {
     if ($userInfoArray && isset($userInfoArray['u_name'])) { // Check if $userInfoArray is valid
         echo "<h2 class='text-center my-5'>Are you sure that you want to delete the user {$userInfoArray['u_name']}?</h2>";
         
+        // Center the buttons and ensure both are the same width
         echo "<div class='row justify-content-center'>
-            <a href='admin-account.php?uid={$_GET['uid']}' class='btn btn-warning' 
-            style='display: block; max-width: 300px;'>No, get me out of here!!!</a>
-            <form method='post' action='' style='display: block; max-width: 300px;'>
-                <input type='submit' name='confirm-delete' class='btn btn-danger' value='Delete this user'>
-            </form>
+            <div class='d-flex justify-content-center gap-3'>
+                <a href='edit_user.php?uid={$_GET['uid']}' class='btn btn-warning' style='width: 200px;'>Back</a>
+                <form method='post' action=''>
+                    <input type='submit' name='confirm-delete' class='btn btn-danger' value='Delete this user' style='width: 200px;'>
+                </form>
+            </div>
         </div>";
     } else {
         echo "<h2 class='text-center my-5'>User not found or invalid ID.</h2>";
@@ -42,6 +44,7 @@ if ($deleteFeedback === null) {
 }
 ?>
 </div>
+
 
 <?php 
 include_once 'includes/footer.php';
