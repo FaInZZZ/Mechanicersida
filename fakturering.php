@@ -8,7 +8,7 @@
     }
 
     echo "<div class='container mt-5'>";
-    echo "<h1 class='mb-4'>Fakturbara Projects</h1>";
+    echo "<h1 class='mb-4'>Billable Projects</h1>";
 
     try {
         // Update SQL query to include the new status IDs 5 (obetald) and 6 (betald)

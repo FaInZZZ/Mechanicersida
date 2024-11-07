@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2024 at 11:14 AM
+-- Generation Time: Nov 07, 2024 at 11:42 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -88,7 +88,7 @@ CREATE TABLE `table_projekt` (
 --
 
 INSERT INTO `table_projekt` (`id_projekt`, `pt_felbeskrivning`, `pt_arbetsbeskrivning`, `pt_status_fk`, `customer_fk`, `created_by_user_fk`, `car_brand`, `car_model`, `car_reg`) VALUES
-(39, 'fele', 'arbat', 2, 10, 24, 'mare', 'mode', 'regn'),
+(39, 'fele', 'arbat', 3, 10, 24, 'mare', 'mode', 'regn'),
 (40, 'feleer', 'arbaww', 2, 10, 24, 'mark', 'model', 'reg'),
 (41, 'dwad', 'adawd', 2, 10, 24, 'wadw', 'adadad', 'ada'),
 (42, 'dad', 'adwad', 2, 10, 24, 'wada', 'dadadd', 'awda'),
@@ -135,8 +135,8 @@ CREATE TABLE `table_status` (
 INSERT INTO `table_status` (`id_status`, `status_name`) VALUES
 (1, 'active'),
 (2, 'inactive'),
-(3, 'fakturerbar'),
-(4, 'fakturerad');
+(3, 'Billable'),
+(4, 'Invoiced');
 
 -- --------------------------------------------------------
 
