@@ -32,20 +32,22 @@
     
 
         if ($stmt->rowCount() > 0) {
+            echo "<div class='table-responsive'>"; // Add this line
             echo "<table class='table table-bordered table-hover'>
-                    <thead class='thead-dark'>
-                        <tr>
-                            <th>Customer</th>
-                            <th>Brand</th>
-                            <th>Model</th>
-                            <th>Registration</th>
-                            <th>Error description</th>
-                            <th>Work description</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>";
+                <thead class='thead-dark'>
+                <tr>
+                    <th>Customer</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Registration</th>
+                    <th>Felbeskrivning</th>
+                    <th>Arbetsbeskrivning</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>";
+            
 
             foreach ($stmt as $row) {
                 // Assign different colors based on the status, only for the Status column
