@@ -28,6 +28,7 @@ try {
     ");
 
     if ($stmt->rowCount() > 0) {
+        echo "<div class='table-responsive'>";
         echo "<table class='table table-bordered table-hover'>
                 <thead class='thead-dark'>
                     <tr>
