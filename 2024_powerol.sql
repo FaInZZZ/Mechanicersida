@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2024 at 11:42 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Nov 08, 2024 at 01:02 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,7 +43,7 @@ CREATE TABLE `table_customer` (
 --
 
 INSERT INTO `table_customer` (`id_cust`, `cust_fname`, `cust_lname`, `cust_tel`, `cust_epost`, `cust_adress`, `cust_postnummer`, `cust_ort`) VALUES
-(10, 'kevin', 'brandt', 'telefon', 'e-post@gmail.com', 'adress', 'postnummer', 'ort');
+(11, 'dw', 'dawda', 'dwadad', 'da@gmail.com', 'dad', 'awda', 'ad');
 
 -- --------------------------------------------------------
 
@@ -63,7 +63,10 @@ CREATE TABLE `table_parts` (
 --
 
 INSERT INTO `table_parts` (`id_produkt`, `produkt_namn`, `produkt_pris`, `project_fk`) VALUES
-(5, 'www', 212.00, 38);
+(5, 'www', 212.00, 38),
+(6, 'we', 232.00, NULL),
+(7, 'wdda', 32323.00, 40),
+(8, '322', 32.00, 44);
 
 -- --------------------------------------------------------
 
@@ -88,11 +91,12 @@ CREATE TABLE `table_projekt` (
 --
 
 INSERT INTO `table_projekt` (`id_projekt`, `pt_felbeskrivning`, `pt_arbetsbeskrivning`, `pt_status_fk`, `customer_fk`, `created_by_user_fk`, `car_brand`, `car_model`, `car_reg`) VALUES
-(39, 'fele', 'arbat', 3, 10, 24, 'mare', 'mode', 'regn'),
-(40, 'feleer', 'arbaww', 2, 10, 24, 'mark', 'model', 'reg'),
-(41, 'dwad', 'adawd', 2, 10, 24, 'wadw', 'adadad', 'ada'),
-(42, 'dad', 'adwad', 2, 10, 24, 'wada', 'dadadd', 'awda'),
-(43, 'jyfjgkn,', 'm,m,.', 2, 10, 24, 'rgsg', 'rdgdg', 'fy');
+(39, 'feldadd', 'arbatdad', 2, NULL, 24, 'mardw', 'modwd', 'regawd'),
+(40, 'feleer', 'arbaww', 1, NULL, 24, 'mar', 'model', 'reg'),
+(41, 'dwad', 'adawd', 2, NULL, 24, 'wadw', 'adadad', 'ada'),
+(42, 'dad', 'adwad', 2, NULL, 24, 'wada', 'dadadd', 'awda'),
+(43, 'jyfjgkn,', 'm,m,.', 4, NULL, 24, 'rgsg22', 'rdgdg', 'fy'),
+(44, 'dwa', 'dwadrgdg', 3, 11, 25, 'brardg', 'dd', 'wadwa');
 
 -- --------------------------------------------------------
 
@@ -175,7 +179,9 @@ INSERT INTO `table_timmar` (`id_timmar`, `date`, `hours`, `user_fk`, `project_fk
 (18, '2024-10-11', 22, 24, 27),
 (19, '2024-10-11', 432, 24, 28),
 (20, '2024-11-20', 0, 24, 28),
-(21, '2024-11-07', 5, 25, 38);
+(21, '2024-11-07', 5, 25, 38),
+(22, '2024-11-10', 232, 24, 40),
+(23, '2024-11-12', 32323, 25, 44);
 
 -- --------------------------------------------------------
 
@@ -201,7 +207,8 @@ INSERT INTO `table_users` (`u_id`, `u_name`, `u_password`, `u_email`, `u_role_fk
 (24, 'kevin', '$2y$10$6RMiMbVRUdYd02EjhAG2deTqfBtpvgnsDi3tvgQG9Z2Zbh7l3mate', 'uihfhuiehifehife@gmail.com', 3, 1),
 (25, 'Mechanicer', '$2y$10$pb59Hn5./9CLTdG2d2T7P.gv6Oy109VKJF004/MNRwT3HyyJbbkeS', 'Mechanicer@gmail.com', 1, 1),
 (26, 'Fakturerare', '$2y$10$9Ujcasd8wRgut4nPbgqhRewdYUunauVr0rpIx.QC0KaQxJMkrFHBq', 'Fakturerare@gmail.com', 2, 1),
-(27, 'Chefen', '$2y$10$N6zVPhEGOOa7XHy3DmZRAuUOV18R7Ov9RTSN/ZOV0XinOBiwBsy9m', 'Chefen@gmail.cok', 4, 1);
+(27, 'Chefen', '$2y$10$Uj1dv7qnJ0hVseNIR9YnT.HCPluka5y.B4eYWd9n3yZchDXjN0tFG', 'Chen@gmail.cok', 4, 1),
+(28, 'wad', '$2y$10$K7Kn5NkqQLDd2HTDWmdnnOMV9CoHKzFn.nWrNxNxZTpGgb1HpURJO', 'adwad@gmail.com', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -264,19 +271,19 @@ ALTER TABLE `table_users`
 -- AUTO_INCREMENT for table `table_customer`
 --
 ALTER TABLE `table_customer`
-  MODIFY `id_cust` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_cust` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `table_parts`
 --
 ALTER TABLE `table_parts`
-  MODIFY `id_produkt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_produkt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `table_projekt`
 --
 ALTER TABLE `table_projekt`
-  MODIFY `id_projekt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id_projekt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `table_roles`
@@ -294,13 +301,13 @@ ALTER TABLE `table_status`
 -- AUTO_INCREMENT for table `table_timmar`
 --
 ALTER TABLE `table_timmar`
-  MODIFY `id_timmar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_timmar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `table_users`
 --
 ALTER TABLE `table_users`
-  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- Constraints for dumped tables
@@ -311,7 +318,7 @@ ALTER TABLE `table_users`
 --
 ALTER TABLE `table_projekt`
   ADD CONSTRAINT `fk1` FOREIGN KEY (`pt_status_fk`) REFERENCES `table_status` (`id_status`),
-  ADD CONSTRAINT `fk3` FOREIGN KEY (`customer_fk`) REFERENCES `table_customer` (`id_cust`);
+  ADD CONSTRAINT `fk3` FOREIGN KEY (`customer_fk`) REFERENCES `table_customer` (`id_cust`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Constraints for table `table_timmar`

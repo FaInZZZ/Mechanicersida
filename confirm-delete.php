@@ -9,13 +9,13 @@ if ($user->checkLoginStatus()) {
     }
 }
 
-// Check if uid is provided and valid before calling getUserInfo
+
 $userInfoArray = false;
 if (isset($_GET['uid'])) {
     $userInfoArray = $user->getUserInfo($_GET['uid']);
 }
 
-$deleteFeedback = null; // Ensure deleteFeedback is defined before use
+$deleteFeedback = null;
 if (isset($_POST['confirm-delete'])) {
     $deleteFeedback = $user->deleteUser($_GET['uid']);
 }
@@ -24,10 +24,10 @@ if (isset($_POST['confirm-delete'])) {
 <div class="container p-5">
 <?php 
 if ($deleteFeedback === null) {
-    if ($userInfoArray && isset($userInfoArray['u_name'])) { // Check if $userInfoArray is valid
+    if ($userInfoArray && isset($userInfoArray['u_name'])) { 
         echo "<h2 class='text-center my-5'>Are you sure that you want to delete the user {$userInfoArray['u_name']}?</h2>";
         
-        // Center the buttons and ensure both are the same width
+
         echo "<div class='row justify-content-center'>
             <div class='d-flex justify-content-center gap-3'>
                 <a href='edit_user.php?uid={$_GET['uid']}' class='btn btn-warning' style='width: 200px;'>Back</a>

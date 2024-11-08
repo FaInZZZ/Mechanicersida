@@ -24,7 +24,7 @@ if(isset($_POST['admin-update-submit'])){
 }
 ?>
 
-<!-- Update button layout and styling to match edit_cust.php -->
+
 <div class="container mt-5">
     <h1>Edit User Info</h1>
     <form method="post" class="mb-5">
@@ -62,7 +62,6 @@ if(isset($_POST['admin-update-submit'])){
             </select>
         </div>
 
-        <!-- Updated button group for consistent styling -->
         <div class="mt-3">
             <button type="submit" name="admin-update-submit" class="btn btn-success">Update</button>
             <a href="confirm-delete.php?uid=<?php echo $_GET['uid']?>" class="btn btn-danger ml-2">Delete This User</a>

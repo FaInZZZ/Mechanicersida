@@ -1,11 +1,12 @@
 <?php
 
-////ok
 include_once 'includes/header.php';
+
 
 if ($user->checkLoginStatus()) {
     if (!$user->checkUserRole(10)) {
         header("Location: home.php");
+        exit;
     }
 }
 
@@ -13,23 +14,9 @@ echo "<div class='container mt-5'>";
 echo "<h1 class='mb-4'>Active Projects</h1>";
 
 try {
-    $stmt = $pdo->query("
-        SELECT 
-            p.id_projekt, 
-            CONCAT(c.cust_fname, ' ', c.cust_lname) AS customer_name, 
-            p.pt_felbeskrivning, 
-            p.pt_arbetsbeskrivning,
-            p.car_brand, 
-            p.car_model, 
-            p.car_reg,
-            s.status_name, 
-            p.pt_status_fk
-        FROM table_projekt p
-        JOIN table_customer c ON p.customer_fk = c.id_cust
-        JOIN table_status s ON p.pt_status_fk = s.id_status
-    ");
+    $stmt = getAllProjects($pdo);
 
-    if ($stmt->rowCount() > 0) {
+    if ($stmt && $stmt->rowCount() > 0) {
         echo "<div class='table-responsive'>";
         echo "<table class='table table-bordered table-hover'>
                 <thead class='thead-dark'>
@@ -47,7 +34,6 @@ try {
                 <tbody>";
 
         foreach ($stmt as $row) {
-            // Set the color class for the Status column only
             $status_color_class = '';
             switch ($row['pt_status_fk']) {
                 case 1:
@@ -96,7 +82,7 @@ try {
         echo "<div class='alert alert-info' role='alert'>No active projects found.</div>";
     }
 
-} catch (PDOException $e) {
+} catch (Exception $e) {
     echo "<div class='alert alert-danger' role='alert'>Error: " . $e->getMessage() . "</div>";
 }
 

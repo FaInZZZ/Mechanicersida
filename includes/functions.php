@@ -132,12 +132,12 @@ function getTimeOverview($pdo) {
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     if (count($results) > 0) {
-        echo "<table border='1'>";
-        echo "<tr><th>User Name</th><th>Total Hours</th></tr>";
+        echo "<table border='1' style='border-collapse: collapse;'>";
+        echo "<tr><th style='padding-right: 20px;'>User Name</th><th style='padding-left: 20px;'>Total Hours</th></tr>";
         foreach ($results as $row) {
             echo "<tr>
-                    <td>" . htmlspecialchars($row['u_name']) . "</td>
-                    <td>" . htmlspecialchars($row['total_hours']) . "</td>
+                    <td style='padding-right: 20px;'>" . htmlspecialchars($row['u_name']) . "</td>
+                    <td style='padding-left: 20px;'>" . htmlspecialchars($row['total_hours']) . "</td>
                   </tr>";
         }
         echo "</table>";
@@ -145,6 +145,7 @@ function getTimeOverview($pdo) {
         echo "<p>No records found for the selected date range.</p>";
     }
 }
+
 
 
 
@@ -159,6 +160,189 @@ function GetPrjParts($pdo, $id_projekt) {
 
 
 }
+
+
+
+function getActiveProjects($pdo) {
+    $output = "";
+
+    $stmt = $pdo->query("
+        SELECT 
+            p.id_projekt, 
+            CONCAT(c.cust_fname, ' ', c.cust_lname) AS customer_name, 
+            p.pt_felbeskrivning, 
+            p.pt_arbetsbeskrivning,
+            p.car_brand, 
+            p.car_model, 
+            p.car_reg,
+            s.status_name,
+            p.pt_status_fk
+        FROM table_projekt p
+        JOIN table_customer c ON p.customer_fk = c.id_cust
+        JOIN table_status s ON p.pt_status_fk = s.id_status
+        WHERE p.pt_status_fk = 1 OR p.pt_status_fk = 2
+        ORDER BY p.pt_status_fk ASC
+    ");
+
+    if ($stmt->rowCount() > 0) {
+        $output .= "<div class='table-responsive'>";
+        $output .= "<table class='table table-bordered table-hover'>
+                <thead class='thead-dark'>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Registration</th>
+                        <th>Felbeskrivning</th>
+                        <th>Arbetsbeskrivning</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>";
+
+        foreach ($stmt as $row) {
+            // Apply color class based on the project status for Status column only
+            $status_color_class = ($row['pt_status_fk'] == 1) ? 'table-success' : 'table-danger';
+
+            $felbeskrivning = strlen($row['pt_felbeskrivning']) > 100 
+                ? substr($row['pt_felbeskrivning'], 0, 100) . '...' 
+                : $row['pt_felbeskrivning'];
+            $arbetsbeskrivning = strlen($row['pt_arbetsbeskrivning']) > 100 
+                ? substr($row['pt_arbetsbeskrivning'], 0, 100) . '...' 
+                : $row['pt_arbetsbeskrivning'];
+
+            $output .= "<tr>
+                    <td>" . $row['customer_name'] . "</td>
+                    <td>" . $row['car_brand'] . "</td>
+                    <td>" . $row['car_model'] . "</td>
+                    <td>" . $row['car_reg'] . "</td>
+                    <td>" . $felbeskrivning . "</td>
+                    <td>" . $arbetsbeskrivning . "</td>
+                    <td class='$status_color_class'>" . $row['status_name'] . "</td>
+                    <td>
+                        <a href='single-project.php?id=" . $row['id_projekt'] . "' class='btn btn-primary'>View Project</a>
+                    </td>
+                    <td>
+                        <a href='edit-single-project.php?id=" . $row['id_projekt'] . "' class='btn btn-primary'>Edit Project</a>
+                    </td>
+                </tr>";
+        }
+
+        $output .= "</tbody></table>";
+    } else {
+        $output .= "<div class='alert alert-info' role='alert'>No active projects found.</div>";
+    }
+
+    return $output;
+}
+?>
+
+<?php
+function getBillableProjects($pdo) {
+    try {
+        $stmt = $pdo->query("
+        SELECT 
+            p.id_projekt, 
+            CONCAT(c.cust_fname, ' ', c.cust_lname) AS customer_name, 
+            p.pt_felbeskrivning, 
+            p.pt_arbetsbeskrivning,
+            p.car_brand, 
+            p.car_model, 
+            p.car_reg,
+            s.status_name, 
+            p.pt_status_fk
+        FROM table_projekt p
+        JOIN table_customer c ON p.customer_fk = c.id_cust
+        JOIN table_status s ON p.pt_status_fk = s.id_status
+        WHERE p.pt_status_fk IN (3, 4, 5, 6)  -- Include new statuses (obetald, betald)
+        ORDER BY p.pt_status_fk ASC
+        ");
+        
+        return $stmt;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+
+function getStatusColorClass($status_id) {
+    switch ($status_id) {
+        case 3:
+            return 'table-warning'; 
+        case 4:
+            return 'table-info';
+        default:
+            return ''; 
+    }
+}
+
+function truncateText($text, $max_length = 100) {
+    return strlen($text) > $max_length ? substr($text, 0, $max_length) . '...' : $text;
+}
+?>
+
+<?php
+
+function getAllProjects($pdo) {
+    try {
+        $stmt = $pdo->query("
+            SELECT 
+                p.id_projekt, 
+                CONCAT(c.cust_fname, ' ', c.cust_lname) AS customer_name, 
+                p.pt_felbeskrivning, 
+                p.pt_arbetsbeskrivning,
+                p.car_brand, 
+                p.car_model, 
+                p.car_reg,
+                s.status_name, 
+                p.pt_status_fk
+            FROM table_projekt p
+            JOIN table_customer c ON p.customer_fk = c.id_cust
+            JOIN table_status s ON p.pt_status_fk = s.id_status
+        ");
+        return $stmt;
+    } catch (PDOException $e) {
+        throw new Exception("Error retrieving active projects: " . $e->getMessage());
+    }
+}
+
+
+
+
+
+
+function getProjectDetails($pdo, $id_projekt) {
+    try {
+        $stmt = $pdo->prepare("
+            SELECT 
+                CONCAT(c.cust_fname, ' ', c.cust_lname) AS customer_name, 
+                p.pt_felbeskrivning, 
+                p.pt_arbetsbeskrivning,
+                p.car_brand, 
+                p.car_model, 
+                p.car_reg,
+                p.pt_status_fk,
+                u.u_name AS user_name  
+            FROM table_projekt p
+            JOIN table_customer c ON p.customer_fk = c.id_cust
+            JOIN table_users u ON p.created_by_user_fk = u.u_id
+            WHERE p.id_projekt = ?
+        ");
+        $stmt->execute([$id_projekt]);
+
+        if ($stmt->rowCount() > 0) {
+            return $stmt->fetch();
+        } else {
+            return null; 
+        }
+    } catch (PDOException $e) {
+        return ['error' => 'Error: ' . htmlspecialchars($e->getMessage())];
+    }
+}
+?>
+
+
 
 
 
@@ -178,4 +362,3 @@ function GetPrjParts($pdo, $id_projekt) {
 
 
 
-?>

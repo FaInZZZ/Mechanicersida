@@ -53,6 +53,13 @@ if($user->checkLoginStatus()){
                     </div>
                 </a>
             </div>
+            <div class="col-lg-4 col-md-6">
+                <a href="timeoverview.php" class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Time overview</h5>
+                    </div>
+                </a>
+            </div>
         </div>
     </main>
     

@@ -11,7 +11,6 @@ if($user->checkLoginStatus()){
 
 if ($user->checkLoginStatus()) {
     if (isset($_POST['admin-update-submit'])) {
-        // Input sanitization should be added here to ensure safe data update
         $user->editCustInfo(
             $_POST['cust_uid'], 
             $_POST['cust_fname'], 
@@ -32,7 +31,7 @@ $CustInfo = $user->getCustInfo($uid);
 <div class="container mt-4">
     <h1>Edit User Information</h1>
 
-    <!-- Display success or error message -->
+    
     <?php if(isset($updateStatus) && $updateStatus == 'success'): ?>
         <div class="alert alert-success">User information updated successfully!</div>
     <?php elseif(isset($updateStatus) && $updateStatus == 'error'): ?>
