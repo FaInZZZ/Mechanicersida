@@ -71,7 +71,7 @@ class User {
         $hashedPassword = password_hash($upass, PASSWORD_DEFAULT);
         $uname = $this->cleanInput($uname);
         
-        $stmt_registerUser = $this->pdo->prepare('INSERT INTO table_users (u_name, u_password, u_email, u_role_fk, u_status) VALUES (:name, :pw, :email, 1, 1)');
+        $stmt_registerUser = $this->pdo->prepare('INSERT INTO table_users (u_name, u_password, u_email, u_role_fk) VALUES (:name, :pw, :email, 1)');
         $stmt_registerUser->bindParam(":name", $uname, PDO::PARAM_STR);
         $stmt_registerUser->bindParam(":pw", $hashedPassword, PDO::PARAM_STR);
         $stmt_registerUser->bindParam(":email", $umail, PDO::PARAM_STR);
